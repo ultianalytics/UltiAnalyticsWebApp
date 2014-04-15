@@ -8,20 +8,20 @@
         <meta name="viewport" content="width=device-width">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <link href="./styles/css/bootstrap.min.css" rel="stylesheet">
-        <link href="./styles/css/bootstrap-responsive.min.css" rel="stylesheet">
-        <link href="./styles/css/google-font-style.css" rel="stylesheet">
-        <link href="./styles/css/font-awesome.min.css" rel="stylesheet">
-        <link href="./styles/css/ui-lightness/jquery-ui-1.10.0.custom.min.css" rel="stylesheet">
-        <link href="./styles/css/base-admin-3.css" rel="stylesheet">
-        <link href="./styles/css/base-admin-3-responsive.css" rel="stylesheet">
-        <link href="./styles/css/pages/signin.css" rel="stylesheet" type="text/css">
-        <link href="./styles/css/pages/dashboard.css" rel="stylesheet">
-        <link href="./styles/css/pages/plans.css" rel="stylesheet">
-        <link href="./styles/css/pages/pricing.css" rel="stylesheet">
-        <link href="./styles/css/pages/reports.css" rel="stylesheet">
-        <link href="./styles/css/custom.css" rel="stylesheet">
-        <link href="./styles/css/animations.css" rel="stylesheet">
+        <link href="./styles/bootstrap.min.css" rel="stylesheet">
+        <link href="./styles/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="./styles/google-font-style.css" rel="stylesheet">
+        <link href="./styles/font-awesome.min.css" rel="stylesheet">
+        <link href="./styles/jquery-ui-1.10.0.custom.min.css" rel="stylesheet">
+        <link href="./styles/base-admin-3.css" rel="stylesheet">
+        <link href="./styles/base-admin-3-responsive.css" rel="stylesheet">
+        <link href="./styles/signin.css" rel="stylesheet" type="text/css">
+        <link href="./styles/dashboard.css" rel="stylesheet">
+        <link href="./styles/plans.css" rel="stylesheet">
+        <link href="./styles/pricing.css" rel="stylesheet">
+        <link href="./styles/reports.css" rel="stylesheet">
+        <link href="./styles/custom.css" rel="stylesheet">
+        <link href="./styles/animations.css" rel="stylesheet">
         <!-- <link href="./styles/animations.css" rel="stylesheet"> -->
     </head>
         <body ng-app="newBetaApp">
@@ -71,6 +71,10 @@
         <script src="bower_components/d3/d3.js"></script>
         <script src="scripts/plugins/sankeyPlugin.js"></script>
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script type="text/javascript">
+          $('.main-view').css('min-height', window.innerHeight - $('.extra').outerHeight() - $('.footer').outerHeight());
+          $(window).resize(function(){$('.main-view').css('min-height', window.innerHeight - $('.extra').outerHeight() - $('.footer').outerHeight())});
+        </script>
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/games.js"></script>
