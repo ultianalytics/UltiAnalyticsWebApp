@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "download.js",
+  "sourceRoot": "",
+  "sources": [
+    "download.coffee"
+  ],
+  "names": [],
+  "mappings": "AAAA;CAAA,CAAA,IAAA,CAAO,GAAP,EAAA,EAAA;EACyC,CAAc,EAAxB,CAAwB,EAAzB,CAA0B,EAAD,EAAzB;CACnB,EAAP,GAAM,OAAN;CAD0B,IAAyB;CADvD,GAAA;CAAA"
+}

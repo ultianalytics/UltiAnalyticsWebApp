@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "hundredths.js",
+  "sourceRoot": "",
+  "sources": [
+    "hundredths.coffee"
+  ],
+  "names": [],
+  "mappings": "AAAA;CAAA,CAAA,UAAA;CAAA,CAEA,CACwB,GADxB,CAAO,EACiB,GADxB;GAEI,EAAA,IAAC,EAAD;CACE,GAAG,CAAA,CAAH;CAAA,cACE;CACM,GAAA,CAAA,CAFR,EAAA;CAGa,IAAK,EAAL,GAAX,IAAA,CAAA;MAHF,EAAA;CAAA,cAIK;QALP;CADoB,IACpB;CAFJ,EACwB;CAHxB"
+}

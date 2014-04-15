@@ -1,11 +1,11 @@
 <div class="subnavbar">
   <div class="subnavbar-inner">
     <div class="container">
-      <a  ng-click="toggleNav()" class="subnav-toggle" data-toggle="collapse" data-target=".subnav-collapse">
+      <a  ng-click="toggleNav()" class="subnav-toggle">
         <span class="sr-only">Toggle Navigation</span>
         <i class="icon-reorder"></i>
       </a>
-      <div class="subnav-collapse {{navState}}">
+      <div class="subnav-collapse {{navState}}" ng-if="!isMobile || navOpen">
         <ul class="mainnav">
           <li ng-class="isActive('players')" ng-click="navTo('players')">
             <a>
