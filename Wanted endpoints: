@@ -1,0 +1,3 @@
+Needed endpoints:
+ - accumulated team stats for each game (map: gameId -> accumulated stats).
+ - accumulated player stats for each game (map: gameId -> player -> accumulated stats).

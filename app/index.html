@@ -1,0 +1,127 @@
+<!doctype html>
+    <html class="no-js">
+        <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>iUltimate</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link href="./styles/css/bootstrap.min.css" rel="stylesheet">
+        <link href="./styles/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="./styles/css/google-font-style.css" rel="stylesheet">
+        <link href="./styles/css/font-awesome.min.css" rel="stylesheet">
+        <link href="./styles/css/ui-lightness/jquery-ui-1.10.0.custom.min.css" rel="stylesheet">
+        <link href="./styles/css/base-admin-3.css" rel="stylesheet">
+        <link href="./styles/css/base-admin-3-responsive.css" rel="stylesheet">
+        <link href="./styles/css/pages/signin.css" rel="stylesheet" type="text/css">
+        <link href="./styles/css/pages/dashboard.css" rel="stylesheet">
+        <link href="./styles/css/pages/plans.css" rel="stylesheet">
+        <link href="./styles/css/pages/pricing.css" rel="stylesheet">
+        <link href="./styles/css/pages/reports.css" rel="stylesheet">
+        <link href="./styles/css/custom.css" rel="stylesheet">
+        <link href="./styles/css/animations.css" rel="stylesheet">
+        <!-- <link href="./styles/animations.css" rel="stylesheet"> -->
+    </head>
+        <body ng-app="newBetaApp">
+        <div ng-view="" class="main-view"></div>
+        <div class="extra">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>General</h4>
+                        <ul>
+                            <li><a href="http://www.ultimate-numbers.com/calcs.html">iUltimate Calculations</a></li>
+                            <li><a href="http://www.ultimate-numbers.com/">About iUltimate</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="mailto:support@ultimate-numbers.com">Send a suggestion</a></li>
+                            <li><a href="mailto:support@ultimate-numbers.com">Report a problem</a></li>
+                        </ul>
+                    </div> <!-- /span3 -->
+                    <div class="col-md-4">
+                        <h4>Personal</h4>
+                        <ul>
+                            <li><a href="http://www.ultimate-numbers.com/privacy.html">Privacy Policy</a></li>
+                        </ul>
+                    </div> <!-- /span3 -->
+                </div> <!-- /row -->
+            </div> <!-- /container -->
+        </div>
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div id="footer-copyright" class="col-md-6">
+                    © 2014 Summit Hill Software.
+                    </div> <!-- /span6 -->
+                </div> <!-- /row -->
+            </div> <!-- /container -->
+        </div>
+
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+        <script src="bower_components/lodash/dist/lodash.min.js"></script>
+        <script src="bower_components/jquery/jquery.js"></script>
+        <script src="bower_components/angular-route/angular-route.min.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+        <script src="bower_components/d3/d3.js"></script>
+        <script src="scripts/plugins/sankeyPlugin.js"></script>
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/games.js"></script>
+        <script src="scripts/controllers/line.js"></script>
+        <script src="scripts/controllers/404.js"></script>
+        <script src="scripts/controllers/splash.js"></script>
+        <script src="scripts/controllers/download.js"></script>
+        <script src="scripts/controllers/player.js"></script>
+        <script src="scripts/controllers/team.js"></script>
+        <script src="scripts/controllers/players.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/directives/titleBar.js"></script>
+        <script src="scripts/directives/navBar.js"></script>
+        <script src="scripts/services/viewer.js"></script>
+        <script src="scripts/services/team.js"></script>
+        <script src="scripts/services/ultimateWebRESTapi.js"></script>
+        <script src="scripts/services/teamName.js"></script>
+        <script src="scripts/services/teamStats.js"></script>
+        <script src="scripts/services/allGames.js"></script>
+        <script src="scripts/services/playerStats.js"></script>
+        <script src="scripts/services/filter.js"></script>
+        <script src="scripts/directives/loading.js"></script>
+        <script src="scripts/directives/statFilter.js"></script>
+        <script src="scripts/directives/dropdownTarget.js"></script>
+        <script src="scripts/directives/dropdownButton.js"></script>
+        <script src="scripts/controllers/filter.js"></script>
+        <script src="scripts/controllers/statTables.js"></script>
+        <script src="scripts/directives/statTables.js"></script>
+        <script src="scripts/filters/camelCase.js"></script>
+        <script src="scripts/directives/checkbox.js"></script>
+        <script src="scripts/services/Authorization.js"></script>
+        <script src="scripts/services/next.js"></script>
+        <script src="scripts/directives/onenter.js"></script>
+        <script src="scripts/directives/pieChart.js"></script>
+        <script src="scripts/directives/flowChart.js"></script>
+        <script src="scripts/services/downloadUrl.js"></script>
+        <script src="scripts/filters/eventDescription.js"></script>
+        <script src="scripts/filters/eventImageUrl.js"></script>
+        <script src="scripts/filters/upperCase.js"></script>
+        <script src="scripts/services/gameStats.js"></script>
+        <script src="scripts/directives/rotating.js"></script>
+        <script src="scripts/directives/droppable.js"></script>
+        <script src="scripts/services/relocate.js"></script>
+        <script src="scripts/services/line.js"></script>
+        <script src="scripts/directives/draggable.js"></script>
+        <script src="scripts/services/lineStats.js"></script>
+        <script src="scripts/directives/feedback.js"></script>
+        <script src="scripts/directives/targetMap.js"></script>
+        <script src="scripts/services/playerExtensionStats.js"></script>
+        <script src="scripts/filters/hundredths.js"></script>
+        <script src="scripts/directives/playerStatTable.js"></script>
+        <!-- endbuild -->
+    </body>
+</html>

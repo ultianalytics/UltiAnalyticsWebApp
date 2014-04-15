@@ -1,0 +1,52 @@
+<div class="col-md-2">
+  <div class="btn-group filter-button">
+    <button type="button" class="btn btn-default filter-button-main" ng-click="collect()">
+      <span>{{buttonMessage}}</span>
+    </button>
+    <button type="button" class="btn btn-default dropdown-toggle filter-button-dropdown" dropdown-button>
+      <span class="caret"></span>
+    </button>
+    <ul dropdown-target class="dropdown-menu">
+      <li ng-click="filter.onlyInclude(allGames)"><a>All Games ({{numberOfGames}})</a></li>
+      <li ng-click="filter.onlyInclude([mostRecentGame])"><a>Most Recent Game ({{mostRecentGame.opponentName}})</a></li>
+      <li ng-click="filter.onlyInclude(mostRecentTournament)"><a>Last Tournament ({{mostRecentGame.tournamentName}})</a></li>
+      <li class="divider"></li>
+      <li><a ng-click="collect()">Specific Games</a></li>
+    </ul>
+  </div>
+</div>
+<div ng-if="dDOpen">
+  <div class="modal-backdrop" ng-click="close()"></div>
+  <div id="smallModal" class="modal" aria-hidden="false" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="close()" style="position:absolute; top:5px; right:5px;">×</button>
+          <h4 class="modal-title"><span class="icon-filter"/> Games Filter</h4>
+        </div> <!-- .widget-header -->
+        <div class="modal-body">
+          <div>
+            <span class="btn btn-primary" ng-click="filter.onlyInclude(allGames)">Select All</span>
+            <span class="btn btn-primary" ng-click="filter.onlyInclude([])" style="float:right;">Deselect All</span>
+          </div>
+          <div ng-repeat="games in orderedTournaments track by $index">
+            <input type="checkbox" checkbox watch="allIncluded(games)" ng-click="toggleAll(games, !allIncluded(games))">
+            <h4 style="display:inline-block; margin: 10px 0 5px 10px">{{games[0].tournamentName}}</h4>
+            <div ng-class="{'disable-games': allIncluded(games)}">
+              <div class="games-under-tournaments" style="margin-left:20px;">
+                <div ng-repeat="game in games">
+                  <input type="checkbox" checkbox watch="isIncluded(game)" ng-disabled="allIncluded(games)" ng-click="toggleSelect(game)">
+                  <span style="display:inline-block; margin-left:10px;">{{game.opponentName}}</span>
+                  <span style="float:right;">({{game.msSinceEpoch | date}})</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="btn btn-default" ng-click="close()">Done</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

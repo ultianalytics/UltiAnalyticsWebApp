@@ -1,0 +1,117 @@
+<div title-bar></div>
+<div nav-bar page="'games'"></div>
+<div loading="loading" style="text-align:center;"></div>
+<feedback></feedback>
+<div class="main fade-in" ng-if="!loading">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="widget stacked widget-table">
+          <div class="widget-header">
+            <span class="icon-list-alt"></span>
+            <h3>Games</h3>
+          </div>
+          <div class="widget-content">
+            <ul class="nav nav-pills nav-stacked">
+              <li ng-repeat="game in sortedGames | orderBy:'date':true" ng-class="{active: isSelectedGame(game)}" ng-click="select(game)">
+                <a class="select-game-button">
+                  <span style="display:inline-block; width:50px;">{{game.date | date:'shortDate'}}</span>
+                  v {{game.opponentName}}
+                  <span style="float:right;">{{game.ours}}-{{game.theirs}}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="widget stacked">
+          <div class="widget-header">
+            <span class="icon-file"></span>
+            <h3 ng-show="selectedGame">
+              <span id="game-title">{{selectedGame.opponentName | upperCase}}</span>
+              <span ng-show="selectedGame.tournamentName">@ {{selectedGame.tournamentName | upperCase}}</span>
+            </h3>
+          </div>
+          <div class="widget-content" loading="gameLoading" loading-type="'icon'">
+            <div ng-if="selectedGame" class="fade-in">
+              <div style="text-align:center; color:initial; margin-bottom:30px;">
+                <h2>{{teamName | upperCase}} ({{selectedGame.ours}}) - {{selectedGame.opponentName | upperCase}} ({{selectedGame.theirs}}) </h2>
+                <h5>{{teamName | upperCase}} are {{gameStats.record.wins}} - {{gameStats.record.losses}}  against {{selectedGame.opponentName | upperCase}}.</h5>  
+              </div>
+              <div class="game-leaders">
+                <b style="font-size:1.5em;">Game Leaders:</b><br>
+                <p style="margin:0;" ng-repeat="(type, leader) in gameStats.leaders">
+                  <span style="display:inline-block; min-width:90px;">{{type | camelCase}} : </span>
+                  <b><a ng-click="relocate.goTo('player', leader.name)">{{leader.name}}</a></b> 
+                  <span>({{leader.stats[type]}})</span>
+                </p>
+              </div>
+
+              <!-- Wind --> 
+              <div class="wind-indicator" ng-if="selectedGame.wind">
+                <div style="margin-bottom: 7px;">
+                  <img src="images/wind-large.png">
+                  <span style="margin-left: 10px; verticle-align:bottom;"> {{selectedGame.wind.mph}} mph</span>
+                </div>
+                <div class="playing-field">
+                  <div class="playing-field-proper">
+                    <div class="arrow-container">
+                      <img src="images/wind-arrow-large.png" rotating="selectedGame.wind.degrees">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Wind End -->
+
+              <!-- Pagination -->
+              <div class="game-content" ng-model="focus" >
+                <ul class="nav nav-tabs" ng-init="focus = 'stats'">
+                  <li ng-class="{active: focus === 'stats'}"><a ng-click="focus = 'stats'">Stats</a></li>
+                  <li ng-class="{active: focus === 'points'}"><a ng-click="focus = 'points'">Points</a></li>
+                </ul>   
+                <div class="tab-content">
+                  <div class="fade-in" ng-if="focus === 'stats'">
+                    <stat-tables></stat-tables>
+                  </div>
+                  <div class="panel-group accordion fade-in fade-out" ng-if="focus === 'points'">
+                    <a ng-click="togglePoints(selectedGame.points, true)" style="margin-right: 15px;">Expand All</a>
+                    <a ng-click="togglePoints([], true)">Collapse All</a>
+                    <div class="panel panel-default" ng-repeat="point in selectedGame.points" ng-class="{open: isOpen(point)}">
+                      <div class="panel-heading" style="cursor:pointer;" ng-click="togglePoints([point])">
+                        <h4 class="panel-title">
+                          <a class="accordion-toggle">
+                            <span class="point-score">{{point.summary.score.ours}}-{{point.summary.score.theirs}}</span>&nbsp;&nbsp;
+                            <span>{{point.summary.lineType}}-Line</span>&nbsp;&nbsp;
+                            <span class="point-minutes">{{(point.summary.elapsedTime / 60 ).toString().slice(0,3)}} min.</span>&nbsp;&nbsp;
+                            <span ng-repeat="player in point.line">
+                              <span>{{player}}</span>
+                              <span>{{$last ? '': ','}}</span>
+                            </span>
+                          </a>
+                        </h4>
+                      </div>
+                      <div class="panel-body" ng-if="isOpen(point)">
+                        <ul style="list-style:none;">
+                          <li class="well well-small" ng-repeat="event in point.events">
+                            <img ng-src="{{event | eventImageUrl}}" style="height:40px; width:40px;"></span>
+                            <span>{{event | eventDescription}}</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Points End -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-game-loading-page" ng-show="!notMobile && loadingGameRender">
+    <img class="loading-icon" src="images/ajax-loader.gif">
+  </div>
+</div>
+<div ng-include="'includes/partials/footer.html'"></div>

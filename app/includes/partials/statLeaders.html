@@ -1,0 +1,13 @@
+<div class="col-md-10">
+  <div class="widget big-stats-container stacked">
+    <div id="leader-widget" class="widget-content">
+      <div id="big_stats" class="cf">
+        <div class="stat" ng-repeat="(type, info) in leaderMap track by $index">
+          <div class="leader-category">{{info.category}}</div>   
+          <div class="leader-name"><a ng-click="relocate.goTo('player', leaders[type].name)" style="color:#FF9900">{{leaders[type].name}}</a></div>
+          <div class="leader-stat" ng-repeat="stat in info.stats">{{stat | camelCase:stat}}: {{leaders[type].stats[stat]}}</div>
+        </div> <!-- .stat -->          
+      </div>
+    </div> <!-- /widget-content -->
+  </div> <!-- /widget -->
+</div> <!-- /span12 --> 

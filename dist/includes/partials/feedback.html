@@ -1,0 +1,41 @@
+
+<a href="mailto:krgeppert@gmail.com" class="no-link">
+  <div class="feedback-token" ng-click=""> <!-- TODO -->
+    <span>Feedback!</span>
+  </div>
+</a>
+
+<div class='modal-backdrop' ng-if="!firstTime && !gotMobileWarning && isMobile"></div>
+<div class="modal" style="display: block;"  ng-if="!firstTime && !gotMobileWarning && isMobile">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Nice Phone!</h4>
+      </div>
+      <div class="modal-body centered">
+        <p>Welcome Mobile User. Please visit our site with a larger screen for more features!</p>
+      </div>
+      <div class="modal-footer centered">
+         <span class="btn btn-normal btn-primary" ng-click="closeMobileWarning()">Got it.</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class='modal-backdrop' ng-if="firstTime"></div>
+<div class="modal" style="display: block;" ng-if="firstTime">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <img class="welcome-banner" src="images/welcome-banner.png">
+      </div>
+      <div class="modal-body centered">
+        <p>We hope you find the information here useful. We're passionate about Ultimate and want to make our tools awesome. Please give us your feedback!</p>
+      </div>
+      <div class="modal-footer centered">
+         <span class="btn btn-normal btn-primary" ng-click="closeFirstTimeModal()">Go</span>
+      </div>
+    </div>
+  </div>
+</div>

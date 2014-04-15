@@ -1,0 +1,51 @@
+<!-- TODO: Fix the tab name away from 'kyle' -->
+<div title-bar></div>
+<div nav-bar page="'player'" tab-name="'kyle'"></div>
+<feedback></feedback>
+<div loading="loading" style="text-align:center;"></div>
+<div class="main" ng-if="!loading">
+  <div class="container">
+    <div class="row">
+      <stat-filter></stat-filter>
+        <div class="col-md-10">
+          <div class="widget widget-stacked">
+            <div class="widget-header">
+              <i class="icon-star"> </i>
+              <h3>Player</h3>
+            </div>
+            <div class="widget-content player-name">
+              <div class="pricing-header">
+                <h1>{{playerName}}</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="widget stacked widget-table">
+          <div class="widget-header">
+            <span class="icon-list-alt"></span>
+            <h3>Stats</h3>
+          </div>
+          <div class="widget-content">
+            <player-stat-table player-name="playerName"></player-stat-table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="widget widget-stacked">
+          <div class="widget-header">
+            <i class="icon-th-list"></i>
+            <h3>Who {{playerName}} throws to</h3>
+          </div>
+          <div class="widget-content">
+            <target-map data="targetStats"></target-map>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+<div ng-include="'includes/partials/footer.html'"></div>

@@ -1,0 +1,50 @@
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <a  ng-click="toggleNav()" class="subnav-toggle">
+        <span class="sr-only">Toggle Navigation</span>
+        <i class="icon-reorder"></i>
+      </a>
+      <div class="subnav-collapse {{navState}}" ng-if="!isMobile || navOpen">
+        <ul class="mainnav">
+          <li ng-class="isActive('players')" ng-click="navTo('players')">
+            <a>
+              <i class="icon-user"></i>
+              <span>Players</span>
+            </a>
+          </li>
+          <li ng-class="isActive('team')" ng-click="navTo('team')">
+            <a>
+              <i class="icon-group"></i>
+              <span>Team</span>
+            </a>
+          </li>
+          <li ng-class="isActive('games')" ng-click="navTo('games')">
+            <a>
+              <i class="icon-book"></i>
+              <span>Game</span>
+            </a>
+          </li>
+<!--           <li ng-class="isActive('line')" ng-click="!isMobile && navTo('line')">
+            <a ng-class="{'line-through':isMobile}">
+              <i class="icon-puzzle-piece"></i>
+              <span >Line Builder</span>
+            </a>
+          </li> -->
+          <li ng-class="isActive('download')" ng-click="!isMobile && navTo('download')">
+            <a ng-class="{'line-through':isMobile}">
+              <i class="icon-cloud-download"></i>
+              <span>Download</span>
+            </a>
+          </li>
+          <li ng-class="isActive('player')" ng-class="{active: pageFocus('specificPlayer')}" ng-if="isActive('player')">
+            <a>
+              <i class="icon-user"></i>
+              <span>{{playerName}}</span>
+            </a>
+          </li>
+        </ul>
+      </div> <!-- /.subnav-collapse -->
+    </div> <!-- /container -->
+  </div> <!-- /subnavbar-inner -->
+</div> <!-- /subnavbar -->
