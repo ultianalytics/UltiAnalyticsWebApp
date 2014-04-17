@@ -56,7 +56,7 @@ body{ color:#838383; font: 13px/1.7em 'Open Sans';}
 	font-family: 'Open Sans';
 	font-size: 13px;
 	color: #8e8d8d;
-	/*padding: 11px 15px 10px 50px;*/
+	padding: 11px 15px 10px 50px;
 	background-color: #fdfdfd;
 	width: 100%;
 	display: block;
@@ -65,9 +65,9 @@ body{ color:#838383; font: 13px/1.7em 'Open Sans';}
 	height: 40px;
 }
 
-.username-field { background: url(../../img/signin/user.png) no-repeat; }
+.username-field { background: url(../images/signin/user.png) no-repeat; }
 
-.password-field { background: url(../../img/signin/password.png) no-repeat; }
+.password-field { background: url(../images/signin/password.png) no-repeat; }
 
 
 
