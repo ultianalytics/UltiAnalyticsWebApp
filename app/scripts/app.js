@@ -1,9 +1,6 @@
 'use strict';
 // gotta get that footer positioned properly. This seemed like a good spot for some errant code.
-$('.main-view').css('min-height', window.innerHeight - $('.extra').outerHeight() - $('.footer').outerHeight())
-$(window).resize(function(){
-  $('.main-view').css('min-height', window.innerHeight - $('.extra').outerHeight() - $('.footer').outerHeight())
-})
+
 
 angular.module('newBetaApp', [
   'ngRoute',

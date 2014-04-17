@@ -1,90 +1,94 @@
-<div title-bar></div>
-<div nav-bar page="'team'"></div>
-<feedback></feedback>
-<div loading="loading" style="text-align:center;"></div>
-<div class="main fade-in" ng-if="!loading" >
-  <div class="container">
-    <div class="row">
-      <stat-filter></stat-filter>
-      <div class="col-md-10">
-        <div class="widget big-stats-container stacked">
-          <div class="widget-content">
-            <div id="big_stats" class="cf" style="padding: 5px;y">
-              <div class="stat">
-                <h4>Record</h4></span>
-                <span class="value">{{teamStats.record.wins}} - {{teamStats.record.losses}}</span>
-              </div> <!-- .stat -->
-              <div class="stat">
-                <h4>Point Spread</h4>
-                <span class="value">{{teamStats.pointSpread.ours}} - {{teamStats.pointSpread.theirs}}</span>
-              </div> <!-- .stat -->
-              <div class="stat">
-                <h4>Offensize Productivity</h4>
-                <span class="value">{{teamStats.offensiveProductivity}}%</span>
-              </div> <!-- .stat -->
-              <div class="stat">
-                <h4>Conversion Rate</h4>
-                <span class="value">{{teamStats.conversionRate}}%</span>
-              </div> <!-- .stat -->
+<div class="main-view">
+  <div title-bar></div>
+  <div>
+  </div>
+  <div nav-bar page="'team'"></div>
+  <feedback></feedback>
+  <div loading="loading" style="text-align:center;"></div>
+  <div class="main fade-in" ng-if="!loading" >
+    <div class="container">
+      <div class="row">
+        <stat-filter></stat-filter>
+        <div class="col-md-10">
+          <div class="widget big-stats-container stacked">
+            <div class="widget-content">
+              <div id="big_stats" class="cf" style="padding: 5px;y">
+                <div class="stat">
+                  <h4>Record</h4></span>
+                  <span class="value">{{teamStats.record.wins}} - {{teamStats.record.losses}}</span>
+                </div> <!-- .stat -->
+                <div class="stat">
+                  <h4>Point Spread</h4>
+                  <span class="value">{{teamStats.pointSpread.ours}} - {{teamStats.pointSpread.theirs}}</span>
+                </div> <!-- .stat -->
+                <div class="stat">
+                  <h4>Offensize Productivity</h4>
+                  <span class="value">{{teamStats.offensiveProductivity}}%</span>
+                </div> <!-- .stat -->
+                <div class="stat">
+                  <h4>Conversion Rate</h4>
+                  <span class="value">{{teamStats.conversionRate}}%</span>
+                </div> <!-- .stat -->
+              </div>
             </div>
-          </div>
-        </div> <!-- /widget-content -->
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="widget stacked widget-table">
-          <div class="widget-header">
-            <span class="icon-list-alt"></span>
-            <h3>Passes per Posession</h3>
-          </div> <!-- .widget-header -->
-          <div class="widget-content points-per-break">
-            <div class="pie-chart-container">
-              <h3>Scored</h3>
-              <pie-chart dataset="teamStats.throwsPerPossession.scored" width="200" height="200"></pie-chart>
-            </div>
-            <div class="pie-chart-container">
-              <h3>Failed</h3>
-              <pie-chart dataset="teamStats.throwsPerPossession.failed" width="200" height="200"></pie-chart>
-            </div>
-          </div>
+          </div> <!-- /widget-content -->
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="widget stacked widget-table">
-          <div class="widget-header">
-            <span class="icon-list-alt"></span>
-            <h3>Points per Line</h3>
-          </div>
-          <div class="widget-content points-per-break">
-            <div class="pie-chart-container">
-              <h3>{{teamName}}</h3>
-              <pie-chart dataset="teamStats.pointSummary.us" width="200" height="200"></pie-chart>
-            </div>
-            <div class="pie-chart-container">
-              <h3>Opponents</h3>
-              <pie-chart dataset="teamStats.pointSummary.them" width="200" height="200"></pie-chart>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-      <div class="row" ng-if="!isMobile">
-        <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
           <div class="widget stacked widget-table">
             <div class="widget-header">
               <span class="icon-list-alt"></span>
-              <h3>Assists to Goals</h3>
+              <h3>Passes per Posession</h3>
             </div> <!-- .widget-header -->
             <div class="widget-content points-per-break">
-              <div class="flow-map-pointers">
-                <div class="flow-map-pointer"><span>Hockey Assists</span></div>
-                <div><img src="images/right-arrow.png"></div>
-                <div class="flow-map-pointer"><span>Assists</span></div>
-                <div><img src="images/right-arrow.png"></div>
-                <div class="flow-map-pointer"><span>Goals!</span></div>
+              <div class="pie-chart-container">
+                <h3>Scored</h3>
+                <pie-chart dataset="teamStats.throwsPerPossession.scored" width="200" height="200"></pie-chart>
               </div>
-              <flow-chart dataset="teamStats.assistMap" width="960"></flow-chart>
+              <div class="pie-chart-container">
+                <h3>Failed</h3>
+                <pie-chart dataset="teamStats.throwsPerPossession.failed" width="200" height="200"></pie-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="widget stacked widget-table">
+            <div class="widget-header">
+              <span class="icon-list-alt"></span>
+              <h3>Points per Line</h3>
+            </div>
+            <div class="widget-content points-per-break">
+              <div class="pie-chart-container">
+                <h3>{{teamName}}</h3>
+                <pie-chart dataset="teamStats.pointSummary.us" width="200" height="200"></pie-chart>
+              </div>
+              <div class="pie-chart-container">
+                <h3>Opponents</h3>
+                <pie-chart dataset="teamStats.pointSummary.them" width="200" height="200"></pie-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="row" ng-if="!isMobile">
+          <div class="col-md-12">
+            <div class="widget stacked widget-table">
+              <div class="widget-header">
+                <span class="icon-list-alt"></span>
+                <h3>Assists to Goals</h3>
+              </div> <!-- .widget-header -->
+              <div class="widget-content points-per-break">
+                <div class="flow-map-pointers">
+                  <div class="flow-map-pointer"><span>Hockey Assists</span></div>
+                  <div><img src="images/right-arrow.png"></div>
+                  <div class="flow-map-pointer"><span>Assists</span></div>
+                  <div><img src="images/right-arrow.png"></div>
+                  <div class="flow-map-pointer"><span>Goals!</span></div>
+                </div>
+                <flow-chart dataset="teamStats.assistMap" width="960"></flow-chart>
+              </div>
             </div>
           </div>
         </div>
@@ -92,3 +96,4 @@
     </div>
   </div>
 </div>
+<footer></footer>
