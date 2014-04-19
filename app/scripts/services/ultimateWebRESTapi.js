@@ -10,10 +10,10 @@ angular.module('newBetaApp')
     var Ultimate = {};
 
     Ultimate.busyDialogStack = 0;
-    
+
     // make sure we use the host from where we were loaded to prevent CORS from being used unnecessarily
     // (unless the page is loaded locally in which case just use the default host)
-    var restHost = window.location.host.indexOf("ultianlytics.com") === -1 ? "www.ultimate-numbers.com" : "www.ultianlytics.com";
+    var restHost = window.location.host.indexOf("ultimate-numbers.com") === -1 ? "www.ultianalytics.com" : "www.ultimate-numbers.com";
     Ultimate.baseRestUrl = "http://" + restHost + '/rest/view';
     // make sure we use the host from where we were loaded to prevent CORS from being used unnecessarily
     Ultimate.sessionId = new Date().getTime() + '';
@@ -438,8 +438,8 @@ angular.module('newBetaApp')
     }
 
     /*
-    Creates a canonical string representation of the object which can be used for comparison or subsequent hash creation.  
-    The object will be deeply recursed to find all objects. 
+    Creates a canonical string representation of the object which can be used for comparison or subsequent hash creation.
+    The object will be deeply recursed to find all objects.
     Circular references are handled automatically (an object will not be re-visited once it has been handled).
     Thread-safe (designed to be a singleton)
     */
@@ -447,10 +447,10 @@ angular.module('newBetaApp')
       /*
         Return a canonical string of the object.
         Undefined properties are skipped.
-        options: {  
+        options: {
         treatNullAsUndefined: boolean  By default NULL properties will be written.  To treat nulls like undefined specify treatNullAsUndefined
         treatEmptyStringsAsUndefined: boolean  By default empty string properties will be written.  To treat empty strings like undefined specify treatEmptyStringsAsUndefined
-        <propertyName>: boolean   By default all other properties of an object are navigated.  To ignore a certain property add it to the options with value of true. 
+        <propertyName>: boolean   By default all other properties of an object are navigated.  To ignore a certain property add it to the options with value of true.
         */
       this.toCanonicalString = function(object, options) {
         var allProps = [];

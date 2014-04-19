@@ -10,17 +10,11 @@ angular.module('newBetaApp')
       scope.submitted = false
 
       scope.closeFirstTimeModal = ->
-        scope.firstTime = true
+        scope.firstTime = false
         $cookies.iUltimateVisited = 'true'
-        try
-          $('.modal-backdrop').remove()
-          $('.modal').remove()
 
       scope.closeMobileWarning = ->
         scope.gotMobileWarning = true
         $cookies.iUltimateVisited = 'mobile'
-        try
-          $('.modal-backdrop').remove()
-          $('.modal').remove()
 
 ]
