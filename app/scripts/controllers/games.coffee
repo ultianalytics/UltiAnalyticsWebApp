@@ -11,7 +11,8 @@ angular.module('newBetaApp')
       allGames = responses[0]
       gameStats = responses[2]
       filter = responses[3]
-      try 
+      $location.replace()
+      try
         id = _.keys($location.search())[0]
         if allGames[id] then scope.select allGames[id]
         else scope.select _.max allGames, (game) -> game.msSinceEpoch

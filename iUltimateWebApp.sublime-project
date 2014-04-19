@@ -1,0 +1,9 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Users/kyle.geppert/Code/Personal/iUltimateWebApp",
+      "folder_exclude_patterns":[".tmp", "test","dist"]
+		}
+	]
+}

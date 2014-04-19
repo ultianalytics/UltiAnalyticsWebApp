@@ -10,6 +10,7 @@ angular.module('newBetaApp')
             deferred.resolve();
           },
           function(error) {
+            $location.replace()
             if (error.status === 401){
               $location.url(teamId + '/login');
             } else {
