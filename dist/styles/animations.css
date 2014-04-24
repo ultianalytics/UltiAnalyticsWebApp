@@ -39,15 +39,4 @@
 .rotating {
   transition: all 3s ease;
 }
-.feedback-modal.ng-enter{
-  top: -5000px;
-  bottom: 10000px;
-  height: 70%;
-  transition: all 1s ease;
-}  
-.feedback-modal.ng-enter-active{
-  opacity: 1;
-  top: 15%;
-  bottom: 15%;
-}
 

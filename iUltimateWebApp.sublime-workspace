@@ -517,9 +517,6 @@
 			]
 		]
 	},
-	"buffers":
-	[
-	],
 	"build_system": "",
 	"command_palette":
 	{
@@ -652,6 +649,20 @@
 	},
 	"file_history":
 	[
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/next.js",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/login.js",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/Authorization.js",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/games.coffee",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/ultimateWebRESTapi.js",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/gameStats.coffee",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/views/games.html",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/app.js",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/styles/animations.css",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/directives/feedback.coffee",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/includes/partials/feedback.html",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/distindex.html",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/views/team.html",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/iUltimateWebApp.sublime-project",
 		"/Users/kyle.geppert/Code/martini/app/client/js/tutorials/sending-tutorial.coffee",
 		"/Users/kyle.geppert/Code/martini/app/client/js/tutorials/first-use.coffee",
 		"/Users/kyle.geppert/Code/martini/app/templates/global/first-use/almost-done-add-fields.jade",
@@ -765,21 +776,7 @@
 		"/Users/kyle.geppert/Code/martini/app/templates/documents-page/envelope-details.jade",
 		"/Users/kyle.geppert/Code/martini/app/templates/templates-page/template-details.jade",
 		"/Users/kyle.geppert/Code/martini/app/templates/send/envelope-details-recipient-row.jade",
-		"/Users/kyle.geppert/Code/martini/app/client/js/documents-page/envelope-details.coffee",
-		"/Users/kyle.geppert/Code/martini/app/common/route-data/documents.coffee",
-		"/Users/kyle.geppert/Code/martini/app/server/models/contact.coffee",
-		"/Users/kyle.geppert/Code/martini/app/scripts/grunt/grunt-start-app.coffee",
-		"/Users/kyle.geppert/Code/martini/app/kyle-boot.coffee",
-		"/Users/kyle.geppert/Desktop/foo.html",
-		"/Users/kyle.geppert/Code/martini/app/client/js/global/base/crud-list-model.coffee",
-		"/Users/kyle.geppert/Code/martini/app/client/js/global/base/model.coffee",
-		"/Users/kyle.geppert/Code/martini/app/client/js/vendor/uploadifive.js",
-		"/Users/kyle.geppert/Code/martini/app/client/css/pages/add-fields.styl",
-		"/Users/kyle.geppert/Code/martini/app/templates/send/tag-panel.jade",
-		"/Users/kyle.geppert/Code/martini/app/client/js/global/clipboard.coffee",
-		"/Users/kyle.geppert/Code/martini/app/server/middleware/public-assets.coffee",
-		"/Users/kyle.geppert/Code/martini/app/scripts/grunt/grunt-require-env.coffee",
-		"/Users/kyle.geppert/Code/martini/app/scripts/grunt/grunt-smart-dev-restart.coffee"
+		"/Users/kyle.geppert/Code/martini/app/client/js/documents-page/envelope-details.coffee"
 	],
 	"find":
 	{
@@ -925,6 +922,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"filter",
+			"setGames",
+			"derive",
+			"pages/",
+			"css/",
+			"mobile",
+			"location",
 			"ActionNeededBarAlertView",
 			"User tried to override invalid feature",
 			"User tried to override invalid feature\n",
@@ -1045,14 +1049,7 @@
 			"FirstUseModalHomeView",
 			"highlight",
 			"HighlighterShroudView",
-			"highlightshroud",
-			"fakeTag",
-			"addfields",
-			"fakeTag",
-			"modelFac",
-			"fakeTag",
-			"true",
-			"top"
+			"highlightshroud"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1071,14 +1068,6 @@
 		"whole_word": false,
 		"wrap": true
 	},
-	"groups":
-	[
-		{
-			"sheets":
-			[
-			]
-		}
-	],
 	"incremental_find":
 	{
 		"height": 0.0
@@ -1133,6 +1122,38 @@
 		"selected_items":
 		[
 			[
+				"player",
+				"app/scripts/services/playerStats.js"
+			],
+			[
+				"grunt",
+				"Gruntfile.js"
+			],
+			[
+				"feed",
+				"app/includes/partials/feedback.html"
+			],
+			[
+				"games",
+				"app/views/games.html"
+			],
+			[
+				"auth",
+				"app/scripts/services/Authorization.js"
+			],
+			[
+				"login",
+				"app/scripts/controllers/login.js"
+			],
+			[
+				"next",
+				"app/scripts/services/next.js"
+			],
+			[
+				"app",
+				"app/scripts/app.js"
+			],
+			[
 				"user",
 				"client/js/global/user-state.coffee"
 			],
@@ -1177,10 +1198,6 @@
 				"client/js/global/router.coffee"
 			],
 			[
-				"app",
-				"server/boot/app.coffee"
-			],
-			[
 				"header",
 				"templates/global/triggers/header_link.jade"
 			],
@@ -1203,10 +1220,6 @@
 			[
 				"modal",
 				"client/js/global/modal.coffee"
-			],
-			[
-				"login",
-				"templates/pages/login.jade"
 			],
 			[
 				"place",
@@ -1315,10 +1328,6 @@
 			[
 				"account",
 				"server/models/account.coffee"
-			],
-			[
-				"grunt",
-				"Gruntfile.coffee"
 			],
 			[
 				"model.",
@@ -1623,26 +1632,6 @@
 			[
 				"template-details",
 				"templates/templates-page/template-details.jade"
-			],
-			[
-				"conf.",
-				"conf/settings.coffee"
-			],
-			[
-				"fea",
-				"conf/feature-flags.coffee"
-			],
-			[
-				"app.",
-				"server/boot/app.coffee"
-			],
-			[
-				"welcome",
-				"server/routes/welcome.coffee"
-			],
-			[
-				"feau",
-				"conf/feature-flags.coffee"
 			]
 		],
 		"width": 0.0

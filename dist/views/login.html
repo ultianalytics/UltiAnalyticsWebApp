@@ -1,17 +1,20 @@
-<div ng-include="'includes/partials/title-bar.html'"></div>
-<div class="account-container stacked" style="margin-bottom: 6%;">
-  <div class="content clearfix">
-      <h1>Password Required</h1>    
-      <div class="login-fields">
-        <p>The administrator of this team has protected the stats, please enter the password:</p>
-        <div class="field">
-          <label>Password:</label>
-          <input  type="password" class="form-control input-lg password-field" ng-model="password" ng-click="failedAttempt = false;">
+<div class="main-view">
+  <div ng-include="'includes/partials/title-bar.html'"></div>
+  <div class="account-container stacked" style="margin-bottom: 6%;">
+    <div class="content clearfix">
+        <h1>Password Required</h1>
+        <div class="login-fields">
+          <p>The administrator of this team has protected the stats, please enter the password:</p>
+          <div class="field">
+            <label>Password:</label>
+            <input  type="password" class="form-control input-lg password-field" ng-model="password" ng-click="failedAttempt = false;">
+          </div>
+          <div style="color:red;" loading="inAttempt" loading-type="'iconOnly'" ng-show="failedAttempt">Incorrect Password.</div>
         </div>
-        <div style="color:red;" loading="inAttempt" loading-type="'iconOnly'" ng-show="failedAttempt">Incorrect Password.</div>
-      </div> 
-      <div class="login-actions">
-        <button ng-click="attempt(password)" class="login-action btn btn-primary" on-enter="attempt(password)">Submit</button>
-      </div>
+        <div class="login-actions">
+          <button ng-click="attempt(password)" class="login-action btn btn-primary" on-enter="attempt(password)">Submit</button>
+        </div>
+    </div>
   </div>
 </div>
+<footer></footer>

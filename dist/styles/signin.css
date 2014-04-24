@@ -18,14 +18,14 @@ body{ color:#838383; font: 13px/1.7em 'Open Sans';}
 
 
 .account-container {
-	width: 390px; 
+	width: 390px;
 	display: block;
 	margin: 60px auto 0 auto;
-	
+
 	background: #f9f9f9;
-	
+
 	border: 1px solid #d5d5d5;
-	
+
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -38,10 +38,10 @@ body{ color:#838383; font: 13px/1.7em 'Open Sans';}
 
 .content {
 	padding: 16px 28px 23px;
-} 
+}
 
 .login-fields {
-	
+
 }
 
 .login-fields .field {
@@ -65,30 +65,30 @@ body{ color:#838383; font: 13px/1.7em 'Open Sans';}
 	height: 40px;
 }
 
-.username-field { background: url(../../img/signin/user.png) no-repeat; }
+.username-field { background: url(../images/signin/user.png) no-repeat; }
 
-.password-field { background: url(../../img/signin/password.png) no-repeat; }
+.password-field { background: url(../images/signin/password.png) no-repeat; }
 
 
 
 
 .login-actions {
 	float: left;
-	
+
 	width: 100%;
-	
+
 	margin-top: -1em;
 	margin-bottom: 1.25em;
 }
 
 .login-social {
 	float: left;
-	
+
 	padding: 10px 0 15px;
-	
+
 	border: 1px dotted #CCC;
 	border-right: none;
-	border-left: none;	
+	border-left: none;
 }
 
 span.login-checkbox {
@@ -102,42 +102,42 @@ span.login-checkbox > input[type='checkbox'] {
     width: 15px;
 }
 
-span.login-checkbox > input[type='checkbox'] + label {    
+span.login-checkbox > input[type='checkbox'] + label {
     clear: none;
-    
-	height: 15px; 
+
+	height: 15px;
 	display: block;
     padding: 0 0 0 22px;
     margin: 0;
-    
+
     font-size: 12px;
     line-height: 1.2em;
-    
+
     background: url(../../img/signin/check.png) no-repeat 0 0;
-    
+
     cursor: pointer;
 }
 
-span.login-checkbox > input[type='checkbox']:checked + label {	
+span.login-checkbox > input[type='checkbox']:checked + label {
 	background-position: 0 -15px;
 }
 
 /** Text Under Box**/
 .login-extra {
-	display: block; 
-	width: 300px; 
+	display: block;
+	width: 300px;
 	margin: 1.5em auto;
-	 
+
 	text-align: center;
-	line-height: 19px; 
-	
-	text-shadow: 1px 1px 0px #fff; 	
+	line-height: 19px;
+
+	text-shadow: 1px 1px 0px #fff;
 }
 
 
 .account-container h1 {
 	margin-bottom: .4em;
-	
+
 	color: #f90;
 
 	font-size: 32px;
@@ -146,19 +146,19 @@ span.login-checkbox > input[type='checkbox']:checked + label {
 /** Buttons **/
 .twitter, .fb {
 	position: relative;
-	
-	height: 32px; 
-	width: 157px; 
+
+	height: 32px;
+	width: 157px;
 	display: block;
-	
-	background: url(../../img/signin/twitter_btn.png) no-repeat; 
-	
+
+	background: url(../../img/signin/twitter_btn.png) no-repeat;
+
 }
 
 .fb {
-	width: 162px; 
-	
-	background: url(../../img/signin/fb_btn.png) no-repeat; 	
+	width: 162px;
+
+	background: url(../../img/signin/fb_btn.png) no-repeat;
 }
 
 .twitter:active, .fb:active {
@@ -170,18 +170,18 @@ span.login-checkbox > input[type='checkbox']:checked + label {
 }
 
 .twitter a, .fb a {
-	padding: 5px 0 0 35px; 
-	text-shadow: -1px -1px 0px rgba(0,0,0,.3); 
-	color:#fff; 
-	font-weight: bold; 
-	font-size: 11px; 
-	height: 32px; 
-	display: block;	
+	padding: 5px 0 0 35px;
+	text-shadow: -1px -1px 0px rgba(0,0,0,.3);
+	color:#fff;
+	font-weight: bold;
+	font-size: 11px;
+	height: 32px;
+	display: block;
 }
 
 .fb a {
-	padding: 5px 0 0 31px; 
-	
+	padding: 5px 0 0 31px;
+
 }
 
 .twitter, .fb {
@@ -220,42 +220,42 @@ span.login-checkbox > input[type='checkbox']:checked + label {
 .register span.login-checkbox {
 	position: relative;
 	top: -6px;
-	
+
 	width: 200px;
 }
 
 .register span.login-checkbox > input[type="checkbox"] + label {
-	
+
 	position: relative;
-	
+
 	line-height: 1.3em;
 }
 
 
 
 @media (max-width: 480px) {
-	
+
 	.account-container {
-		width: 280px;	
+		width: 280px;
 		margin-top: 35px;
 	}
-	
+
 	.login-fields input {
 		width: 160px;
 	}
-	
+
 	.login-social {
 		width: 100%;
 	}
-	
+
 	.twitter {
 		display: block;
 		margin-bottom: 1em;
 	}
-	
+
 	.register .login-fields input {
 		width: 204px;
 		padding-left: 6px;
 	}
-	
+
 }

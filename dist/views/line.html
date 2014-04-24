@@ -1,95 +1,97 @@
-<div title-bar></div>
-<div nav-bar page="'line'"></div>
-<feedback></feedback>
-<div loading="loading" style="text-align:center;"></div>
-<div class="main" ng-if='!loading'>
-  <div class="container">
-    <div class="row">
-      <stat-filter></stat-filter>
-      <div class="col-md-10">
+<div class="main-view">
+  <div title-bar></div>
+  <div nav-bar page="'line'"></div>
+  <feedback></feedback>
+  <div loading="loading" style="text-align:center;"></div>
+  <div class="main" ng-if='!loading'>
+    <div class="container">
+      <div class="row">
+        <stat-filter></stat-filter>
+        <div class="col-md-10">
+          <div class="widget stacked widget-table">
+            <div class="widget-header">
+              <span class="icon-list-alt"></span>
+              <h3>Players</h3>
+            </div>
+            <div class="widget-content" style="text-align:center;padding: 2px;">
+              <button ng-repeat="player in players" draggable="true" item="player" on-drag="setDragging" class="btn btn-default player-token" ng-click="addPlayerToSelected(player)" ng-class="{selected: _contains(selectedLine.players, player)}">{{player}}</button>
+            </div>
+          </div>
+        </div>
         <div class="widget stacked widget-table">
           <div class="widget-header">
             <span class="icon-list-alt"></span>
-            <h3>Players</h3>
+            <h3>Lines</h3>
           </div>
-          <div class="widget-content" style="text-align:center;padding: 2px;">
-            <button ng-repeat="player in players" draggable="true" item="player" on-drag="setDragging" class="btn btn-default player-token" ng-click="addPlayerToSelected(player)" ng-class="{selected: _contains(selectedLine.players, player)}">{{player}}</button>
-          </div>
-        </div>
-      </div>
-      <div class="widget stacked widget-table">
-        <div class="widget-header">
-          <span class="icon-list-alt"></span>
-          <h3>Lines</h3>
-        </div>
-        <div class="widget-content">
-          <div class="line-carousel" style="min-width:{{(lines.length + 2) * 270}}px;">
-            <div class="line-container" style="border:0; box-shadow:0 0; width:200px;">
-              <div class="new-line-button" ng-click="addLine()">
-                <span class="new-line-button-contents">
-                  <i class="icon icon-plus new-line-button-icon"></i>
-                  <span class="new-line-button-text">Make a new line</span>
-                </span>
+          <div class="widget-content">
+            <div class="line-carousel" style="min-width:{{(lines.length + 2) * 270}}px;">
+              <div class="line-container" style="border:0; box-shadow:0 0; width:200px;">
+                <div class="new-line-button" ng-click="addLine()">
+                  <span class="new-line-button-contents">
+                    <i class="icon icon-plus new-line-button-icon"></i>
+                    <span class="new-line-button-text">Make a new line</span>
+                  </span>
+                </div>
               </div>
-            </div>
-            <div class="line-container" ng-repeat="line in lines" droppable on-drop="line.addPlayer" on-enter="teaseTODO" on-leave="stopTeaseTODO" dragging="dragging" ng-click="selectLine(line)">
-              <div class="line-header">
-                <h3 ng-if="line !== selectedLine">Line {{line.id}}</h3>
-                <h3 ng-if="line === selectedLine"><b>SELECTED</b></h3>
-                <i class="icon icon-remove line-close-button" ng-click="removeLine(line)"></i>
-              </div>
-              <div class="line-players-list">
-                <div class="line-drop-box">
-                  <div class="shadowy">
-                    <div class="player-in-line" ng-repeat="player in line.players">
-                      <span>{{player}}</span>
-                      &nbsp;&nbsp;
-                      <span class="icon-trash line-close-button" ng-click="line.removePlayer(player)"></span>
-                    </div>
-                    <div ng-if="!line.players.length" style="text-align:center;">
-                      <span class="drag-line-text">Drag
-                        <span ng-if="line === selectedLine">or click</span>
-                        a player onto the line!
-                      </span>
+              <div class="line-container" ng-repeat="line in lines" droppable on-drop="line.addPlayer" on-enter="teaseTODO" on-leave="stopTeaseTODO" dragging="dragging" ng-click="selectLine(line)">
+                <div class="line-header">
+                  <h3 ng-if="line !== selectedLine">Line {{line.id}}</h3>
+                  <h3 ng-if="line === selectedLine"><b>SELECTED</b></h3>
+                  <i class="icon icon-remove line-close-button" ng-click="removeLine(line)"></i>
+                </div>
+                <div class="line-players-list">
+                  <div class="line-drop-box">
+                    <div class="shadowy">
+                      <div class="player-in-line" ng-repeat="player in line.players">
+                        <span>{{player}}</span>
+                        &nbsp;&nbsp;
+                        <span class="icon-trash line-close-button" ng-click="line.removePlayer(player)"></span>
+                      </div>
+                      <div ng-if="!line.players.length" style="text-align:center;">
+                        <span class="drag-line-text">Drag
+                          <span ng-if="line === selectedLine">or click</span>
+                          a player onto the line!
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div>
-                <table ng-show="line.players.length" class="table table-striped">
-                  <tr>
-                    <td><b>Points Played Together<b></td><td><b>{{line.stats.consideredPoints.length}}<b></td>
-                  </tr>
-                  <tr>
-                    <td>Scoring Percentage</td><td>{{line.stats.scoringPercentage | hundredths}}</td>
-                  </tr>
-                  <tr>
-                    <th>Connections</th>
-                    <th>{{line.stats.connections.total}}</th>
-                  </tr>
-                  <tr ng-repeat="(connection, value) in line.stats.connections.combinations">
-                    <td>{{connection}}</td>
-                    <td>{{value}}</td>
-                  </tr>
-                  <tr>
-                    <th>On Offense</th>
-                    <th>{{line.stats.oPoints.length}}</th>
-                  </tr>
-                  <tr ng-repeat="(stat,value) in line.stats.onOffense">
-                    <td>{{stat | camelCase}}</td>
-                    <td>{{value | hundredths}}</td>
-                  </tr>
-                  <tr>
-                    <th>On Defense</th>
-                    <th>{{line.stats.dPoints.length}}</th>
-                  </tr>
-                  <tr ng-repeat="(stat,value) in line.stats.onDefense">
-                    <td>{{stat | camelCase}}</td>
-                    <td>{{value | hundredths}}</td>
-                  </tr>
-                  <tr ng-repeat="stat in line.stats.onDefense"></tr>
-                </table>
-                <h3 ng-show="!line.players.length" style="text-align:center;"><b>No Data</b></h3>
+                <div>
+                  <table ng-show="line.players.length" class="table table-striped">
+                    <tr>
+                      <td><b>Points Played Together<b></td><td><b>{{line.stats.consideredPoints.length}}<b></td>
+                    </tr>
+                    <tr>
+                      <td>Scoring Percentage</td><td>{{line.stats.scoringPercentage | hundredths}}</td>
+                    </tr>
+                    <tr>
+                      <th>Connections</th>
+                      <th>{{line.stats.connections.total}}</th>
+                    </tr>
+                    <tr ng-repeat="(connection, value) in line.stats.connections.combinations">
+                      <td>{{connection}}</td>
+                      <td>{{value}}</td>
+                    </tr>
+                    <tr>
+                      <th>On Offense</th>
+                      <th>{{line.stats.oPoints.length}}</th>
+                    </tr>
+                    <tr ng-repeat="(stat,value) in line.stats.onOffense">
+                      <td>{{stat | camelCase}}</td>
+                      <td>{{value | hundredths}}</td>
+                    </tr>
+                    <tr>
+                      <th>On Defense</th>
+                      <th>{{line.stats.dPoints.length}}</th>
+                    </tr>
+                    <tr ng-repeat="(stat,value) in line.stats.onDefense">
+                      <td>{{stat | camelCase}}</td>
+                      <td>{{value | hundredths}}</td>
+                    </tr>
+                    <tr ng-repeat="stat in line.stats.onDefense"></tr>
+                  </table>
+                  <h3 ng-show="!line.players.length" style="text-align:center;"><b>No Data</b></h3>
+                </div>
               </div>
             </div>
           </div>
@@ -98,5 +100,4 @@
     </div>
   </div>
 </div>
-
-
+<footer></footer>

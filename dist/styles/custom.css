@@ -569,9 +569,10 @@ Assigned to:	You
   margin:5px 0 3px 10px !important;
 }
 .logo {
+  top: 14px;
+  width: 150px;
   position: absolute;
   right: 0;
-  padding-top: 6px;
 }
 .nav-header-container {
   position: relative;

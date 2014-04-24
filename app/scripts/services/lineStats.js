@@ -2,7 +2,7 @@
 'use strict';
 angular.module('newBetaApp').factory('lineStats', [
   '$q', 'team', 'allGames', 'filter', function($q, team, allGames, filter) {
-    var api, deferred, getStats, includedGames;
+    var api, deferred, getConnectionStats, getConsideredPoints, getScoringPercentage, getStats, includedGames;
     deferred = $q.defer();
     includedGames = null;
     $q.all([team, allGames]).then(function(response) {
@@ -10,18 +10,75 @@ angular.module('newBetaApp').factory('lineStats', [
       team = response[0];
       return deferred.resolve(api);
     });
-    getStats = function(players) {
-      var consideredPoints, result;
-      result = {};
+    getConsideredPoints = function(games, players) {
+      var consideredPoints;
       consideredPoints = [];
-      _.each(includedGames, function(game) {
+      _.each(games, function(game) {
         return _.each(game.points, function(point) {
           if (_.intersection(point.line, players).length === players.length) {
             return consideredPoints.push(point);
           }
         });
       });
-      result.consideredPoints = consideredPoints;
+      return consideredPoints;
+    };
+    getScoringPercentage = function(points) {
+      var ratio;
+      ratio = _.countBy(points, function(point) {
+        if (point.events[point.events.length - 1].type === 'Offense') {
+          return 'scored';
+        } else {
+          return 'failed';
+        }
+      });
+      ratio = _.defaults(ratio, {
+        scored: 0,
+        failed: 0
+      });
+      return ratio.scored / ((ratio.scored || 0) + (ratio.failed || 0)) * 100;
+    };
+    getConnectionStats = function(points, players) {
+      var connections;
+      connections = {
+        total: 0,
+        combinations: {}
+      };
+      _.each(points, function(point) {
+        return _.each(point.events, function(event) {
+          var _base, _name;
+          if (_(players).contains(event.passer) && _(players).contains(event.receiver)) {
+            connections.total++;
+            if ((_base = connections.combinations)[_name = event.passer + ' to ' + event.receiver] == null) {
+              _base[_name] = 0;
+            }
+            return connections.combinations[event.passer + ' to ' + event.receiver]++;
+          }
+        });
+      });
+      return connections;
+    };
+    getStats = function(players) {
+      var consideredPoints, dPoints, oPoints, result;
+      consideredPoints = getConsideredPoints(includedGames, players);
+      oPoints = _.filter(consideredPoints, function(point) {
+        return point.summary.lineType === 'O';
+      });
+      dPoints = _.filter(consideredPoints, function(point) {
+        return point.summary.lineType === 'D';
+      });
+      result = {
+        consideredPoints: consideredPoints,
+        oPoints: oPoints,
+        dPoints: dPoints,
+        connections: getConnectionStats(consideredPoints, players),
+        scoringPercentage: getScoringPercentage(consideredPoints),
+        onOffense: {
+          scoringPercentage: getScoringPercentage(oPoints)
+        },
+        onDefense: {
+          scoringPercentage: getScoringPercentage(dPoints)
+        }
+      };
       return result;
     };
     api = {

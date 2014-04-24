@@ -11,6 +11,7 @@ angular.module('newBetaApp').controller('GamesCtrl', [
       allGames = responses[0];
       gameStats = responses[2];
       filter = responses[3];
+      $location.replace();
       try {
         id = _.keys($location.search())[0];
         if (allGames[id]) {
