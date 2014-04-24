@@ -190,7 +190,7 @@ module.exports = function (grunt) {
       // Usemin blocks.
       dist: {
         files: {
-          '<%= yeoman.dist %>/styles/main.css': ["<%= yeoman.app %>/styles/css/bootstrap.min.css", "<%= yeoman.app %>/styles/css/bootstrap-responsive.min.css", "<%= yeoman.app %>/styles/css/google-font-style.css", "<%= yeoman.app %>/styles/css/font-awesome.min.css", "<%= yeoman.app %>/styles/css/ui-lightness/jquery-ui-1.10.0.custom.min.css", "<%= yeoman.app %>/styles/css/base-admin-3.css", "<%= yeoman.app %>/styles/css/base-admin-3-responsive.css", "<%= yeoman.app %>/styles/css/pages/signin.css", "<%= yeoman.app %>/styles/css/pages/dashboard.css", "<%= yeoman.app %>/styles/css/pages/plans.css", "<%= yeoman.app %>/styles/css/pages/pricing.css", "<%= yeoman.app %>/styles/css/pages/reports.css", "<%= yeoman.app %>/styles/css/custom.css", "<%= yeoman.app %>/styles/css/animations.css"
+          '<%= yeoman.dist %>/styles/main.css': ["<%= yeoman.app %>/styles/bootstrap.min.css", "<%= yeoman.app %>/styles/bootstrap-responsive.min.css", "<%= yeoman.app %>/styles/google-font-style.css", "<%= yeoman.app %>/styles/font-awesome.min.css", "<%= yeoman.app %>/styles/ui-lightness/jquery-ui-1.10.0.custom.min.css", "<%= yeoman.app %>/styles/base-admin-3.css", "<%= yeoman.app %>/styles/base-admin-3-responsive.css", "<%= yeoman.app %>/styles/signin.css", "<%= yeoman.app %>/styles/dashboard.css", "<%= yeoman.app %>/styles/plans.css", "<%= yeoman.app %>/styles/pricing.css", "<%= yeoman.app %>/styles/reports.css", "<%= yeoman.app %>/styles/custom.css", "<%= yeoman.app %>/styles/animations.css"
           ]
         }
       }

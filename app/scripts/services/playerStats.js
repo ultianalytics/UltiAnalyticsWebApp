@@ -197,7 +197,9 @@ angular.module('newBetaApp')
         getLeaders: getLeaders,
         getTotals: getTotals,
         getAverages: getAverages,
-        getAll: function(){return playerStats},
+        getAll: function(){
+          return playerStats
+        },
         getForPlayer: function(playerName){
           return playerStats[playerName];
         },
