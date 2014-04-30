@@ -382,22 +382,27 @@ angular.module('newBetaApp')
       playerStats = statsApi;
       init();
     });
-    $scope.categories = [{
-      name: 'Passing',
-      statTypes: ['assists', 'completions', 'throwaways','stalls', 'passingPercentage']
-    }, {
-      name: 'Receiving',
-      statTypes: ['goals','catches','touches','drops','catchingPercentage']
-    }, {
-      name: 'Playing Time',
-      statTypes: ['gamesPlayed','pointsPlayed','timePlayedMinutes', 'oPoints', 'dPoints']
-    }, {
-      name: 'Defense',
-      statTypes: ['ds','pulls','callahans','averagePullHangtime','oBPulls',]
-    }, {
-      name: 'Per Point',
-      statTypes: ['ppGoals' ,'ppAssists', 'ppDs' , 'ppThrowaways' , 'ppDrops']
-    }, ];
+    $scope.categories = [
+      {
+        name: 'Summary',
+        statTypes: ['plusMinus', 'oPlusMinus', 'dPlusMinus', 'oPoints','dPoints']
+      }, {
+        name: 'Passing',
+        statTypes: ['assists', 'completions', 'throwaways','stalls', 'passingPercentage']
+      }, {
+        name: 'Receiving',
+        statTypes: ['goals','catches','touches','drops','catchingPercentage']
+      }, {
+        name: 'Playing Time',
+        statTypes: ['gamesPlayed','pointsPlayed','timePlayedMinutes', 'oPoints', 'dPoints']
+      }, {
+        name: 'Defense',
+        statTypes: ['ds','pulls','callahans','averagePullHangtime','oBPulls',]
+      }, {
+        name: 'Per Point',
+        statTypes: ['ppGoals' ,'ppAssists', 'ppDs' , 'ppThrowaways' , 'ppDrops']
+      }
+    ];
     $scope.focus = $scope.categories[0];
     $scope.games = filter.included; // updated by the filter controller.
     $scope.sorter = '-name';
@@ -424,7 +429,7 @@ angular.module('newBetaApp')
       ($scope.sorter === name) ? $scope.sorter = '-' + $scope.sorter : $scope.sorter = name;
     };
   }]);
-  ;'use strict';
+;'use strict';
 
 angular.module('newBetaApp')
   .controller('TeamCtrl', ['$scope', 'teamStats', '$location','filter',function($scope, teamStats, $location, filter) {
@@ -1940,20 +1945,35 @@ angular.module('newBetaApp')
       }
     }
 
-    var derive = function() {
-      var players = {};
-      _(team.players).pluck('name').each(function(name){
-        players[name] = {};
-        players[name].stats = {};
-        _.each(basicStatTypes, function(type){
-          players[name].stats[type] = 0;
-        });
-      });
+    function establishPlayerBuckets(players, basicStatTypes){
+      var playerBuckets = {}
 
+      return playerBuckets;
+    }
+    function defaultBucket(basicStatTypes){
+      var bucket = {
+        stats: {}
+      };
+      _.each(basicStatTypes, function(type){
+        bucket.stats[type] = 0;
+      });
+      return bucket;
+    }
+    var boooo = _.once(function(){console.log('Let the world know that I disapprove of the above line of code.')});
+    var derive = function() {
+      var shittyMode = true; // see ULTIWEB-71. @TODO
+      var players = {}
+      _(team.players).pluck('name').each(function(name){
+        players[name] = defaultBucket(basicStatTypes);
+      });
       _.each(includedGames, function(ref) {
         var playedInGame = {};
         _.each(allGames[ref.gameId].points, function(point) {
           _.each(point.line, function(name){
+            if (shittyMode && !players[name]){
+              players[name] = defaultBucket(basicStatTypes);
+              boooo();
+            }
             if (players[name]) {
               if (!playedInGame[name]){
                 players[name].stats.gamesPlayed++;
@@ -2888,7 +2908,7 @@ angular.module('newBetaApp')
   .factory('viewer', function () {
     return {
       isMobile: function () {
-        return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        return $(window).outerWidth() <= 768;
       }
     };
   });
