@@ -3,9 +3,9 @@
 angular.module('newBetaApp').filter('hundredths', function() {
   return function(input) {
     if (_(input).isNaN()) {
-      return '?';
+      return '*';
     } else if (_(input).isNumber()) {
-      return input.toFixed(2).replace(/(\.00$)|(0*$)/, '');
+      return parseFloat(input.toFixed(2)).toLocaleString();
     } else {
       return 'NA';
     }

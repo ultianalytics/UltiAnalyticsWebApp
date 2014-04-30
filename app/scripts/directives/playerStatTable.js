@@ -27,7 +27,7 @@ angular.module('newBetaApp').directive('playerStatTable', [
           api.setGames(scope.included);
           scope.playerStats = api.getAll()[scope.playerName].stats;
           scope.teamAverage = api.getAverages();
-          return scope.statTypes = _.keys(scope.playerStats).sort();
+          return scope.statTypes = _(scope.playerStats).omit(['timePlayed', 'hungPulls', 'pullHangtime']).keys(scope.playerStats).valueOf().sort();
         };
       }
     };

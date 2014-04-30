@@ -10,20 +10,12 @@ angular.module('newBetaApp').directive('feedback', [
         scope.firstTime = !$cookies.iUltimateVisited;
         scope.submitted = false;
         scope.closeFirstTimeModal = function() {
-          scope.firstTime = true;
-          $cookies.iUltimateVisited = 'true';
-          try {
-            $('.modal-backdrop').remove();
-            return $('.modal').remove();
-          } catch (_error) {}
+          scope.firstTime = false;
+          return $cookies.iUltimateVisited = 'true';
         };
         return scope.closeMobileWarning = function() {
           scope.gotMobileWarning = true;
-          $cookies.iUltimateVisited = 'mobile';
-          try {
-            $('.modal-backdrop').remove();
-            return $('.modal').remove();
-          } catch (_error) {}
+          return $cookies.iUltimateVisited = 'mobile';
         };
       }
     };

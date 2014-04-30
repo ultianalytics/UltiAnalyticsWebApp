@@ -84,6 +84,9 @@ angular.module('newBetaApp').directive('targetMap', [
               return scope.getColor(d.actionType, true);
             });
             node.append('text').attr('dy', '.5em').style('text-anchor', 'middle').text(function(d) {
+              if (_.contains(d.receiver.toLowerCase(), 'anonymous')) {
+                return 'The other team';
+              }
               return d.receiver.substring(0, d.r / 3);
             });
             return d3.select(self.frameElement).style('height', diameter + 'px');

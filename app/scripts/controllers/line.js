@@ -10,6 +10,7 @@ angular.module('newBetaApp').controller('LineCtrl', [
     scope.includedGames = filter.included;
     $scope.loading = true;
     lineStats.then(function(response) {
+      filter.includeAll();
       lineStats = response;
       $scope.players = lineStats.getPlayers();
       return $scope.loading = false;
@@ -31,6 +32,9 @@ angular.module('newBetaApp').controller('LineCtrl', [
     };
     scope.selectLine = function(line) {
       return scope.selectedLine = line;
+    };
+    scope.isNumber = function(item) {
+      return typeof item === 'number';
     };
     scope._contains = _.contains;
     scope.addLine();
