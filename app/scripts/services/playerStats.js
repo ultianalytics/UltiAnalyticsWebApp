@@ -86,20 +86,35 @@ angular.module('newBetaApp')
       }
     }
 
-    var derive = function() {
-      var players = {};
-      _(team.players).pluck('name').each(function(name){
-        players[name] = {};
-        players[name].stats = {};
-        _.each(basicStatTypes, function(type){
-          players[name].stats[type] = 0;
-        });
-      });
+    function establishPlayerBuckets(players, basicStatTypes){
+      var playerBuckets = {}
 
+      return playerBuckets;
+    }
+    function defaultBucket(basicStatTypes){
+      var bucket = {
+        stats: {}
+      };
+      _.each(basicStatTypes, function(type){
+        bucket.stats[type] = 0;
+      });
+      return bucket;
+    }
+    var boooo = _.once(function(){console.log('Let the world know that I disapprove of the above line of code.')});
+    var derive = function() {
+      var shittyMode = true; // see ULTIWEB-71. @TODO
+      var players = {}
+      _(team.players).pluck('name').each(function(name){
+        players[name] = defaultBucket(basicStatTypes);
+      });
       _.each(includedGames, function(ref) {
         var playedInGame = {};
         _.each(allGames[ref.gameId].points, function(point) {
           _.each(point.line, function(name){
+            if (shittyMode && !players[name]){
+              players[name] = defaultBucket(basicStatTypes);
+              boooo();
+            }
             if (players[name]) {
               if (!playedInGame[name]){
                 players[name].stats.gamesPlayed++;
