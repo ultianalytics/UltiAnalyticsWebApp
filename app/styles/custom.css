@@ -603,3 +603,8 @@ Assigned to:	You
 div[ng-view]{
   min-height: 100%
 }
+.ellipsed {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

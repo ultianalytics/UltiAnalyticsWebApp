@@ -16,9 +16,9 @@
               <ul class="nav nav-pills nav-stacked">
                 <li ng-repeat="game in sortedGames | orderBy:'date':true" ng-class="{active: isSelectedGame(game)}" ng-click="select(game)">
                   <a class="select-game-button">
-                    <span style="display:inline-block; width:50px;">{{game.date | date:'shortDate'}}</span>
-                    v {{game.opponentName}}
-                    <span style="float:right;">{{game.ours}}-{{game.theirs}}</span>
+                    <div style="display:inline-block;width:26%;float:left;">{{game.date | date:'shortDate'}}</div>
+                    <div class="ellipsed" style="verticle-align:center;display:inline-block;max-width:50%;">v {{game.opponentName}}</div>
+                    <div style="display:inline-block;width:20%;float:right;">{{game.ours}}-{{game.theirs}}</div>
                   </a>
                 </li>
               </ul>
