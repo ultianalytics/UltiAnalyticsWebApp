@@ -12,22 +12,27 @@ angular.module('newBetaApp')
       playerStats = statsApi;
       init();
     });
-    $scope.categories = [{
-      name: 'Passing',
-      statTypes: ['assists', 'completions', 'throwaways','stalls', 'passingPercentage']
-    }, {
-      name: 'Receiving',
-      statTypes: ['goals','catches','touches','drops','catchingPercentage']
-    }, {
-      name: 'Playing Time',
-      statTypes: ['gamesPlayed','pointsPlayed','timePlayedMinutes', 'oPoints', 'dPoints']
-    }, {
-      name: 'Defense',
-      statTypes: ['ds','pulls','callahans','averagePullHangtime','oBPulls',]
-    }, {
-      name: 'Per Point',
-      statTypes: ['ppGoals' ,'ppAssists', 'ppDs' , 'ppThrowaways' , 'ppDrops']
-    }, ];
+    $scope.categories = [
+      {
+        name: 'Summary',
+        statTypes: ['plusMinus', 'oPlusMinus', 'dPlusMinus', 'oPoints','dPoints']
+      }, {
+        name: 'Passing',
+        statTypes: ['assists', 'completions', 'throwaways','stalls', 'passingPercentage']
+      }, {
+        name: 'Receiving',
+        statTypes: ['goals','catches','touches','drops','catchingPercentage']
+      }, {
+        name: 'Playing Time',
+        statTypes: ['gamesPlayed','pointsPlayed','timePlayedMinutes', 'oPoints', 'dPoints']
+      }, {
+        name: 'Defense',
+        statTypes: ['ds','pulls','callahans','averagePullHangtime','oBPulls',]
+      }, {
+        name: 'Per Point',
+        statTypes: ['ppGoals' ,'ppAssists', 'ppDs' , 'ppThrowaways' , 'ppDrops']
+      }
+    ];
     $scope.focus = $scope.categories[0];
     $scope.games = filter.included; // updated by the filter controller.
     $scope.sorter = '-name';
@@ -54,4 +59,3 @@ angular.module('newBetaApp')
       ($scope.sorter === name) ? $scope.sorter = '-' + $scope.sorter : $scope.sorter = name;
     };
   }]);
-  
