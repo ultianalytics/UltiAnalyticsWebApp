@@ -28,7 +28,8 @@ angular.module('newBetaApp', [
 
 
       $routeProvider
-        .when('/', {templateUrl: 'views/splash.html', controller: 'SplashCtrl'}) .when('/:teamId/login', {templateUrl: 'views/login.html', controller: 'LoginCtrl'})
+        .when('/', {templateUrl: 'views/splash.html'})
+        .when('/:teamId/login', {templateUrl: 'views/login.html', controller: 'LoginCtrl'})
         .when('/:teamId/players', {templateUrl: 'views/players.html', controller: 'PlayersCtrl', resolve: {authorized: checkAuth}})
         .when('/:teamId/team', {templateUrl: 'views/team.html', controller: 'TeamCtrl', resolve: {authorized: checkAuth}})
         .when('/:teamId/download', {templateUrl: 'views/download.html', controller: 'DownloadCtrl', resolve: {authorized: checkAuth}})
