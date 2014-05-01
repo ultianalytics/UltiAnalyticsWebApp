@@ -10,4 +10,6 @@ angular.module('newBetaApp')
         element.addClass('rotating')
         scope.$watch 'rotating', (newVal, oldVal)->
           element.css '-webkit-transform', 'rotate(' + newVal + 'deg)'
+          element.css '-moz-transform', 'rotate(' + newVal + 'deg)'
+          element.css 'transform', 'rotate(' + newVal + 'deg)'
 
