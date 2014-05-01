@@ -1,6 +1,8 @@
 .panel-body.ng-enter {
   max-height: 0;
   opacity:0;
+  -moz-transition: all 2s ease;
+  -webkit-transition: all 2s ease;
   transition: all 2s ease;
 }
 .panel-body.ng-enter-active {
@@ -9,6 +11,8 @@
 }
 .panel-body.ng-leave {
   max-height: 1000px;
+  -moz-transition: all 1s ease;
+  -webkit-transition: all 1s ease;
   transition: all 1s ease;
 }
 .panel-body.ng-leave-active {
@@ -20,6 +24,8 @@
 
 .fade-in.ng-enter {
   opacity: 0;
+  -moz-transition: all 1s ease;
+  -webkit-transition: all 1s ease;
   transition: all 1s ease;
 }
 .fade-in.ng-enter-active {
@@ -27,6 +33,8 @@
 }
 .fade-in.ng-move {
   opacity: 0;
+  -moz-transition: all 1s ease;
+  -webkit-transition: all 1s ease;
   transition: all 1s ease;
 }
 .fade-in.ng-move-active {
@@ -34,9 +42,13 @@
 }
 .fade-out-ng-leave {
   opacity:1;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
   transition: all 1s ease;
 }
 .rotating {
+  -webkit-transition: all 3s ease;
+  -moz-transition: all 3s ease;
   transition: all 3s ease;
 }
 

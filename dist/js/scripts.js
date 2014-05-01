@@ -28,7 +28,8 @@ angular.module('newBetaApp', [
 
 
       $routeProvider
-        .when('/', {templateUrl: 'views/splash.html', controller: 'SplashCtrl'}) .when('/:teamId/login', {templateUrl: 'views/login.html', controller: 'LoginCtrl'})
+        .when('/', {templateUrl: 'views/splash.html'})
+        .when('/:teamId/login', {templateUrl: 'views/login.html', controller: 'LoginCtrl'})
         .when('/:teamId/players', {templateUrl: 'views/players.html', controller: 'PlayersCtrl', resolve: {authorized: checkAuth}})
         .when('/:teamId/team', {templateUrl: 'views/team.html', controller: 'TeamCtrl', resolve: {authorized: checkAuth}})
         .when('/:teamId/download', {templateUrl: 'views/download.html', controller: 'DownloadCtrl', resolve: {authorized: checkAuth}})
@@ -358,16 +359,6 @@ angular.module('newBetaApp')
       $scope.leaders = playerStats.getLeaders(['goals','ds','pointsPlayed', 'plusMinus']);
     }
   }]);
-;'use strict';
-
-angular.module('newBetaApp')
-  .controller('SplashCtrl', ['$scope', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  }]);
 ;/* global _ */
 
 'use strict';
@@ -385,7 +376,7 @@ angular.module('newBetaApp')
     $scope.categories = [
       {
         name: 'Summary',
-        statTypes: ['plusMinus', 'oPlusMinus', 'dPlusMinus', 'oPoints','dPoints']
+        statTypes: ['plusMinus', 'oPlusMinus', 'dPlusMinus', 'pointsPlayed','gamesPlayed']
       }, {
         name: 'Passing',
         statTypes: ['assists', 'completions', 'throwaways','stalls', 'passingPercentage']
@@ -748,7 +739,8 @@ angular.module('newBetaApp')
             'Calculating Team Statistics...',
             'Determining content network...',
             'Uploading personal information...',
-            'Lying about what this loading gif represents...'
+            'Lying about what this loading gif represents...',
+            'If you\'ve gotten this far, then either your internet is terrible or you should refresh your page.'
           ];
           message = messages[0];
         }
@@ -774,7 +766,7 @@ angular.module('newBetaApp')
       link: function postLink(scope) {
         scope.playerName = decodeURI($routeParams.playerNameUri);
         $rootScope.isMobile = viewer.isMobile();
-        scope.isMobile = viewer.isMobile();
+        scope.isMobileSized = viewer.isMobileSized;
         scope.isActive = function(option){
           return option === scope.page ? 'active' : '';
         };
@@ -2908,6 +2900,9 @@ angular.module('newBetaApp')
   .factory('viewer', function () {
     return {
       isMobile: function () {
+        return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      },
+      isMobileSized: function () {
         return $(window).outerWidth() <= 768;
       }
     };

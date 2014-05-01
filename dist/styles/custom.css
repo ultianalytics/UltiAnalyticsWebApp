@@ -506,6 +506,8 @@ Assigned to:	You
   border-radius: 20px 20px 0 0;
   border: 1px solid gray;
   -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  transform: rotate(270deg);
   text-align: center;
   line-height: 40px;
   z-index:3;
@@ -602,4 +604,9 @@ Assigned to:	You
 }
 div[ng-view]{
   min-height: 100%
+}
+.ellipsed {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
