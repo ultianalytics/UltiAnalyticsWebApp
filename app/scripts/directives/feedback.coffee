@@ -1,20 +1,20 @@
 'use strict'
 
 angular.module('newBetaApp')
-  .directive 'feedback', ['$cookies', ($cookies) ->
+  .directive 'feedback', [ () ->
     templateUrl: 'includes/partials/feedback.html'
     restrict: 'E'
     link: (scope, element, attrs) ->
-      scope.gotMobileWarning = $cookies.iUltimateVisited is 'mobile'
-      scope.firstTime =  !$cookies.iUltimateVisited
+      scope.gotMobileWarning = _(document.cookie).contains 'mobile'
+      scope.firstTime = not _(document.cookie).contains('visited')
       scope.submitted = false
 
       scope.closeFirstTimeModal = ->
         scope.firstTime = false
-        $cookies.iUltimateVisited = 'true'
+        document.cookie = 'visited=true;max-age=100000000000'
 
       scope.closeMobileWarning = ->
         scope.gotMobileWarning = true
-        $cookies.iUltimateVisited = 'mobile'
+        document.cookie = 'mobile-visited=true;max-age=100000000000'
 
 ]

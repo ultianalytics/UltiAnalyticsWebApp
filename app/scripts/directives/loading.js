@@ -24,7 +24,8 @@ angular.module('newBetaApp')
             'Calculating Team Statistics...',
             'Determining content network...',
             'Uploading personal information...',
-            'Lying about what this loading gif represents...'
+            'Lying about what this loading gif represents...',
+            'If you\'ve gotten this far, then either your internet is terrible or you should refresh your page.'
           ];
           message = messages[0];
         }

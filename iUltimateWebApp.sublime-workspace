@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"no",
+				"nowrap"
+			],
+			[
+				"games",
+				"games"
+			],
+			[
+				"defaul",
+				"defaultBucket"
+			],
+			[
+				"player",
+				"playerBuckets"
+			],
+			[
 				"mon",
 				"monitoringSettings"
 			],
@@ -50,10 +66,6 @@
 			[
 				"offse",
 				"topOffset"
-			],
-			[
-				"no",
-				"noFade"
 			],
 			[
 				"tuto",
@@ -502,18 +514,6 @@
 			[
 				"alt",
 				"alert-loading-wrapper"
-			],
-			[
-				"tran",
-				"transparent"
-			],
-			[
-				"open",
-				"openedAlerts"
-			],
-			[
-				"time",
-				"timeStamp"
 			]
 		]
 	},
@@ -649,6 +649,7 @@
 	},
 	"file_history":
 	[
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/viewer.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/next.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/login.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/Authorization.js",
@@ -775,8 +776,7 @@
 		"/Users/kyle.geppert/Code/martini/app/templates/global/shroud.jade",
 		"/Users/kyle.geppert/Code/martini/app/templates/documents-page/envelope-details.jade",
 		"/Users/kyle.geppert/Code/martini/app/templates/templates-page/template-details.jade",
-		"/Users/kyle.geppert/Code/martini/app/templates/send/envelope-details-recipient-row.jade",
-		"/Users/kyle.geppert/Code/martini/app/client/js/documents-page/envelope-details.coffee"
+		"/Users/kyle.geppert/Code/martini/app/templates/send/envelope-details-recipient-row.jade"
 	],
 	"find":
 	{
@@ -784,9 +784,11 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
+			"*html",
+			"*js",
 			"*",
 			"*server/*",
 			"*",
@@ -912,9 +914,7 @@
 			"*",
 			"*styl",
 			"*coffee",
-			"*",
-			"*styl",
-			"*coffee"
+			"*"
 		]
 	},
 	"find_state":
@@ -922,6 +922,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"game in sortedGames",
+			"isMobile",
+			"{\n",
+			".subnav-toggle",
+			"subnav-toggle",
+			"plusMinus",
+			"players",
+			"alert 'foo'",
+			"alert('foo')",
+			"alert",
 			"filter",
 			"setGames",
 			"derive",
@@ -1039,17 +1049,7 @@
 			"farRight",
 			"exports.highlight",
 			"shrouds",
-			"hideOverlay",
-			"exports.openTutorialModal",
-			"exports.highlight",
-			"highlight",
-			"exports.highlight",
-			"highlight",
-			"openTutorialModal",
-			"FirstUseModalHomeView",
-			"highlight",
-			"HighlighterShroudView",
-			"highlightshroud"
+			"hideOverlay"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1122,8 +1122,24 @@
 		"selected_items":
 		[
 			[
+				"custom",
+				"app/styles/custom.css"
+			],
+			[
+				"viewe",
+				"app/scripts/services/viewer.js"
+			],
+			[
+				"nav",
+				"app/includes/partials/nav-bar.html"
+			],
+			[
 				"player",
 				"app/scripts/services/playerStats.js"
+			],
+			[
+				"stat",
+				"app/scripts/controllers/statTables.js"
 			],
 			[
 				"grunt",
@@ -1616,22 +1632,6 @@
 			[
 				"base/modal",
 				"client/css/base/modal.styl"
-			],
-			[
-				"alert-loading",
-				"templates/global/alert-loading.jade"
-			],
-			[
-				"progr",
-				"templates/send/upload-progress.jade"
-			],
-			[
-				"post",
-				"server/routes/post-api.coffee"
-			],
-			[
-				"template-details",
-				"templates/templates-page/template-details.jade"
 			]
 		],
 		"width": 0.0
