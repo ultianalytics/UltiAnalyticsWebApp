@@ -784,7 +784,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"*coffee, *js",
@@ -922,6 +922,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"teamName",
 			"-webkit",
 			"debugger",
 			"ng-include",
@@ -1048,8 +1049,7 @@
 			"@edges",
 			"shouldBeClear",
 			"edges",
-			"verticle",
-			"box"
+			"verticle"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1122,16 +1122,28 @@
 		"selected_items":
 		[
 			[
-				"title",
-				"app/scripts/directives/titleBar.js"
-			],
-			[
 				"nav",
 				"app/scripts/directives/navBar.js"
 			],
 			[
+				"vie",
+				"app/scripts/services/viewer.js"
+			],
+			[
 				"tit",
 				"app/includes/partials/title-bar.html"
+			],
+			[
+				"cut",
+				"app/styles/custom.css"
+			],
+			[
+				"team",
+				"app/scripts/services/teamName.js"
+			],
+			[
+				"title",
+				"app/scripts/directives/titleBar.js"
 			],
 			[
 				"games",
@@ -1620,18 +1632,6 @@
 			[
 				"rec",
 				"server/models/recipients.coffee"
-			],
-			[
-				"pla",
-				"client/js/send/fields/placed-field.coffee"
-			],
-			[
-				"plac",
-				"client/js/send/fields/placed-field.coffee"
-			],
-			[
-				"clipb",
-				"client/js/global/clipboard.coffee"
 			]
 		],
 		"width": 0.0

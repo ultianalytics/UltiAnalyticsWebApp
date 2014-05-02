@@ -22,6 +22,7 @@ angular.module('newBetaApp')
         scope.toggleNav = function(){
           scope.navOpen = !scope.navOpen;
         };
+        scope.teamId = $routeParams.teamId
       }
     };
   }]);
