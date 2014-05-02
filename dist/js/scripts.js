@@ -2120,7 +2120,7 @@ angular.module('newBetaApp')
   .factory('teamName', ['$q', 'team',function ($q, team) {
     var deferred = $q.defer();
     team.then(function(result){
-      deferred.resolve(result.name);
+      deferred.resolve(result.nameWithSeason);
     });
     return deferred.promise;
   }]);
@@ -2897,7 +2897,10 @@ angular.module('newBetaApp')
   });;'use strict';
 
 angular.module('newBetaApp')
-  .factory('viewer', function () {
+  .factory('viewer', function ($rootScope) {
+    $(window).resize(function(){
+      $rootScope.$digest()
+    });
     return {
       isMobile: function () {
         return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);

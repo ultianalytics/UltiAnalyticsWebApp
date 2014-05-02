@@ -22,7 +22,7 @@
           <li ng-class="isActive('games')" ng-click="navTo('games')">
             <a>
               <i class="icon-book"></i>
-              <span>Game</span>
+              <span>Games</span>
             </a>
           </li>
 <!--           <li ng-class="isActive('line')" ng-click="!isMobile && navTo('line')">
@@ -43,6 +43,7 @@
               <span>{{playerName}}</span>
             </a>
           </li>
+          <a class="switch-back" ng-if="!isMobileSized()" href="http://www.ultianalytics.com/team/{teamId}/main-classic">Old Verison</a>
         </ul>
       </div> <!-- /.subnav-collapse -->
     </div> <!-- /container -->

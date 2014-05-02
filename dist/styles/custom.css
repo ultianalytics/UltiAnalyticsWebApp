@@ -610,3 +610,16 @@ div[ng-view]{
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.switch-back {
+  color: rgb(255, 153, 0);
+  position: absolute;
+  right: 0;
+  top: 80px;
+  display: inline-block;
+  line-height: 1;
+  text-align: center;
+  width: 50px;
+}
+.switch-back:hover{
+  color: rgb(255, 153, 0);
+}
