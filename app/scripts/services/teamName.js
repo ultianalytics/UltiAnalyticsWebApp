@@ -4,7 +4,7 @@ angular.module('newBetaApp')
   .factory('teamName', ['$q', 'team',function ($q, team) {
     var deferred = $q.defer();
     team.then(function(result){
-      deferred.resolve(result.name);
+      deferred.resolve(result.nameWithSeason);
     });
     return deferred.promise;
   }]);

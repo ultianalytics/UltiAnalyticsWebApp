@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"gam",
+				"gamesPlayed"
+			],
+			[
 				"no",
 				"nowrap"
 			],
@@ -510,10 +514,6 @@
 			[
 				"moda",
 				"modal-wrapper"
-			],
-			[
-				"alt",
-				"alert-loading-wrapper"
 			]
 		]
 	},
@@ -649,20 +649,23 @@
 	},
 	"file_history":
 	[
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/statTables.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/viewer.js",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/views/games.html",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/includes/partials/nav-bar.html",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/directives/feedback.coffee",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/directives/navBar.js",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/views/team.html",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/next.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/login.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/Authorization.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/games.coffee",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/ultimateWebRESTapi.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/gameStats.coffee",
-		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/views/games.html",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/app.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/styles/animations.css",
-		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/directives/feedback.coffee",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/includes/partials/feedback.html",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/distindex.html",
-		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/views/team.html",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/iUltimateWebApp.sublime-project",
 		"/Users/kyle.geppert/Code/martini/app/client/js/tutorials/sending-tutorial.coffee",
 		"/Users/kyle.geppert/Code/martini/app/client/js/tutorials/first-use.coffee",
@@ -773,10 +776,7 @@
 		"/Users/kyle.geppert/Code/martini/app/templates/global/alert-confirm.jade",
 		"/Users/kyle.geppert/Code/martini/app/client/css/views.styl",
 		"/Users/kyle.geppert/Code/martini/app/templates/send/fields/create.jade",
-		"/Users/kyle.geppert/Code/martini/app/templates/global/shroud.jade",
-		"/Users/kyle.geppert/Code/martini/app/templates/documents-page/envelope-details.jade",
-		"/Users/kyle.geppert/Code/martini/app/templates/templates-page/template-details.jade",
-		"/Users/kyle.geppert/Code/martini/app/templates/send/envelope-details-recipient-row.jade"
+		"/Users/kyle.geppert/Code/martini/app/templates/global/shroud.jade"
 	],
 	"find":
 	{
@@ -787,6 +787,8 @@
 		"height": 93.0,
 		"where_history":
 		[
+			"*coffee, *js",
+			"*",
 			"*html",
 			"*js",
 			"*",
@@ -912,9 +914,7 @@
 			"*styl",
 			"*coffee",
 			"*",
-			"*styl",
-			"*coffee",
-			"*"
+			"*styl"
 		]
 	},
 	"find_state":
@@ -922,6 +922,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"-webkit",
+			"debugger",
+			"ng-include",
+			"params",
+			"isMobileSized",
+			"isMobile",
+			"lying",
 			"game in sortedGames",
 			"isMobile",
 			"{\n",
@@ -1042,14 +1049,7 @@
 			"shouldBeClear",
 			"edges",
 			"verticle",
-			"box",
-			"highlight",
-			"div",
-			"floor",
-			"farRight",
-			"exports.highlight",
-			"shrouds",
-			"hideOverlay"
+			"box"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1122,6 +1122,26 @@
 		"selected_items":
 		[
 			[
+				"title",
+				"app/scripts/directives/titleBar.js"
+			],
+			[
+				"nav",
+				"app/scripts/directives/navBar.js"
+			],
+			[
+				"tit",
+				"app/includes/partials/title-bar.html"
+			],
+			[
+				"games",
+				"app/views/games.html"
+			],
+			[
+				"stat",
+				"app/scripts/controllers/statTables.js"
+			],
+			[
 				"custom",
 				"app/styles/custom.css"
 			],
@@ -1130,16 +1150,8 @@
 				"app/scripts/services/viewer.js"
 			],
 			[
-				"nav",
-				"app/includes/partials/nav-bar.html"
-			],
-			[
 				"player",
 				"app/scripts/services/playerStats.js"
-			],
-			[
-				"stat",
-				"app/scripts/controllers/statTables.js"
 			],
 			[
 				"grunt",
@@ -1148,10 +1160,6 @@
 			[
 				"feed",
 				"app/includes/partials/feedback.html"
-			],
-			[
-				"games",
-				"app/views/games.html"
 			],
 			[
 				"auth",
@@ -1624,14 +1632,6 @@
 			[
 				"clipb",
 				"client/js/global/clipboard.coffee"
-			],
-			[
-				"modal.s",
-				"client/css/base/modal.styl"
-			],
-			[
-				"base/modal",
-				"client/css/base/modal.styl"
 			]
 		],
 		"width": 0.0
