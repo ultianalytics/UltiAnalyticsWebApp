@@ -24,39 +24,34 @@
             <h3>Lines</h3>
           </div>
           <div class="widget-content">
-            <div class="line-carousel" style="min-width:{{(lines.length + 2) * 270}}px;">
-              <div class="line-container" style="border:0; box-shadow:0 0; width:200px;">
-                <div class="new-line-button" ng-click="addLine()">
-                  <span class="new-line-button-contents">
-                    <i class="icon icon-plus new-line-button-icon"></i>
-                    <span class="new-line-button-text">Make a new line</span>
-                  </span>
-                </div>
-              </div>
-              <div class="line-container" ng-repeat="line in lines" droppable on-drop="line.addPlayer" on-enter="teaseTODO" on-leave="stopTeaseTODO" dragging="dragging" ng-click="selectLine(line)">
+            <div>
+              <ul class="chrome-style">
+                <li ng-class="{'chrome-style-selected': line === selectedLine}" ng-repeat="line in lines"><a>{{ line.players.join(', ') || 'No Data'}}</a></li>
+                <li ng-click="addLine()"><a>+</a></li>
+              </ul>
+              <div class="line-container" droppable on-drop="selectedLine.addPlayer" dragging="dragging">
                 <div class="line-header">
-                  <h3 ng-if="line !== selectedLine">Line {{line.id}}</h3>
-                  <h3 ng-if="line === selectedLine"><b>SELECTED</b></h3>
-                  <i class="icon icon-remove line-close-button" ng-click="removeLine(line)"></i>
+                  <h3>Players</h3>
                 </div>
                 <div class="line-players-list">
                   <div class="line-drop-box">
                     <div class="shadowy">
-                      <div class="player-in-line" ng-repeat="player in line.players">
+                      <div class="player-in-line" ng-repeat="player in selectedLine.players">
                         <span>{{player}}</span>
                         &nbsp;&nbsp;
-                        <span class="icon-trash line-close-button" ng-click="line.removePlayer(player)"></span>
+                        <span class="icon-trash line-close-button" ng-click="selectedLine.removePlayer(player)"></span>
                       </div>
-                      <div ng-if="!line.players.length" style="text-align:center;">
-                        <span class="drag-line-text">Drag
-                          <span ng-if="line === selectedLine">or click</span>
-                          a player onto the line!
-                        </span>
+                      <div ng-if="!selectedLine.players.length" style="text-align:center;">
+                        <span class="drag-line-text">Drag or click a player onto the line!</span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div>
+              </div>
+
+
+
+<!--
                   <table ng-show="line.players.length" class="table table-striped">
                     <tr>
                       <td><b>Points Played Together<b></td><td><b>{{line.stats.consideredPoints.length}}<b></td>
@@ -94,6 +89,7 @@
                 </div>
               </div>
             </div>
+ -->
           </div>
         </div>
       </div>
