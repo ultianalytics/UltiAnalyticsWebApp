@@ -9,7 +9,9 @@ angular.module('newBetaApp')
       function success(response) {
         _.each(response, function(game) {
           game.date = new Date(game.msSinceEpoch);
-          game.points = JSON.parse(game.pointsJson);
+          if (game.pointsJson){
+            game.points = JSON.parse(game.pointsJson);
+          }
           delete game.pointsJson;
         });
         deferred.resolve(_.indexBy(response, 'gameId'));
