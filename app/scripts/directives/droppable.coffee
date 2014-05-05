@@ -5,7 +5,7 @@ angular.module('newBetaApp')
     restrict: 'A'
     scope: true
     link: (scope, element, attrs)->
-      onEnter = $parse(attrs.onEnter)(scope) 
+      onEnter = $parse(attrs.onEnter)(scope)
       onLeave = $parse(attrs.onLeave)(scope)
       onDrop = $parse(attrs.onDrop)(scope)
       element.on 'dragenter', (event)->
@@ -13,8 +13,8 @@ angular.module('newBetaApp')
       element.on 'dragleave', (event)->
         onLeave?(scope.dragging)
       element.on 'drop', (event)->
-        onDrop?(scope.dragging)
-        scope.$digest()
+        scope.$apply ->
+          onDrop?(scope.dragging)
       element.on 'dragover', (event)->
         onOver?(scope.dragging)
         event.preventDefault()

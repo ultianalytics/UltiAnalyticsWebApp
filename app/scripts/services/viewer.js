@@ -11,6 +11,9 @@ angular.module('newBetaApp')
       },
       isMobileSized: function () {
         return $(window).outerWidth() <= 768;
+      },
+      isLargeScreen: function (){
+        return $(window).outerWidth() >= 1200;
       }
     };
   });

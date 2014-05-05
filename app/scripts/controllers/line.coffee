@@ -1,14 +1,18 @@
 'use strict'
 
 angular.module('newBetaApp')
-  .controller 'LineCtrl', ['$scope', 'lineStats', 'Line', 'filter', ($scope, lineStats, Line, filter) ->
+  .controller 'LineCtrl', ['$scope', 'lineStats','LineView', 'filter', 'viewer', ($scope, lineStats, LineView, filter, viewer) ->
     scope = $scope
     scope.dragging
-    scope.selectedLine
-    scope.lines = {}
     scope.includedGames = filter.included
     $scope.loading = true
+    scope.lineViews = []
 
+    scope.lineViews.push new LineView
+    if viewer.isLargeScreen() then scope.lineViews.push new LineView
+    _.each scope.lineViews, (lineView)->
+      lineView.addLine()
+    scope.selectedLineView = _.first scope.lineViews
 
     lineStats.then (response)->
       filter.includeAll();
@@ -16,26 +20,25 @@ angular.module('newBetaApp')
       $scope.players = lineStats.getPlayers()
       $scope.loading = false
 
-    scope.setDragging = (player)->
-      scope.dragging = player
-    scope.addLine = ->
-      line = new Line
-      scope.lines[line.id] = line
-      scope.selectedLine = line
-    scope.removeLine = (line)->
-      delete scope.lines[line.id]
-    scope.addPlayerToSelected = (player)->
-      scope.selectedLine.addPlayer(player)
-    scope.selectLine = (line)->
-      scope.selectedLine = line
-    scope.isNumber = (item)->
-      typeof(item) is 'number'
-    scope._contains = _.contains
-    scope.addLine()
-
     # update the lines on filter change
     scope.$watchCollection 'includedGames', (update, old)->
       if update and lineStats.getStats
         _(scope.lines).each (line)->
           line.updateStats()
+
+    scope.setDragging = (player)->
+      scope.dragging = player
+
+    scope.addPlayerToSelected = (player)->
+      scope.selectedLineView.selectedLine.addPlayer(player)
+
+    scope.isSelectedLineView = (lineView)->
+      scope.selectedLineView is lineView
+    scope.selectLineView = (lineView)->
+      scope.selectedLineView = lineView
+
+
+    scope._contains = _.contains
+    scope.isNumber = (item)->
+      typeof(item) is 'number'
 ]

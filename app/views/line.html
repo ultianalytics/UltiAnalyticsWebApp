@@ -14,7 +14,7 @@
               <h3>Players</h3>
             </div>
             <div class="widget-content" style="text-align:center;padding: 2px;">
-              <button ng-repeat="player in players" draggable="true" item="player" on-drag="setDragging" class="btn btn-default player-token" ng-click="addPlayerToSelected(player)" ng-class="{selected: _contains(selectedLine.players, player)}">{{player}}</button>
+              <button ng-repeat="player in players" draggable="true" item="player" on-drag="setDragging" class="btn btn-default player-token" ng-click="addPlayerToSelected(player)" ng-class="{selected: _contains(selectedLineView.selectedLine.players, player)}">{{player}}</button>
             </div>
           </div>
         </div>
@@ -24,25 +24,30 @@
             <h3>Lines</h3>
           </div>
           <div class="widget-content">
-            <div>
+            <div ng-repeat="lineView in lineViews" style="display:inline-block;"  ng-style="{'width': 100 / lineViews.length + '%'}" ng-click="selectLineView(lineView)">
               <ul class="chrome-style">
-                <li ng-class="{'chrome-style-selected': line === selectedLine}" ng-repeat="line in lines"><a>{{ line.players.join(', ') || 'No Data'}}</a></li>
-                <li ng-click="addLine()"><a>+</a></li>
+                <li ng-class="{'chrome-style-selected': line === lineView.selectedLine}" ng-repeat="line in lineView.lines track by $index" ng-click="lineView.selectLine(line)"><a>{{ line.players.join(', ') || 'No Data'}}</a></li>
+                <li ng-click="lineView.addLine()"><a>+</a></li>
               </ul>
-              <div class="line-container" droppable on-drop="selectedLine.addPlayer" dragging="dragging">
+              <div class="line-container" droppable on-drop="lineView.selectedLine.addPlayer" dragging="dragging">
                 <div class="line-header">
-                  <h3>Players</h3>
+                  <h3 ng-show="!isSelectedLineView(lineView)">Players</h3>
+                  <h3 ng-show="isSelectedLineView(lineView)"><b>Selected</b></h3>
                 </div>
                 <div class="line-players-list">
                   <div class="line-drop-box">
                     <div class="shadowy">
-                      <div class="player-in-line" ng-repeat="player in selectedLine.players">
+                      <div class="player-in-line" ng-repeat="player in lineView.selectedLine.players">
                         <span>{{player}}</span>
                         &nbsp;&nbsp;
-                        <span class="icon-trash line-close-button" ng-click="selectedLine.removePlayer(player)"></span>
+                        <span class="icon-trash line-close-button" ng-click="lineView.selectedLine.removePlayer(player)"></span>
                       </div>
-                      <div ng-if="!selectedLine.players.length" style="text-align:center;">
-                        <span class="drag-line-text">Drag or click a player onto the line!</span>
+                      <div ng-if="!lineView.selectedLine.players.length" style="text-align:center;">
+                        <span class="drag-line-text">
+                          <span>Drag </span>
+                          <span ng-if="isSelectedLineView(lineView)">or click </span>
+                          <span>a player onto the line!</span>
+                        </span>
                       </div>
                     </div>
                   </div>
