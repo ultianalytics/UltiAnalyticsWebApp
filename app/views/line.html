@@ -29,7 +29,7 @@
                 <li ng-class="{'chrome-style-selected': line === lineView.selectedLine}" ng-repeat="line in lineView.lines track by $index" ng-click="lineView.selectLine(line)"><a>{{ line.players.join(', ') || 'No Data'}}</a></li>
                 <li ng-click="lineView.addLine()"><a>+</a></li>
               </ul>
-              <div class="line-container" droppable on-drop="lineView.selectedLine.addPlayer" dragging="dragging">
+              <div class="line-container" droppable on-drop="lineView.selectedAddPlayer" dragging="dragging">
                 <div class="line-header">
                   <h3 ng-show="!isSelectedLineView(lineView)">Players</h3>
                   <h3 ng-show="isSelectedLineView(lineView)"><b>Selected</b></h3>

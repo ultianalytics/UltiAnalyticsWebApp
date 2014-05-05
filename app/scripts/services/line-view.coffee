@@ -13,4 +13,6 @@ angular.module('newBetaApp')
         delete @lines[line.id]
       selectLine: (line)->
         @selectedLine = line
+      selectedAddPlayer: (player)=>
+        @selectedLine.addPlayer player
     LineView

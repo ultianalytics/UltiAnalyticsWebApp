@@ -7,6 +7,7 @@ angular.module('newBetaApp')
     scope.includedGames = filter.included
     $scope.loading = true
     scope.lineViews = []
+    $scope._bind = _.bind
 
     scope.lineViews.push new LineView
     if viewer.isLargeScreen() then scope.lineViews.push new LineView
