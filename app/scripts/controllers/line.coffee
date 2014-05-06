@@ -42,4 +42,5 @@ angular.module('newBetaApp')
     scope._contains = _.contains
     scope.isNumber = (item)->
       typeof(item) is 'number'
+    scope.floor = Math.floor
 ]

@@ -4,6 +4,66 @@
 		"selected_items":
 		[
 			[
+				"line",
+				"lineView"
+			],
+			[
+				"selectedLine",
+				"selectedLineView"
+			],
+			[
+				"lin",
+				"lineViews"
+			],
+			[
+				"Line",
+				"LineView"
+			],
+			[
+				"sel",
+				"selectLine"
+			],
+			[
+				"border",
+				"border-radius"
+			],
+			[
+				"borde",
+				"border-bottom"
+			],
+			[
+				"padding",
+				"padding-bottom"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"chrome",
+				"chrome-content"
+			],
+			[
+				"bore",
+				"border-left"
+			],
+			[
+				"bor",
+				"border-radius"
+			],
+			[
+				"word",
+				"word-wrap:   (property)"
+			],
+			[
+				"point",
+				"pointsJson"
+			],
+			[
 				"gam",
 				"gamesPlayed"
 			],
@@ -144,10 +204,6 @@
 				"currentHo"
 			],
 			[
-				"back",
-				"background"
-			],
-			[
 				"first",
 				"first-use"
 			],
@@ -204,14 +260,6 @@
 				"inline-block"
 			],
 			[
-				"padding",
-				"padding-left"
-			],
-			[
-				"border",
-				"border-right"
-			],
-			[
 				"c-very-",
 				"c-very-light-gray"
 			],
@@ -222,10 +270,6 @@
 			[
 				"le",
 				"left-half"
-			],
-			[
-				"margin",
-				"margin-top"
 			],
 			[
 				"c-v",
@@ -470,50 +514,6 @@
 			[
 				"pas",
 				"pastedGroup"
-			],
-			[
-				"parent",
-				"parentEl"
-			],
-			[
-				"Availabe",
-				"AvailableFieldView"
-			],
-			[
-				"place",
-				"placedFields"
-			],
-			[
-				"cont",
-				"content"
-			],
-			[
-				"conte",
-				"contentGroups"
-			],
-			[
-				"cp",
-				"copyNum"
-			],
-			[
-				"cop",
-				"copyNum"
-			],
-			[
-				"view",
-				"viewReference"
-			],
-			[
-				"con",
-				"content"
-			],
-			[
-				"fromFie",
-				"fromFieldView"
-			],
-			[
-				"moda",
-				"modal-wrapper"
 			]
 		]
 	},
@@ -649,16 +649,19 @@
 	},
 	"file_history":
 	[
+		"/Users/kyle.geppert/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/allGames.js",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/Authorization.js",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/includes/partials/nav-bar.html",
+		"/Users/kyle.geppert/Desktop/tabs.html",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/statTables.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/viewer.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/views/games.html",
-		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/includes/partials/nav-bar.html",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/directives/feedback.coffee",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/directives/navBar.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/views/team.html",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/next.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/login.js",
-		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/Authorization.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/games.coffee",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/ultimateWebRESTapi.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/gameStats.coffee",
@@ -773,10 +776,7 @@
 		"/Users/kyle.geppert/Code/martini/app/templates/send/document-advanced-options-master.jade",
 		"/Users/kyle.geppert/Code/martini/app/client/css/views/recipients.styl",
 		"/Users/kyle.geppert/Code/martini/app/templates/global/alert-loading.jade",
-		"/Users/kyle.geppert/Code/martini/app/templates/global/alert-confirm.jade",
-		"/Users/kyle.geppert/Code/martini/app/client/css/views.styl",
-		"/Users/kyle.geppert/Code/martini/app/templates/send/fields/create.jade",
-		"/Users/kyle.geppert/Code/martini/app/templates/global/shroud.jade"
+		"/Users/kyle.geppert/Code/martini/app/templates/global/alert-confirm.jade"
 	],
 	"find":
 	{
@@ -919,9 +919,13 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"Line",
+			" class=\"drag-line-text\"",
+			"select",
+			"chrome-style-ul",
 			"teamName",
 			"-webkit",
 			"debugger",
@@ -1045,11 +1049,7 @@
 			"range",
 			"cell",
 			"isOverHighlight",
-			"targetMidPoint",
-			"@edges",
-			"shouldBeClear",
-			"edges",
-			"verticle"
+			"targetMidPoint"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1122,8 +1122,28 @@
 		"selected_items":
 		[
 			[
+				"line",
+				"app/scripts/services/line-view.coffee"
+			],
+			[
+				"view",
+				"app/scripts/services/viewer.js"
+			],
+			[
+				"drop",
+				"app/scripts/directives/droppable.coffee"
+			],
+			[
+				"custom",
+				"app/styles/custom.css"
+			],
+			[
 				"nav",
-				"app/scripts/directives/navBar.js"
+				"app/includes/partials/nav-bar.html"
+			],
+			[
+				"all",
+				"app/scripts/services/allGames.js"
 			],
 			[
 				"vie",
@@ -1152,10 +1172,6 @@
 			[
 				"stat",
 				"app/scripts/controllers/statTables.js"
-			],
-			[
-				"custom",
-				"app/styles/custom.css"
 			],
 			[
 				"viewe",
@@ -1616,22 +1632,6 @@
 			[
 				"field",
 				"client/css/views/fields.styl"
-			],
-			[
-				"basemodel",
-				"client/js/global/base/model.coffee"
-			],
-			[
-				"clip",
-				"client/js/global/clipboard.coffee"
-			],
-			[
-				"recipients",
-				"client/js/send/recipients.coffee"
-			],
-			[
-				"rec",
-				"server/models/recipients.coffee"
 			]
 		],
 		"width": 0.0

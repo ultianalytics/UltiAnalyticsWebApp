@@ -11,8 +11,9 @@ angular.module('newBetaApp')
         @id = ++lineNum
         @players = []
       addPlayer: (player)=>
-        @players = _.union @players, [player]
-        @updateStats()
+        if @players.length < 7
+          @players = _.union @players, [player]
+          @updateStats()
       removePlayer: (player)->
         @players = _.without @players, player
         @updateStats()
