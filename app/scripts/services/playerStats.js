@@ -180,7 +180,7 @@ angular.module('newBetaApp')
     function getTotals(){
       var totals = {};
       _.each(basicStatTypes, function(type){
-        totals[type] = _.reduce(playerStats,getSumFunction(type));
+        totals[type] = _.reduce(playerStats,getSumFunction(type),0);
       });
       extendPercentageStats(totals);
       extendAestheticStats(totals);
@@ -190,7 +190,7 @@ angular.module('newBetaApp')
       var averages = {};
       var statTypes = _.keys(_.sample(playerStats).stats);
       _(statTypes).each(function(type){
-        averages[type] = _.reduce(playerStats, getSumFunction(type)).valueOf() / _.keys(playerStats).length;
+        averages[type] = _.reduce(playerStats, getSumFunction(type),0).valueOf() / _.keys(playerStats).length;
       });
       return averages;
     }
@@ -198,8 +198,6 @@ angular.module('newBetaApp')
       return function(memo, player){
         if (_.isNumber(memo)) {
           return player.stats[type] ? memo + player.stats[type] : memo;
-        } else {
-          return player.stats[type];
         }
       };
     }
