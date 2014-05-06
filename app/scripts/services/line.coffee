@@ -17,6 +17,6 @@ angular.module('newBetaApp')
       removePlayer: (player)->
         @players = _.without @players, player
         @updateStats()
-      updateStats: ->
-        @stats = lineStats.getStats(@players)
+      updateStats: ()->
+        @stats = lineStats.getStats @players
 ]

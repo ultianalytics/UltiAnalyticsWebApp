@@ -24,7 +24,6 @@
             <h3>Lines</h3>
           </div>
           <div class="widget-content">
-            <!-- @todo Make all this shit work with bootstrap. I can't believe I forgot to already.-->
             <div ng-repeat="lineView in lineViews" ng-class="'col-md-' + floor(12 / lineViews.length)" ng-click="selectLineView(lineView)">
               <ul class="chrome-style">
                 <li ng-class="{'chrome-style-selected': line === lineView.selectedLine}" ng-repeat="line in lineView.lines track by $index" ng-click="lineView.selectLine(line)"><a>{{ line.players.join(', ') || 'No Data'}}</a></li>
@@ -57,11 +56,18 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  We are the team stats of course!
+                <div class="col-md-6" ng-if="lineView.selectedLine.players.length">
+                  <p>{{lineView.selectedLine.players | linePlayers}} {{lineView.selectedLine.stats.numberOfPointsConsidered}} of {{lineView.selectedLine.stats.pointsPossible}} posssible points.</p>
+                  <h3>The Team</h3>
+                  <ul>
+                    <li ng-repeat="(statType, statValue) in lineView.selectedLine.stats.teamStats">
+                      <span>{{statType | camelCase}}:</span>
+                      <span>{{statValue}}</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
-              <div class="row">
+              <div class="row" ng-if="lineView.selectedLine.players.length">
                 <div class="col-md-4">
                   connections stats go here!
                 </div>

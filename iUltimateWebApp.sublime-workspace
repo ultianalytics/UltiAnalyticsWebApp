@@ -4,6 +4,54 @@
 		"selected_items":
 		[
 			[
+				"con",
+				"consideredPoints"
+			],
+			[
+				"point",
+				"pointSpread"
+			],
+			[
+				"team",
+				"teamStats"
+			],
+			[
+				"pon",
+				"pointSpread"
+			],
+			[
+				"getPo",
+				"getPointSpread"
+			],
+			[
+				"goal",
+				"goalSummary"
+			],
+			[
+				"poin",
+				"pointSummary"
+			],
+			[
+				"get",
+				"getPointSummary"
+			],
+			[
+				"our",
+				"ourPointSpread"
+			],
+			[
+				"scor",
+				"scoringOpps"
+			],
+			[
+				"cons",
+				"considerablePoints"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
 				"line",
 				"lineView"
 			],
@@ -58,10 +106,6 @@
 			[
 				"word",
 				"word-wrap:   (property)"
-			],
-			[
-				"point",
-				"pointsJson"
 			],
 			[
 				"gam",
@@ -174,10 +218,6 @@
 			[
 				"ver",
 				"verticleBoundaries"
-			],
-			[
-				"get",
-				"getHorizontalBounds"
 			],
 			[
 				"left",
@@ -474,46 +514,6 @@
 			[
 				"key",
 				"keypress-for-scrolling"
-			],
-			[
-				"set",
-				"setTimeout"
-			],
-			[
-				"field",
-				"fieldModel"
-			],
-			[
-				"tab",
-				"tabLabel"
-			],
-			[
-				"new",
-				"newRadioField"
-			],
-			[
-				"ra",
-				"radio"
-			],
-			[
-				"group",
-				"groupName"
-			],
-			[
-				"rad",
-				"radioView"
-			],
-			[
-				"crea",
-				"createDefaultRadioGroup"
-			],
-			[
-				"poi",
-				"positionPastedView"
-			],
-			[
-				"pas",
-				"pastedGroup"
 			]
 		]
 	},
@@ -649,6 +649,16 @@
 	},
 	"file_history":
 	[
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/filters/line-players.coffee",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/iUltimateWebApp.sublime-project",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/views/line.html",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/dist/views/line.html",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/styles/custom.css",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/line.coffee",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/teamStats.js",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/playerStats.js",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/lineStats.coffee",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/line.coffee",
 		"/Users/kyle.geppert/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/allGames.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/Authorization.js",
@@ -669,7 +679,6 @@
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/styles/animations.css",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/includes/partials/feedback.html",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/distindex.html",
-		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/iUltimateWebApp.sublime-project",
 		"/Users/kyle.geppert/Code/martini/app/client/js/tutorials/sending-tutorial.coffee",
 		"/Users/kyle.geppert/Code/martini/app/client/js/tutorials/first-use.coffee",
 		"/Users/kyle.geppert/Code/martini/app/templates/global/first-use/almost-done-add-fields.jade",
@@ -767,16 +776,7 @@
 		"/Users/kyle.geppert/Code/martini/app/client/js/send/documents.coffee",
 		"/Users/kyle.geppert/Code/martini/app/client/js/cloud-providers/cloud-providers.coffee",
 		"/Users/kyle.geppert/Code/martini/app/client/css/pages/prepare.styl",
-		"/Users/kyle.geppert/Code/martini/app/templates/global/modal.jade",
-		"/Users/kyle.geppert/Code/martini/app/templates/send/prepare-layout-main.jade",
-		"/Users/kyle.geppert/Code/martini/app/templates/global/alert.jade",
-		"/Users/kyle.geppert/Code/martini/app/templates/global/modal-save.jade",
-		"/Users/kyle.geppert/Code/martini/app/templates/send/document-advanced-options.jade",
-		"/Users/kyle.geppert/Code/martini/app/client/js/send/document-advanced-options.coffee",
-		"/Users/kyle.geppert/Code/martini/app/templates/send/document-advanced-options-master.jade",
-		"/Users/kyle.geppert/Code/martini/app/client/css/views/recipients.styl",
-		"/Users/kyle.geppert/Code/martini/app/templates/global/alert-loading.jade",
-		"/Users/kyle.geppert/Code/martini/app/templates/global/alert-confirm.jade"
+		"/Users/kyle.geppert/Code/martini/app/templates/global/modal.jade"
 	],
 	"find":
 	{
@@ -787,6 +787,7 @@
 		"height": 0.0,
 		"where_history":
 		[
+			"*css",
 			"*coffee, *js",
 			"*",
 			"*html",
@@ -913,8 +914,7 @@
 			"*coffee",
 			"*styl",
 			"*coffee",
-			"*",
-			"*styl"
+			"*"
 		]
 	},
 	"find_state":
@@ -922,6 +922,22 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"getConsideredPoints",
+			"getScoringPercentage",
+			"getSumFunction",
+			"filter",
+			"team",
+			"result",
+			"goalCount",
+			"tpp",
+			"groupingFunc",
+			"gs",
+			"ps",
+			"statsMap",
+			"ps",
+			"getConversionRate",
+			"considerable",
+			"line-connection-stats",
 			"Line",
 			" class=\"drag-line-text\"",
 			"select",
@@ -1033,23 +1049,7 @@
 			"vertical",
 			"Vertical",
 			"vertical",
-			"Vertical",
-			"VerticalBoundaries",
-			"Vertical",
-			"Verticle",
-			"verticle",
-			"Verticle",
-			"verticle",
-			"debugger",
-			".shrouds",
-			"getVerticleBounds",
-			"getLeftBound",
-			"addRanges",
-			"parsedCss",
-			"range",
-			"cell",
-			"isOverHighlight",
-			"targetMidPoint"
+			"Vertical"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1122,8 +1122,24 @@
 		"selected_items":
 		[
 			[
+				"team",
+				"app/scripts/services/teamStats.js"
+			],
+			[
 				"line",
-				"app/scripts/services/line-view.coffee"
+				"app/scripts/services/line.coffee"
+			],
+			[
+				"line.html",
+				"app/views/line.html"
+			],
+			[
+				"player",
+				"app/scripts/services/playerStats.js"
+			],
+			[
+				"custom",
+				"app/styles/custom.css"
 			],
 			[
 				"view",
@@ -1132,10 +1148,6 @@
 			[
 				"drop",
 				"app/scripts/directives/droppable.coffee"
-			],
-			[
-				"custom",
-				"app/styles/custom.css"
 			],
 			[
 				"nav",
@@ -1158,10 +1170,6 @@
 				"app/styles/custom.css"
 			],
 			[
-				"team",
-				"app/scripts/services/teamName.js"
-			],
-			[
 				"title",
 				"app/scripts/directives/titleBar.js"
 			],
@@ -1176,10 +1184,6 @@
 			[
 				"viewe",
 				"app/scripts/services/viewer.js"
-			],
-			[
-				"player",
-				"app/scripts/services/playerStats.js"
 			],
 			[
 				"grunt",
@@ -1628,10 +1632,6 @@
 			[
 				"radio",
 				"templates/send/fields/radioGroupTabs.jade"
-			],
-			[
-				"field",
-				"client/css/views/fields.styl"
 			]
 		],
 		"width": 0.0
