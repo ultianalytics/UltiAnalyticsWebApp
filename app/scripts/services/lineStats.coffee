@@ -20,16 +20,16 @@ angular.module('newBetaApp')
       consideredPoints
 
     getConnectionStats = (points, players)->
-      connections =
-        total: 0
-        combinations:{}
+      combinations = {}
       _.each points, (point)->
         _.each point.events, (event)->
           if _(players).contains(event.passer) and _(players).contains event.receiver
-            connections.total++
-            connections.combinations[event.passer + ' to ' + event.receiver] ?= 0
-            connections.combinations[event.passer + ' to ' + event.receiver]++
-      connections
+            connectionRef = combinations["Outcomes of #{event.passer} throwing to #{event.receiver}"] ?=
+              total: 0
+            connectionRef[event.action] ?= 0
+            connectionRef[event.action]++
+            connectionRef.total++
+      combinations
 
     getPointSpread = (points)->
       _.countBy points, (point)->
@@ -55,6 +55,9 @@ angular.module('newBetaApp')
             offensiveProduction: "#{teamStats.getOffensiveProductivity(consideredPoints) or 'NA'}%"
             breaksPerPoint: "@todo"
             favoriteTarget: "@todo"
+          connectionStats: getConnectionStats consideredPoints, players
+
+
         }
         results
 

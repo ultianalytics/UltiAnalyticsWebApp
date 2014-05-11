@@ -57,7 +57,7 @@
                   </div>
                 </div>
                 <div class="col-md-6" ng-if="lineView.selectedLine.players.length">
-                  <p>{{lineView.selectedLine.players | linePlayers}} {{lineView.selectedLine.stats.numberOfPointsConsidered}} of {{lineView.selectedLine.stats.pointsPossible}} posssible points.</p>
+                  <p>{{lineView.selectedLine.players | linePlayers}} <b>{{lineView.selectedLine.stats.numberOfPointsConsidered}} of {{lineView.selectedLine.stats.pointsPossible}}</b> posssible points.</p>
                   <h3>The Team</h3>
                   <ul>
                     <li ng-repeat="(statType, statValue) in lineView.selectedLine.stats.teamStats">
@@ -69,7 +69,20 @@
               </div>
               <div class="row" ng-if="lineView.selectedLine.players.length">
                 <div class="col-md-4">
-                  connections stats go here!
+                  <table class="table table-bordered" ng-repeat="(players, outcomes) in lineView.selectedLine.stats.connectionStats">
+                    <thead>
+                      <tr>
+                        <th>{{players}}</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="(outcome, quantity) in outcomes">
+                        <td>{{outcome | camelCase}}</td>
+                        <td>{{quantity}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
                 <div class="col-md-8">
                   This will be the diagram!
