@@ -14,49 +14,63 @@
               <h3>Players</h3>
             </div>
             <div class="widget-content" style="text-align:center;padding: 2px;">
-              <button ng-repeat="player in players" draggable="true" item="player" on-drag="setDragging" class="btn btn-default player-token" ng-click="addPlayerToSelected(player)" ng-class="{selected: _contains(selectedLine.players, player)}">{{player}}</button>
+              <button ng-repeat="player in players" draggable="true" item="player" on-drag="setDragging" class="btn btn-default player-token" ng-click="addPlayerToSelected(player)" ng-class="{selected: _contains(selectedLineView.selectedLine.players, player)}">{{player}}</button>
             </div>
           </div>
         </div>
-        <div class="widget stacked widget-table">
+        <div class="widget stacked widget-table col-md-12">
           <div class="widget-header">
             <span class="icon-list-alt"></span>
             <h3>Lines</h3>
           </div>
           <div class="widget-content">
-            <div class="line-carousel" style="min-width:{{(lines.length + 2) * 270}}px;">
-              <div class="line-container" style="border:0; box-shadow:0 0; width:200px;">
-                <div class="new-line-button" ng-click="addLine()">
-                  <span class="new-line-button-contents">
-                    <i class="icon icon-plus new-line-button-icon"></i>
-                    <span class="new-line-button-text">Make a new line</span>
-                  </span>
-                </div>
-              </div>
-              <div class="line-container" ng-repeat="line in lines" droppable on-drop="line.addPlayer" on-enter="teaseTODO" on-leave="stopTeaseTODO" dragging="dragging" ng-click="selectLine(line)">
-                <div class="line-header">
-                  <h3 ng-if="line !== selectedLine">Line {{line.id}}</h3>
-                  <h3 ng-if="line === selectedLine"><b>SELECTED</b></h3>
-                  <i class="icon icon-remove line-close-button" ng-click="removeLine(line)"></i>
-                </div>
-                <div class="line-players-list">
-                  <div class="line-drop-box">
-                    <div class="shadowy">
-                      <div class="player-in-line" ng-repeat="player in line.players">
-                        <span>{{player}}</span>
-                        &nbsp;&nbsp;
-                        <span class="icon-trash line-close-button" ng-click="line.removePlayer(player)"></span>
-                      </div>
-                      <div ng-if="!line.players.length" style="text-align:center;">
-                        <span class="drag-line-text">Drag
-                          <span ng-if="line === selectedLine">or click</span>
-                          a player onto the line!
-                        </span>
+            <!-- @todo Make all this shit work with bootstrap. I can't believe I forgot to already.-->
+            <div ng-repeat="lineView in lineViews" ng-class="'col-md-' + floor(12 / lineViews.length)" ng-click="selectLineView(lineView)">
+              <ul class="chrome-style">
+                <li ng-class="{'chrome-style-selected': line === lineView.selectedLine}" ng-repeat="line in lineView.lines track by $index" ng-click="lineView.selectLine(line)"><a>{{ line.players.join(', ') || 'No Data'}}</a></li>
+                <li ng-click="lineView.addLine()"><a>+</a></li>
+              </ul>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="line-container" droppable on-drop="lineView.selectedAddPlayer" dragging="dragging">
+                    <div class="line-header">
+                      <h3 ng-show="!isSelectedLineView(lineView)">Players</h3>
+                      <h3 ng-show="isSelectedLineView(lineView)"><b>Selected</b></h3>
+                    </div>
+                    <div class="line-players-list">
+                      <div class="line-drop-box">
+                        <div class="shadowy">
+                          <div class="player-in-line" ng-repeat="player in lineView.selectedLine.players">
+                            <span>{{player}}</span>
+                            &nbsp;&nbsp;
+                            <span class="icon-trash line-close-button" ng-click="lineView.selectedLine.removePlayer(player)"></span>
+                          </div>
+                          <div ng-if="!lineView.selectedLine.players.length" style="text-align:center;">
+                            <span class="drag-line-text">
+                              <span>Drag </span>
+                              <span ng-if="isSelectedLineView(lineView)">or click </span>
+                              <span>a player onto the line!</span>
+                            </span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div>
+                <div class="col-md-6">
+                  We are the team stats of course!
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  connections stats go here!
+                </div>
+                <div class="col-md-8">
+                  This will be the diagram!
+                </div>
+              </div>
+
+              <!--
                   <table ng-show="line.players.length" class="table table-striped">
                     <tr>
                       <td><b>Points Played Together<b></td><td><b>{{line.stats.consideredPoints.length}}<b></td>
@@ -94,6 +108,7 @@
                 </div>
               </div>
             </div>
+               -->
           </div>
         </div>
       </div>

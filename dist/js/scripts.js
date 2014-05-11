@@ -737,10 +737,10 @@ angular.module('newBetaApp')
           },3000);
           var messages = [
             'Calculating Team Statistics...',
-            'Determining content network...',
-            'Uploading personal information...',
-            'Lying about what this loading gif represents...',
-            'If you\'ve gotten this far, then either your internet is terrible or you should refresh your page.'
+            'Calculating Game Statistics...',
+            'Calculating Player Statistics...',
+            'Calculating Other Data...',
+            'Whoa...a long time has passed.  Try refreshing the page.'
           ];
           message = messages[0];
         }
@@ -1861,10 +1861,10 @@ angular.module('newBetaApp')
 
     var includedGames;
     var playerStats;
-    var basicStatTypes = ['catches', 'drops', 'throwaways', 'stalls', 'penalized', 'ds', 'iBPulls', 'oBPulls', 'goals', 'callahans', 'thrownCallahans', 'assists', 'passesDropped', 'completions', 'timePlayed', 'pullHangtime', 'gamesPlayed', 'dPoints', 'oPoints', 'oPlusMinus', 'dPlusMinus','hungPulls'];
+    var basicStatTypes = ['catches', 'drops', 'throwaways', 'stalls', 'penalized', 'ds', 'iBPulls', 'oBPulls', 'goals', 'callahans', 'thrownCallahans', 'assists', 'passesDropped', 'completions', 'timePlayed', 'pullHangtime', 'gamesPlayed', 'dPoints', 'oPoints', 'oPlusMinus', 'dPlusMinus', 'plusMinus', 'hungPulls'];
 
 
-    function recordEvent(event, players) {
+    function recordEvent(point, event, players) {
       var receiver = event.receiver;
       var passer = event.passer;
       var defender = event.defender;
@@ -1875,27 +1875,28 @@ angular.module('newBetaApp')
         break;
       case 'Drop':
         players[receiver] && players[receiver].stats.drops++;
-        players[receiver] && players[receiver].stats.oPlusMinus--;
+        players[receiver] && players[receiver].stats.plusMinus--;
         players[passer] && players[passer].stats.passesDropped++;
         break;
       case 'Throwaway':
         players[passer] && players[passer].stats.throwaways++;
-        players[passer] && players[passer].stats.oPlusMinus--;
+        players[passer] && players[passer].stats.plusMinus--;
         break;
       case 'Stall':
         players[passer] && players[passer].stats.stalls++;
-        players[passer] && players[passer].stats.oPlusMinus--;
+        players[passer] && players[passer].stats.plusMinus--;
         break;
       case 'MiscPenalty':
         if (event.type === 'Offense'){
           players[passer] && players[passer].stats.penalized++;
+          players[passer] && players[passer].stats.plusMinus--;
         } else {
           players[defender] && players[defender].stats.penalized++;
         }
         break;
       case 'D':
         players[defender] && players[defender].stats.ds++;
-        players[defender] && players[defender].stats.dPlusMinus++;
+        players[defender] && players[defender].stats.plusMinus++;
         break;
       case 'Pull':
         if (players[defender]){
@@ -1913,30 +1914,65 @@ angular.module('newBetaApp')
         break;
       case 'Goal':
         if (players[passer]){
-          players[passer].stats.oPlusMinus++;
           players[passer].stats.completions++;
           players[passer].stats.assists++;
+          players[passer].stats.plusMinus++;
         }
         if (players[receiver]){
-          players[receiver].stats.oPlusMinus++;
           players[receiver].stats.catches++;
           players[receiver].stats.goals++;
+          players[receiver].stats.plusMinus++;
         }
+        updatePlusMinusLine(players, point, event.type === 'Offense');
         break;
       case 'Callahan':
-        if (players[defender]){
-          players[defender].stats.catches++;
-          players[defender].stats.dPlusMinus++;
-          players[defender].stats.oPlusMinus++;
-          players[defender].stats.goals++;
-          players[defender].stats.ds++;
-          players[defender].stats.callahans++;
+        if (event.type === 'Defense') {
+          if (players[defender]){
+            players[defender].stats.catches++;
+            players[defender].stats.goals++;
+            players[defender].stats.ds++;
+            players[defender].stats.callahans++;
+            players[defender].stats.plusMinus++; // + 1 for D
+            players[defender].stats.plusMinus++; // + 1 for Goal
+            updatePlusMinusLine(players, point, true);
+          }
+        } else {
+          if (players[passer]){
+            // TODO...need to add the offense callahan stat (referred to as callaned)
+            players[passer].stats.throwaways++;
+            players[passer].stats.plusMinus--;  // - 1 for throwaway
+            updatePlusMinusLine(players, point, false);
+          }
         }
         break;
       default:
         if (['EndOfFirstQuarter', 'Halftime', 'EndOfThirdQuarter', 'EndOfFourthQuarter', 'GameOver'].indexOf(event.action) < 0){
           throw new Error(event.action, ' is not a registered event.');
         }
+      }
+    }
+
+    function updatePlusMinusLine(players, point, isOurGoal) {
+      if (point.line) {
+        _.each(point.line, function(playerName){
+          if (players[playerName]) {
+            if (isOurGoal) {
+              if (point.summary.lineType === 'O') {
+                players[playerName].stats.oPlusMinus++;
+              } else {
+                players[playerName].stats.dPlusMinus++;
+              }
+            } else {
+              if (point.summary.lineType === 'O') {
+                players[playerName].stats.oPlusMinus--;
+              } else {
+                players[playerName].stats.dPlusMinus--;
+              }
+            }
+          } else {
+            console.log("missing player " + playerName);
+          }
+        });
       }
     }
 
@@ -1979,7 +2015,7 @@ angular.module('newBetaApp')
             }
           });
           _.each(point.events, function(event){
-            recordEvent(event, players);
+            recordEvent(point, event, players);
           });
         });
       });
@@ -2005,7 +2041,6 @@ angular.module('newBetaApp')
       stats.pointsPlayed = statSum(stats, ['oPoints', 'dPoints']);
       stats.pulls = statSum(stats, ['oBPulls', 'iBPulls']);
       stats.touches = statSum(stats, ['completions', 'throwaways', 'goals','passesDropped']);
-      stats.plusMinus = statSum(stats, ['oPlusMinus', 'dPlusMinus']);
       stats.timePlayedMinutes = Math.round(stats.timePlayed / 60);
       stats.averagePullHangtime = stats.pullHangtime  / stats.hungPulls;
       _.each(['goals', 'assists', 'ds',  'throwaways',  'drops'], function(name){
@@ -2034,7 +2069,7 @@ angular.module('newBetaApp')
     function getTotals(){
       var totals = {};
       _.each(basicStatTypes, function(type){
-        totals[type] = _.reduce(playerStats,getSumFunction(type));
+        totals[type] = _.reduce(playerStats,getSumFunction(type),0);
       });
       extendPercentageStats(totals);
       extendAestheticStats(totals);
@@ -2044,7 +2079,7 @@ angular.module('newBetaApp')
       var averages = {};
       var statTypes = _.keys(_.sample(playerStats).stats);
       _(statTypes).each(function(type){
-        averages[type] = _.reduce(playerStats, getSumFunction(type)).valueOf() / _.keys(playerStats).length;
+        averages[type] = _.reduce(playerStats, getSumFunction(type),0).valueOf() / _.keys(playerStats).length;
       });
       return averages;
     }
@@ -2052,8 +2087,6 @@ angular.module('newBetaApp')
       return function(memo, player){
         if (_.isNumber(memo)) {
           return player.stats[type] ? memo + player.stats[type] : memo;
-        } else {
-          return player.stats[type];
         }
       };
     }
@@ -2153,6 +2186,39 @@ angular.module('newBetaApp')
         );
       });
     });
+
+    function getGoalSummary(game){
+      return statsMap[game.gameId].goalSummary;
+    }
+    function throwGroupingFunc(num) {
+      if (num === 1) {
+        return '1';
+      }
+      if (num < 4) {
+        return '4';
+      }
+      if (num < 8) {
+        return '8';
+      }
+      if (num < 12) {
+        return '12';
+      }
+      return '12+';
+    }
+
+    function addLink(passer, receiver, map) {
+      if (map.links[passer]) {
+        if (map.links[passer][receiver]) {
+          map.links[passer][receiver] += 1;
+        } else {
+          map.links[passer][receiver] = 1;
+        }
+      } else {
+        map.links[passer] = {};
+        map.links[passer][receiver] = 1;
+      }
+    }
+
     var tsApi = {
       getFromIncluded: function() {
         var that = this;
@@ -2165,112 +2231,50 @@ angular.module('newBetaApp')
         return result;
       },
       getFrom: function(games) {
-        var result = {};
+        var results = {};
+        var considerablePoints = _.reduce(games, function(points, game){
+          return points.concat(game.points);
+        }, []);
 
-        // Record
-        var record = {
-          wins: 0,
-          losses: 0
-        };
-        _(games).each(function(game) {
-          var gs = statsMap[game.gameId].goalSummary;
-          gs.ourOlineGoals + gs.ourDlineGoals > gs.theirOlineGoals + gs.theirDlineGoals ? record.wins++ : record.losses++;
-        });
-        result.record = record;
+        results.record = this.getRecord(games);
+        results.pointSpread = this.getPointSpread(games);
+        results.offensiveProductivity = this.getOffensiveProductivity(considerablePoints);
+        results.conversionRate = this.getConversionRate(considerablePoints, results.pointSpread.ours);
+        results.throwsPerPossession = this.getThrowsPerPossession(considerablePoints);
+        results.pointSummary = this.getPointSummary(considerablePoints);
+        results.assistMap = this.getAssistMap(considerablePoints);
 
-        // Point Spread
-        var ps = {
-          ours: 0,
-          theirs: 0
-        };
-        _(games).each(function(game) {
-          var gs = statsMap[game.gameId].goalSummary;
-          ps.ours += gs.ourDlineGoals + gs.ourOlineGoals;
-          ps.theirs += gs.theirDlineGoals + gs.theirOlineGoals;
-        });
-        result.pointSpread = ps;
-
-        // Offensive Conversion
+        return results;
+      },
+      getOffensiveProductivity: function(points){
         var offensiveOpps = 0;
         var offensiveConversions = 0;
-        _(games).each(function(game) {
-          _(game.points).each(function(point) {
-            if (point.summary.lineType === 'O') {
-              offensiveOpps++;
-              if (point.events[point.events.length - 1].type === 'Offense') {
-                offensiveConversions++;
-              }
+        _(points).each(function(point) {
+          if (point.summary.lineType === 'O') {
+            offensiveOpps++;
+            if (point.events[point.events.length - 1].type === 'Offense') {
+              offensiveConversions++;
             }
-          });
+          }
         });
-        result.offensiveProductivity = offensiveOpps ? Math.round(offensiveConversions / offensiveOpps * 100) : 0;
-
-        // Conversion Rate
-
+        return offensiveOpps ? Math.round(offensiveConversions / offensiveOpps * 100) : 0;
+      },
+      getConversionRate: function(points, ourPointSpread){
         var scoringOpps = 0;
-        _(games).each(function(game) {
-          _(game.points).each(function(point) {
-            if (point.summary.lineType === 'O') {
+        _(points).each(function(point) {
+          if (point.summary.lineType === 'O') {
+            scoringOpps++;
+          }
+          _(point.events).each(function(event) {
+            if ((event.action === 'D' && event.type === 'Defense') || (event.action === 'Throwaway' && event.type === 'Defense')) {
               scoringOpps++;
             }
-            _(point.events).each(function(event) {
-              if ((event.action === 'D' && event.type === 'Defense') || (event.action === 'Throwaway' && event.type === 'Defense')) {
-                scoringOpps++;
-              }
-            });
           });
         });
-        result.conversionRate = scoringOpps ? Math.round(result.pointSpread.ours / scoringOpps * 100) : 0;
-
-        // Throws per possession
-        var scored = [];
-        var failed = [];
-        var passes = 0;
-        _(games).each(function(game) {
-          _(game.points).each(function(point) {
-            passes = 0;
-            _(point.events).each(function(event) {
-              if (event.type === 'Offense') {
-                if (event.action === 'Catch') {
-                  passes++;
-                } else if (event.action === 'Goal') {
-                  scored.push(++passes);
-                  passes = 0;
-                } else if (event.action === 'Throwaway' || event.action === 'Drop' || event.action === 'Turnover' || event.action === 'Stall') {
-                  failed.push(++passes);
-                  passes = 0;
-                }
-              } else {
-                if (passes > 0) {
-                  scored.push(passes);
-                  passes = 0;
-                }
-              }
-            });
-          });
-        });
-        var tpp = {};
-        var groupingFunc = function(num) {
-          if (num === 1) {
-            return '1';
-          }
-          if (num < 4) {
-            return '4';
-          }
-          if (num < 8) {
-            return '8';
-          }
-          if (num < 12) {
-            return '12';
-          }
-          return '12+';
-        };
-        tpp.scored = _.countBy(scored, groupingFunc);
-        tpp.failed = _.countBy(failed,groupingFunc);
-        result.throwsPerPossession = tpp;
-
-        // points scored by line
-        var ps = {
+        return scoringOpps ? Math.round(ourPointSpread / scoringOpps * 100) : 0;
+      },
+      getPointSummary: function(points){
+        var pointSummary = {
           us: {
             offense: 0,
             defense: 0
@@ -2280,40 +2284,85 @@ angular.module('newBetaApp')
             defense: 0
           }
         };
-
+        _(points).each(function(point) {
+          if (point.events[point.events.length - 1].type === 'Offense') {
+            point.summary.lineType === 'D' ? pointSummary.us.defense++ : pointSummary.us.offense++;
+          } else {
+            point.summary.lineType === 'D' ? pointSummary.them.offense++ : pointSummary.them.defense++;
+          }
+        });
+        return pointSummary;
+      },
+      getPointSpread: function(games){
+        var pointSpread = {
+          ours: 0,
+          theirs: 0
+        };
         _(games).each(function(game) {
-          _(game.points).each(function(point) {
-            if (point.events[point.events.length - 1].type === 'Offense') {
-              point.summary.lineType === 'D' ? ps.us.defense++ : ps.us.offense++;
+          var goalSummary = getGoalSummary(game);
+          pointSpread.ours += goalSummary.ourDlineGoals + goalSummary.ourOlineGoals;
+          pointSpread.theirs += goalSummary.theirDlineGoals + goalSummary.theirOlineGoals;
+        });
+        return pointSpread;
+      },
+      getRecord: function(games){
+        var record = {
+          wins: 0,
+          losses: 0
+        };
+        _(games).each(function(game) {
+          var goalSummary = getGoalSummary(game);
+          goalSummary.ourOlineGoals + goalSummary.ourDlineGoals > goalSummary.theirOlineGoals + goalSummary.theirDlineGoals ? record.wins++ : record.losses++;
+        });
+        return record;
+      },
+      getThrowsPerPossession: function(points){
+        var scored = [];
+        var failed = [];
+        var passes = 0;
+        _(points).each(function(point) {
+          passes = 0;
+          _(point.events).each(function(event) {
+            if (event.type === 'Offense') {
+              if (event.action === 'Catch') {
+                passes++;
+              } else if (event.action === 'Goal') {
+                scored.push(++passes);
+                passes = 0;
+              } else if (event.action === 'Throwaway' || event.action === 'Drop' || event.action === 'Turnover' || event.action === 'Stall') {
+                failed.push(++passes);
+                passes = 0;
+              }
             } else {
-              point.summary.lineType === 'D' ? ps.them.offense++ : ps.them.defense++;
+              if (passes > 0) {
+                scored.push(passes);
+                passes = 0;
+              }
             }
           });
         });
-
-        result.pointSummary = ps;
-
-        // goal flow
-
-        var goalCount = result.pointSpread.ours;
+        var throwsPerPossession = {};
+        throwsPerPossession.scored = _.countBy(scored, throwGroupingFunc);
+        throwsPerPossession.failed = _.countBy(failed, throwGroupingFunc);
+        return throwsPerPossession;
+      },
+      getAssistMap: function(points){
         var assistMap = {nodes: {}, links: {}};
-        _.each(games, function(game) {
-          _.each(game.points, function(point) {
-            var endEvent = point.events[point.events.length - 1];
-            var penultimateEvent = point.events[point.events.length - 2];
-            if (endEvent.type === 'Offense') { // if the goal was scored by the offense.
-              var passer = endEvent.passer + 'P';
-              var receiver = endEvent.receiver + 'R';
-              if (penultimateEvent && penultimateEvent.type === 'Offense') {
-                var penUPasser = penultimateEvent.passer + 'H';
-                assistMap.nodes[penUPasser] = true;
-                addLink(penUPasser, passer, assistMap);
-              }
-              assistMap.nodes[passer] = true;
-              assistMap.nodes[receiver] = true;
-              addLink(passer, receiver, assistMap);
+        _(points).each(function(point) {
+          var endEvent = point.events[point.events.length - 1];
+          var penultimateEvent = point.events[point.events.length - 2];
+          if (endEvent.type === 'Offense') { // if the goal was scored by the offense.
+            var passer = endEvent.passer + 'P';
+            var receiver = endEvent.receiver + 'R';
+            if (penultimateEvent && penultimateEvent.type === 'Offense') {
+              var penUPasser = penultimateEvent.passer + 'H';
+              assistMap.nodes[penUPasser] = true;
+              addLink(penUPasser, passer, assistMap);
             }
-          });
+            assistMap.nodes[passer] = true;
+            assistMap.nodes[receiver] = true;
+            addLink(passer, receiver, assistMap);
+          }
         });
         var nodes = [];
         var i = 0;
@@ -2337,25 +2386,16 @@ angular.module('newBetaApp')
           });
         });
         assistMap.links = links;
-        function addLink(passer, receiver, map) {
-          if (map.links[passer]) {
-            if (map.links[passer][receiver]) {
-              map.links[passer][receiver] += 1;
-            } else {
-              map.links[passer][receiver] = 1;
-            }
-          } else {
-            map.links[passer] = {};
-            map.links[passer][receiver] = 1;
-          }
-        };
-
-        result.assistMap = assistMap;
-        return result;
+        return assistMap;
       }
     };
     return deferred.promise;
-  }]);;/* global $, angular, jQuery */
+  }]);
+
+
+
+
+;/* global $, angular, jQuery */
 // written by Jim Geppert
 
 'use strict';
@@ -2910,6 +2950,9 @@ angular.module('newBetaApp')
       },
       isMobileSized: function () {
         return $(window).outerWidth() <= 768;
+      },
+      isLargeScreen: function (){
+        return $(window).outerWidth() >= 1200;
       }
     };
   });
