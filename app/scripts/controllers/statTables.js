@@ -35,7 +35,8 @@ angular.module('newBetaApp')
     ];
     $scope.focus = $scope.categories[0];
     $scope.games = filter.included; // updated by the filter controller.
-    $scope.sorter = '-name';
+    $scope.sorter = 'name';
+    $scope.inclineSort = false;
     function init(){
       $scope.stats = playerStats.getAll();
       $scope.players = _.keys($scope.stats);
@@ -53,9 +54,8 @@ angular.module('newBetaApp')
         $scope.averages = playerStats.getAverages();
       });
     }
-    $scope.sort = function(obj, prop){
-      var name;
-      prop ? name = obj + '.' + prop : name = obj;
-      ($scope.sorter === name) ? $scope.sorter = '-' + $scope.sorter : $scope.sorter = name;
+    $scope.sort = function(property){
+      $scope.inclineSort = $scope.sorter === property && !$scope.inclineSort
+      $scope.sorter = property
     };
   }]);
