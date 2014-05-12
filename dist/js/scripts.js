@@ -1946,8 +1946,8 @@ angular.module('newBetaApp')
         }
         break;
       default:
-        if (['EndOfFirstQuarter', 'Halftime', 'EndOfThirdQuarter', 'EndOfFourthQuarter', 'GameOver'].indexOf(event.action) < 0){
-          throw new Error(event.action, ' is not a registered event.');
+        if (['EndOfFirstQuarter', 'Halftime', 'EndOfThirdQuarter', 'EndOfFourthQuarter', 'GameOver', 'EndOfOvertime'].indexOf(event.action) < 0){
+          console.log('Invalid event: ' + event.action + ' (event skipped)');
         }
       }
     }
