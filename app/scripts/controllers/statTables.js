@@ -15,7 +15,7 @@ angular.module('newBetaApp')
     $scope.categories = [
       {
         name: 'Summary',
-        statTypes: ['plusMinus', 'oPlusMinus', 'dPlusMinus', 'pointsPlayed','gamesPlayed']
+        statTypes: ['plusMinus', 'oEfficiency', 'dEfficiency', 'passingPercentage', 'pointsPlayed']
       }, {
         name: 'Passing',
         statTypes: ['assists', 'completions', 'throwaways','stalls', 'passingPercentage']

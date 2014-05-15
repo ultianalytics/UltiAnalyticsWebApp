@@ -7,7 +7,7 @@ angular.module('newBetaApp')
 
     var includedGames;
     var playerStats;
-    var basicStatTypes = ['catches', 'drops', 'throwaways', 'stalls', 'penalized', 'ds', 'iBPulls', 'oBPulls', 'goals', 'callahans', 'thrownCallahans', 'assists', 'passesDropped', 'completions', 'timePlayed', 'pullHangtime', 'gamesPlayed', 'dPoints', 'oPoints', 'oPlusMinus', 'dPlusMinus','hungPulls'];
+    var basicStatTypes = ['catches', 'drops', 'throwaways', 'stalls', 'penalized', 'ds', 'iBPulls', 'oBPulls', 'goals', 'callahans', 'thrownCallahans', 'assists', 'passesDropped', 'completions', 'timePlayed', 'pullHangtime', 'gamesPlayed', 'dPoints', 'oPoints', 'oPlusMinus', 'dPlusMinus','hungPulls', 'oEfficiencyPoints', 'dEfficiencyPoints'];
 
 
     function recordEvent(event, players) {
@@ -100,6 +100,9 @@ angular.module('newBetaApp')
       });
       return bucket;
     }
+    function pointWasWon(point){
+      return _.last(point.events).type === 'Offense';
+    }
 
     var derive = function() {
       var shittyMode = true; // see ULTIWEB-71. @TODO
@@ -113,7 +116,8 @@ angular.module('newBetaApp')
           var subbedPlayers = _.reduce(point.substitutions, function(subbedPlayers, substitution){
             return subbedPlayers.concat([substitution.fromPlayer, substitution.toPlayer]);
           }, []);
-          _.each(_.union(point.line, subbedPlayers), function(name){
+          var involvedPlayers = _.union(point.line, subbedPlayers);
+          _.each(involvedPlayers, function(name){
             if (shittyMode && !players[name]){
               players[name] = defaultBucket(basicStatTypes);
             }
@@ -129,6 +133,15 @@ angular.module('newBetaApp')
           // var fromPlayer = point.substitutions[i].fromPlayer;
           // var toPlayer = point.substitutions[i].toPlayer;
           });
+          if (pointWasWon(point)){
+            _.each(involvedPlayers, function(name){
+              point.summary.lineType === 'D' ? players[name].stats.dEfficiencyPoints++ : players[name].stats.oEfficiencyPoints++;
+            });
+          } else {
+            _.each(involvedPlayers, function(name){
+              point.summary.lineType === 'D' ? players[name].stats.dEfficiencyPoints-- : players[name].stats.oEfficiencyPoints--;
+            });
+          }
           _.each(point.events, function(event){
             recordEvent(event, players);
           });
@@ -159,6 +172,9 @@ angular.module('newBetaApp')
       stats.plusMinus = statSum(stats, ['oPlusMinus', 'dPlusMinus']);
       stats.timePlayedMinutes = Math.round(stats.timePlayed / 60);
       stats.averagePullHangtime = stats.pullHangtime  / stats.hungPulls;
+      stats.oEfficiency = stats.oEfficiencyPoints / stats.oPoints;
+      stats.dEfficiency = stats.dEfficiencyPoints / stats.dPoints;
+      stats.efficiency = (stats.oEfficiencyPoints + stats.dEfficiencyPoints) / stats.pointsPlayed;
       _.each(['goals', 'assists', 'ds',  'throwaways',  'drops'], function(name){
         stats['pp' + name[0].toUpperCase() + name.slice(1)] = stats.pointsPlayed ? (stats[name] / stats.pointsPlayed) : 0;
       });
