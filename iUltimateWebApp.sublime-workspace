@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"page",
+				"pageRoute"
+			],
+			[
+				"play",
+				"playerA"
+			],
+			[
+				"pla",
+				"playerA"
+			],
+			[
+				"pe",
+				"property"
+			],
+			[
+				"conn",
+				"connectionRef"
+			],
+			[
 				"line",
 				"lineView"
 			],
@@ -206,10 +226,6 @@
 			[
 				"first",
 				"first-use"
-			],
-			[
-				"page",
-				"pageYOffset"
 			],
 			[
 				"extend",
@@ -498,22 +514,6 @@
 			[
 				"group",
 				"groupName"
-			],
-			[
-				"rad",
-				"radioView"
-			],
-			[
-				"crea",
-				"createDefaultRadioGroup"
-			],
-			[
-				"poi",
-				"positionPastedView"
-			],
-			[
-				"pas",
-				"pastedGroup"
 			]
 		]
 	},
@@ -784,9 +784,10 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
+			"*html",
 			"*coffee, *js",
 			"*",
 			"*html",
@@ -913,8 +914,7 @@
 			"*coffee",
 			"*styl",
 			"*coffee",
-			"*",
-			"*styl"
+			"*"
 		]
 	},
 	"find_state":
@@ -922,6 +922,12 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"href",
+			"checkAuth",
+			"track by",
+			"trackBy",
+			"$track",
+			"property",
 			"Line",
 			" class=\"drag-line-text\"",
 			"select",
@@ -1043,13 +1049,7 @@
 			"debugger",
 			".shrouds",
 			"getVerticleBounds",
-			"getLeftBound",
-			"addRanges",
-			"parsedCss",
-			"range",
-			"cell",
-			"isOverHighlight",
-			"targetMidPoint"
+			"getLeftBound"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1122,6 +1122,22 @@
 		"selected_items":
 		[
 			[
+				"stat",
+				"app/scripts/filters/statsort.coffee"
+			],
+			[
+				"table",
+				"app/includes/partials/statTables.html"
+			],
+			[
+				"playersta",
+				"app/includes/partials/playerStatTable.html"
+			],
+			[
+				"players",
+				"app/scripts/services/playerStats.js"
+			],
+			[
 				"line",
 				"app/scripts/services/line-view.coffee"
 			],
@@ -1168,10 +1184,6 @@
 			[
 				"games",
 				"app/views/games.html"
-			],
-			[
-				"stat",
-				"app/scripts/controllers/statTables.js"
 			],
 			[
 				"viewe",
@@ -1620,18 +1632,6 @@
 			[
 				"field.coffee",
 				"client/js/send/fields/placed-field.coffee"
-			],
-			[
-				"field.",
-				"server/models/field.coffee"
-			],
-			[
-				"radio",
-				"templates/send/fields/radioGroupTabs.jade"
-			],
-			[
-				"field",
-				"client/css/views/fields.styl"
 			]
 		],
 		"width": 0.0

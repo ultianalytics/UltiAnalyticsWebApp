@@ -136,7 +136,7 @@ angular.module('newBetaApp')
       });
       return bucket;
     }
-    var boooo = _.once(function(){console.log('Let the world know that I disapprove of the above line of code.')});
+
     var derive = function() {
       var shittyMode = true; // see ULTIWEB-71. @TODO
       var players = {}
@@ -146,10 +146,12 @@ angular.module('newBetaApp')
       _.each(includedGames, function(ref) {
         var playedInGame = {};
         _.each(allGames[ref.gameId].points, function(point) {
-          _.each(point.line, function(name){
+          var subbedPlayers = _.reduce(point.substitutions, function(subbedPlayers, substitution){
+            return subbedPlayers.concat([substitution.fromPlayer, substitution.toPlayer]);
+          }, []);
+          _.each(_.union(point.line, subbedPlayers), function(name){
             if (shittyMode && !players[name]){
               players[name] = defaultBucket(basicStatTypes);
-              boooo();
             }
             if (players[name]) {
               if (!playedInGame[name]){
@@ -157,8 +159,11 @@ angular.module('newBetaApp')
                 playedInGame[name] = true;
               }
               point.summary.lineType === 'D' ? players[name].stats.dPoints++ : players[name].stats.oPoints++;
-              players[name].stats.timePlayed += point.endSeconds - point.startSeconds;
+              players[name].stats.timePlayed += _.contains(subbedPlayers, name) ? (point.endSeconds - point.startSeconds) / 2 : point.endSeconds - point.startSeconds;
             }
+          //           for (var i = 0; i < point.substitutions.length; i++) {
+          // var fromPlayer = point.substitutions[i].fromPlayer;
+          // var toPlayer = point.substitutions[i].toPlayer;
           });
           _.each(point.events, function(event){
             recordEvent(point, event, players);
