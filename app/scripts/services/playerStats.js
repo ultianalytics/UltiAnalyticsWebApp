@@ -7,10 +7,10 @@ angular.module('newBetaApp')
 
     var includedGames;
     var playerStats;
-    var basicStatTypes = ['catches', 'drops', 'throwaways', 'stalls', 'penalized', 'ds', 'iBPulls', 'oBPulls', 'goals', 'callahans', 'thrownCallahans', 'assists', 'passesDropped', 'completions', 'timePlayed', 'pullHangtime', 'gamesPlayed', 'dPoints', 'oPoints', 'oPlusMinus', 'dPlusMinus', 'plusMinus', 'hungPulls'];
+    var basicStatTypes = ['catches', 'drops', 'throwaways', 'stalls', 'penalized', 'ds', 'iBPulls', 'oBPulls', 'goals', 'callahans', 'thrownCallahans', 'assists', 'passesDropped', 'completions', 'timePlayed', 'pullHangtime', 'gamesPlayed', 'dPoints', 'oPoints', 'oPlusMinus', 'dPlusMinus','hungPulls'];
 
 
-    function recordEvent(point, event, players) {
+    function recordEvent(event, players) {
       var receiver = event.receiver;
       var passer = event.passer;
       var defender = event.defender;
@@ -21,28 +21,27 @@ angular.module('newBetaApp')
         break;
       case 'Drop':
         players[receiver] && players[receiver].stats.drops++;
-        players[receiver] && players[receiver].stats.plusMinus--;
+        players[receiver] && players[receiver].stats.oPlusMinus--;
         players[passer] && players[passer].stats.passesDropped++;
         break;
       case 'Throwaway':
         players[passer] && players[passer].stats.throwaways++;
-        players[passer] && players[passer].stats.plusMinus--;
+        players[passer] && players[passer].stats.oPlusMinus--;
         break;
       case 'Stall':
         players[passer] && players[passer].stats.stalls++;
-        players[passer] && players[passer].stats.plusMinus--;
+        players[passer] && players[passer].stats.oPlusMinus--;
         break;
       case 'MiscPenalty':
         if (event.type === 'Offense'){
           players[passer] && players[passer].stats.penalized++;
-          players[passer] && players[passer].stats.plusMinus--;
         } else {
           players[defender] && players[defender].stats.penalized++;
         }
         break;
       case 'D':
         players[defender] && players[defender].stats.ds++;
-        players[defender] && players[defender].stats.plusMinus++;
+        players[defender] && players[defender].stats.dPlusMinus++;
         break;
       case 'Pull':
         if (players[defender]){
@@ -60,65 +59,30 @@ angular.module('newBetaApp')
         break;
       case 'Goal':
         if (players[passer]){
+          players[passer].stats.oPlusMinus++;
           players[passer].stats.completions++;
           players[passer].stats.assists++;
-          players[passer].stats.plusMinus++;
         }
         if (players[receiver]){
+          players[receiver].stats.oPlusMinus++;
           players[receiver].stats.catches++;
           players[receiver].stats.goals++;
-          players[receiver].stats.plusMinus++;
         }
-        updatePlusMinusLine(players, point, event.type === 'Offense');
         break;
       case 'Callahan':
-        if (event.type === 'Defense') {
-          if (players[defender]){
-            players[defender].stats.catches++;
-            players[defender].stats.goals++;
-            players[defender].stats.ds++;
-            players[defender].stats.callahans++;
-            players[defender].stats.plusMinus++; // + 1 for D
-            players[defender].stats.plusMinus++; // + 1 for Goal
-            updatePlusMinusLine(players, point, true);
-          }
-        } else {
-          if (players[passer]){
-            // TODO...need to add the offense callahan stat (referred to as callaned)
-            players[passer].stats.throwaways++;
-            players[passer].stats.plusMinus--;  // - 1 for throwaway
-            updatePlusMinusLine(players, point, false);
-          }
+        if (players[defender]){
+          players[defender].stats.catches++;
+          players[defender].stats.dPlusMinus++;
+          players[defender].stats.oPlusMinus++;
+          players[defender].stats.goals++;
+          players[defender].stats.ds++;
+          players[defender].stats.callahans++;
         }
         break;
       default:
         if (['EndOfFirstQuarter', 'Halftime', 'EndOfThirdQuarter', 'EndOfFourthQuarter', 'GameOver', 'EndOfOvertime'].indexOf(event.action) < 0){
           console.log('Invalid event: ' + event.action + ' (event skipped)');
         }
-      }
-    }
-
-    function updatePlusMinusLine(players, point, isOurGoal) {
-      if (point.line) {
-        _.each(point.line, function(playerName){
-          if (players[playerName]) {
-            if (isOurGoal) {
-              if (point.summary.lineType === 'O') {
-                players[playerName].stats.oPlusMinus++;
-              } else {
-                players[playerName].stats.dPlusMinus++;
-              }
-            } else {
-              if (point.summary.lineType === 'O') {
-                players[playerName].stats.oPlusMinus--;
-              } else {
-                players[playerName].stats.dPlusMinus--;
-              }
-            }
-          } else {
-            console.log("missing player " + playerName);
-          }
-        });
       }
     }
 
@@ -166,7 +130,7 @@ angular.module('newBetaApp')
           // var toPlayer = point.substitutions[i].toPlayer;
           });
           _.each(point.events, function(event){
-            recordEvent(point, event, players);
+            recordEvent(event, players);
           });
         });
       });
@@ -192,6 +156,7 @@ angular.module('newBetaApp')
       stats.pointsPlayed = statSum(stats, ['oPoints', 'dPoints']);
       stats.pulls = statSum(stats, ['oBPulls', 'iBPulls']);
       stats.touches = statSum(stats, ['completions', 'throwaways', 'goals','passesDropped']);
+      stats.plusMinus = statSum(stats, ['oPlusMinus', 'dPlusMinus']);
       stats.timePlayedMinutes = Math.round(stats.timePlayed / 60);
       stats.averagePullHangtime = stats.pullHangtime  / stats.hungPulls;
       _.each(['goals', 'assists', 'ds',  'throwaways',  'drops'], function(name){
