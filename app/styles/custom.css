@@ -468,6 +468,7 @@ Assigned to:	You
 .stat-header {
   max-width: 17%;
   word-wrap:break-word;
+  position: relative;
 }
 .my-modal {
   left: 35%;
@@ -694,4 +695,27 @@ div[ng-view]{
 }
 .chrome-style li.chrome-style-selected:after {
     box-shadow: -2px 2px 0 #FFF;
+}
+.explanation {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 90%;
+  z-index: 10;
+}
+.explanation .explanation-tooltip {
+  width: 200px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  padding: 5px;
+  background-color: white;
+  box-shadow: 2px 2px 10px #888888;
+  font-size: .85em;
+  font-weight: 100;
+}
+.explanation .explanation-tooltip .close-button {
+  display: inline-block;
+  position: absolute;
+  top: -2px;
+  right: 2px;
 }
