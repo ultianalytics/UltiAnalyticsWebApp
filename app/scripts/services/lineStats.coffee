@@ -32,13 +32,17 @@ angular.module('newBetaApp')
       combinations
 
     getPointSpread = (points)->
-      _.countBy points, (point)->
+      spread = _.countBy points, (point)->
         if point.events[point.events.length - 1].type is 'Offense' then return 'ours' else return 'theirs'
+      spread.ours ?= 0
+      spread.theirs ?= 0
+      spread
 
-    getTotalPoints = (games)->
+    getAllPoints = (games)->
       _.reduce games, (total, game)->
-        total + game.points.length
-      , 0
+        total.concat game.points
+      , []
+
     api =
       getStats: (players)->
         consideredPoints = getConsideredPoints filter.included, players
@@ -46,9 +50,9 @@ angular.module('newBetaApp')
         dPoints = _.filter consideredPoints, (point)-> point.summary.lineType is 'D'
         pointSpread = getPointSpread consideredPoints
 
-        results = {
+        results =
           numberOfPointsConsidered: consideredPoints.length
-          pointsPossible: getTotalPoints filter.included
+          pointsPossible: getAllPoints(filter.included).length
           teamStats:
             conversionRate: "#{teamStats.getConversionRate consideredPoints, pointSpread.ours}%"
             pointSpread: "#{pointSpread.ours or 0} - #{pointSpread.theirs or 0}"
@@ -56,10 +60,16 @@ angular.module('newBetaApp')
             breaksPerPoint: "@todo"
             favoriteTarget: "@todo"
           connectionStats: getConnectionStats consideredPoints, players
-
-
-        }
         results
+      getForTeam: ()->
+        consideredPoints = getAllPoints filter.included
+        pointSpread = getPointSpread consideredPoints
+
+        conversionRate: "#{teamStats.getConversionRate consideredPoints, pointSpread.ours}%"
+        pointSpread: "#{pointSpread.ours or 0} - #{pointSpread.theirs or 0}"
+        offensiveProduction: "#{teamStats.getOffensiveProductivity(consideredPoints) or 'NA'}%"
+        breaksPerPoint: "@todo"
+        favoriteTarget: "@todo"
 
     deferred.promise
 ]

@@ -4,52 +4,64 @@
 		"selected_items":
 		[
 			[
-				"con",
-				"consideredPoints"
+				"show",
+				"showPrompt"
 			],
 			[
-				"point",
-				"pointSpread"
+				"shou",
+				"shouldShowToolTip"
 			],
 			[
-				"team",
-				"teamStats"
+				"e",
+				"explanation"
 			],
 			[
-				"pon",
-				"pointSpread"
+				"cl",
+				"calculationExplanations"
 			],
 			[
-				"getPo",
-				"getPointSpread"
+				"ex",
+				"explanationKey"
 			],
 			[
-				"goal",
-				"goalSummary"
+				"bor",
+				"border"
 			],
 			[
-				"poin",
-				"pointSummary"
+				"po",
+				"pointsPlayed"
 			],
 			[
-				"get",
-				"getPointSummary"
+				"o",
+				"oEfficiency"
 			],
 			[
-				"our",
-				"ourPointSpread"
+				"poi",
+				"pointWasWon"
 			],
 			[
-				"scor",
-				"scoringOpps"
+				"sub",
+				"subbedPlayers"
 			],
 			[
-				"cons",
-				"considerablePoints"
+				"page",
+				"pageRoute"
 			],
 			[
-				"padd",
-				"padding"
+				"play",
+				"playerA"
+			],
+			[
+				"pla",
+				"playerA"
+			],
+			[
+				"pe",
+				"property"
+			],
+			[
+				"conn",
+				"connectionRef"
 			],
 			[
 				"line",
@@ -100,12 +112,12 @@
 				"border-left"
 			],
 			[
-				"bor",
-				"border-radius"
-			],
-			[
 				"word",
 				"word-wrap:   (property)"
+			],
+			[
+				"point",
+				"pointsJson"
 			],
 			[
 				"gam",
@@ -180,14 +192,6 @@
 				"tutorial"
 			],
 			[
-				"cl",
-				"class"
-			],
-			[
-				"show",
-				"showTagContentEditor"
-			],
-			[
 				"res",
 				"resizer"
 			],
@@ -220,6 +224,10 @@
 				"verticleBoundaries"
 			],
 			[
+				"get",
+				"getHorizontalBounds"
+			],
+			[
 				"left",
 				"leftOffset"
 			],
@@ -246,10 +254,6 @@
 			[
 				"first",
 				"first-use"
-			],
-			[
-				"page",
-				"pageYOffset"
 			],
 			[
 				"extend",
@@ -510,10 +514,6 @@
 			[
 				"k",
 				"keypress-for-scrolling"
-			],
-			[
-				"key",
-				"keypress-for-scrolling"
 			]
 		]
 	},
@@ -649,27 +649,29 @@
 	},
 	"file_history":
 	[
-		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/filters/line-players.coffee",
-		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/iUltimateWebApp.sublime-project",
-		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/views/line.html",
-		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/dist/views/line.html",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/views/team.html",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/includes/partials/explanation-tooltip.html",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/views/players.html",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/styles/custom.css",
-		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/line.coffee",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/includes/partials/statLeaders.html",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/index.html",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/directives/explanation-tooltip.coffee",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/directives/explanation.coffee",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/calculation-explanations.coffee",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/explanation.coffee",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/statTables.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/teamStats.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/playerStats.js",
-		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/lineStats.coffee",
-		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/line.coffee",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/stats-accumulator.js",
 		"/Users/kyle.geppert/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/allGames.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/Authorization.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/includes/partials/nav-bar.html",
 		"/Users/kyle.geppert/Desktop/tabs.html",
-		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/statTables.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/viewer.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/views/games.html",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/directives/feedback.coffee",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/directives/navBar.js",
-		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/views/team.html",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/next.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/login.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/games.coffee",
@@ -679,6 +681,7 @@
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/styles/animations.css",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/includes/partials/feedback.html",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/distindex.html",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/iUltimateWebApp.sublime-project",
 		"/Users/kyle.geppert/Code/martini/app/client/js/tutorials/sending-tutorial.coffee",
 		"/Users/kyle.geppert/Code/martini/app/client/js/tutorials/first-use.coffee",
 		"/Users/kyle.geppert/Code/martini/app/templates/global/first-use/almost-done-add-fields.jade",
@@ -773,10 +776,7 @@
 		"/Users/kyle.geppert/Code/martini/app/test/client-side-unit/client-route-data.test.coffee",
 		"/Users/kyle.geppert/Code/martini/app/client/js/global/folder.coffee",
 		"/Users/kyle.geppert/Code/martini/app/templates/send/documents-send-list.jade",
-		"/Users/kyle.geppert/Code/martini/app/client/js/send/documents.coffee",
-		"/Users/kyle.geppert/Code/martini/app/client/js/cloud-providers/cloud-providers.coffee",
-		"/Users/kyle.geppert/Code/martini/app/client/css/pages/prepare.styl",
-		"/Users/kyle.geppert/Code/martini/app/templates/global/modal.jade"
+		"/Users/kyle.geppert/Code/martini/app/client/js/send/documents.coffee"
 	],
 	"find":
 	{
@@ -784,10 +784,11 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
-			"*css",
+			"*",
+			"*html",
 			"*coffee, *js",
 			"*",
 			"*html",
@@ -913,8 +914,7 @@
 			"*jade",
 			"*coffee",
 			"*styl",
-			"*coffee",
-			"*"
+			"*coffee"
 		]
 	},
 	"find_state":
@@ -922,22 +922,31 @@
 		"case_sensitive": true,
 		"find_history":
 		[
-			"getConsideredPoints",
-			"getScoringPercentage",
-			"getSumFunction",
-			"filter",
-			"team",
-			"result",
-			"goalCount",
-			"tpp",
-			"groupingFunc",
-			"gs",
-			"ps",
-			"statsMap",
-			"ps",
-			"getConversionRate",
-			"considerable",
-			"line-connection-stats",
+			"Productivity",
+			"productivity",
+			"box",
+			"z-index",
+			".stat-header",
+			"color: ",
+			"div",
+			"for",
+			"$scope.",
+			".interactionObject",
+			":",
+			"interactionObject",
+			"dPointsPlayed",
+			"extendPercen",
+			"extendPercen	",
+			"extendPercentageStats\nextendPercentageStats",
+			"booo",
+			"timePlayed",
+			"time",
+			"href",
+			"checkAuth",
+			"track by",
+			"trackBy",
+			"$track",
+			"property",
 			"Line",
 			" class=\"drag-line-text\"",
 			"select",
@@ -1040,16 +1049,7 @@
 			"#highlight",
 			"firstUse.highlight",
 			"firstUes.highlight",
-			"$('#send-button')",
-			"fakeTag",
-			"debug",
-			"debugger",
-			"fakeTag",
-			"deb",
-			"vertical",
-			"Vertical",
-			"vertical",
-			"Vertical"
+			"$('#send-button')"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1122,24 +1122,64 @@
 		"selected_items":
 		[
 			[
-				"team",
-				"app/scripts/services/teamStats.js"
-			],
-			[
-				"line",
-				"app/scripts/services/line.coffee"
-			],
-			[
 				"line.html",
 				"app/views/line.html"
 			],
 			[
+				"cus",
+				"app/styles/custom.css"
+			],
+			[
+				"stat",
+				"app/includes/partials/statTables.html"
+			],
+			[
+				"pla",
+				"app/views/players.html"
+			],
+			[
+				"explan",
+				"app/includes/partials/explanation-tooltip.html"
+			],
+			[
+				"calc",
+				"app/scripts/services/calculation-explanations.coffee"
+			],
+			[
 				"player",
+				"app/views/players.html"
+			],
+			[
+				"expla",
+				"app/scripts/directives/explanation.coffee"
+			],
+			[
+				"exa",
+				"app/scripts/controllers/explanation.coffee"
+			],
+			[
+				"team",
+				"app/scripts/services/teamStats.js"
+			],
+			[
+				"players",
 				"app/scripts/services/playerStats.js"
 			],
 			[
-				"custom",
-				"app/styles/custom.css"
+				"stats",
+				"app/scripts/stats-accumulator.js"
+			],
+			[
+				"table",
+				"app/includes/partials/statTables.html"
+			],
+			[
+				"playersta",
+				"app/includes/partials/playerStatTable.html"
+			],
+			[
+				"line",
+				"app/scripts/services/line-view.coffee"
 			],
 			[
 				"view",
@@ -1148,6 +1188,10 @@
 			[
 				"drop",
 				"app/scripts/directives/droppable.coffee"
+			],
+			[
+				"custom",
+				"app/styles/custom.css"
 			],
 			[
 				"nav",
@@ -1176,10 +1220,6 @@
 			[
 				"games",
 				"app/views/games.html"
-			],
-			[
-				"stat",
-				"app/scripts/controllers/statTables.js"
 			],
 			[
 				"viewe",
@@ -1592,46 +1632,6 @@
 			[
 				"router.co",
 				"client/js/global/router.coffee"
-			],
-			[
-				"feedback-layout",
-				"templates/global/feedback-layout.jade"
-			],
-			[
-				"tag-pan",
-				"templates/send/tag-panel.jade"
-			],
-			[
-				"envelope-details-recipient-row",
-				"templates/send/envelope-details-recipient-row.jade"
-			],
-			[
-				"recipient-correct",
-				"templates/send/recipient-correct.jade"
-			],
-			[
-				"tag",
-				"templates/send/tag-panel.jade"
-			],
-			[
-				"baseview",
-				"client/js/global/base/view.coffee"
-			],
-			[
-				"prepare-layout-main",
-				"templates/send/prepare-layout-main.jade"
-			],
-			[
-				"field.coffee",
-				"client/js/send/fields/placed-field.coffee"
-			],
-			[
-				"field.",
-				"server/models/field.coffee"
-			],
-			[
-				"radio",
-				"templates/send/fields/radioGroupTabs.jade"
 			]
 		],
 		"width": 0.0
@@ -1648,6 +1648,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 262.0,
+	"side_bar_width": 194.0,
 	"status_bar_visible": true
 }

@@ -58,13 +58,19 @@
                 </div>
                 <div class="col-md-6" ng-if="lineView.selectedLine.players.length">
                   <p>{{lineView.selectedLine.players | linePlayers}} <b>{{lineView.selectedLine.stats.numberOfPointsConsidered}} of {{lineView.selectedLine.stats.pointsPossible}}</b> posssible points.</p>
-                  <h3>The Team</h3>
-                  <ul>
-                    <li ng-repeat="(statType, statValue) in lineView.selectedLine.stats.teamStats">
-                      <span>{{statType | camelCase}}:</span>
-                      <span>{{statValue}}</span>
-                    </li>
-                  </ul>
+                  <h3>Performance</h3>
+                  <table class="table">
+                    <tr>
+                      <th></th>
+                      <th>Line</th>
+                      <th>Team</th>
+                    </tr>
+                    <tr ng-repeat="(statType, statValue) in lineView.selectedLine.stats.teamStats">
+                      <td>{{statType | camelCase}}</td>
+                      <td>{{statValue}}</td>
+                      <td>{{teamStats[statType]}}</td>
+                    </tr>
+                  </table>
                 </div>
               </div>
               <div class="row" ng-if="lineView.selectedLine.players.length">

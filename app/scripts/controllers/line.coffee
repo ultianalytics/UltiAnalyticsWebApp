@@ -21,12 +21,14 @@ angular.module('newBetaApp')
       lineStats = response[0]
       $scope.players = _.pluck team.players, 'name'
       $scope.loading = false
+      $scope.teamStats = lineStats.getForTeam()
 
     # update the lines on filter change
     scope.$watchCollection 'includedGames', (update, old)->
       if update and lineStats.getStats
         _(scope.lines).each (line)->
           line.updateStats()
+        $scope.teamStats = lineStats.getForTeam()
 
     scope.setDragging = (player)->
       scope.dragging = player
