@@ -43,7 +43,7 @@ angular.module('newBetaApp')
         total.concat game.points
       , []
 
-    makeBox = (name, countedEvents)->
+    makeChild = (name, countedEvents)->
       box =
         playerName: name
         isPlayer: true
@@ -53,37 +53,47 @@ angular.module('newBetaApp')
         box.stats[name] = 0
       box
 
-    flatten = (containers)->
-      _.reduce containers,
-
     getBubbleMapStats = (points, players)->
       countedEvents = ['Drop', 'Catch', 'Goal', 'D']
-      statBoxes = _.reduce players, (boxes, player)->
-        boxes[player] = makeBox player, countedEvents
+      children = _.reduce players, (boxes, player)->
+        boxes[player] = makeChild player, countedEvents
         boxes
       , {}
-      statBoxes.team = makeBox 'team', countedEvents
-      statBoxes.team.isPlayer = false
+      children.team = makeChild 'team', countedEvents
+      children.team.isPlayer = false
 
       _.each points, (point)->
         _.each point.events, (event)->
           if _(countedEvents).contains(event.action)
             hero = event.receiver or event.defender
             if _(players).contains(hero)
-              statBoxes[hero].stats[event.action]++
-              statBoxes[hero].value++
+              children[hero].stats[event.action]++
+              children[hero].value++
             else
-              statBoxes.team.stats[event.action]++
-              statBoxes.team.value++
+              children.team.stats[event.action]++
+              children.team.value++
 
-      numberOfFillers = 7 - _.keys(statBoxes).length
-      statBoxes.team.value = statBoxes.team.value / 7
+      numberOfFillers = 7 - _.keys(children).length
+      children.team.value = children.team.value / 7
+
+      _.each children, (child)->
+        child.stats = _.reduce child.stats, (arr, val, name)->
+          arr.push
+            label: name
+            value: val
+          arr
+        , []
+
       bubbleStats =
-        children: utils.objToArr statBoxes
+        children: utils.objToArr children
 
       for num in [0..numberOfFillers]
-        bubbleStats.children.push _.clone(statBoxes.team)
+        bubbleStats.children.push _.clone(children.team)
 
+
+      _.each bubbleStats.children, (child)->
+        child.id = Math.random().toString().slice(2)
+        child.value = Math.pow child.value, 2
       bubbleStats
 
     api =
