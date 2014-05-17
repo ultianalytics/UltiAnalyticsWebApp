@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('newBetaApp')
-  .factory 'lineStats', ['$q', 'filter', 'teamStats',($q, filter, teamStats) ->
+  .factory 'lineStats', ['$q', 'filter', 'teamStats','utils',($q, filter, teamStats, utils) ->
 
     deferred = $q.defer()
 
@@ -43,6 +43,49 @@ angular.module('newBetaApp')
         total.concat game.points
       , []
 
+    makeBox = (name, countedEvents)->
+      box =
+        playerName: name
+        isPlayer: true
+        value: 0
+        stats: {}
+      _.each countedEvents, (name)->
+        box.stats[name] = 0
+      box
+
+    flatten = (containers)->
+      _.reduce containers,
+
+    getBubbleMapStats = (points, players)->
+      countedEvents = ['Drop', 'Catch', 'Goal', 'D']
+      statBoxes = _.reduce players, (boxes, player)->
+        boxes[player] = makeBox player, countedEvents
+        boxes
+      , {}
+      statBoxes.team = makeBox 'team', countedEvents
+      statBoxes.team.isPlayer = false
+
+      _.each points, (point)->
+        _.each point.events, (event)->
+          if _(countedEvents).contains(event.action)
+            hero = event.receiver or event.defender
+            if _(players).contains(hero)
+              statBoxes[hero].stats[event.action]++
+              statBoxes[hero].value++
+            else
+              statBoxes.team.stats[event.action]++
+              statBoxes.team.value++
+
+      numberOfFillers = 7 - _.keys(statBoxes).length
+      statBoxes.team.value = statBoxes.team.value / 7
+      bubbleStats =
+        children: utils.objToArr statBoxes
+
+      for num in [0..numberOfFillers]
+        bubbleStats.children.push _.clone(statBoxes.team)
+
+      bubbleStats
+
     api =
       getStats: (players)->
         consideredPoints = getConsideredPoints filter.included, players
@@ -60,6 +103,7 @@ angular.module('newBetaApp')
             breaksPerPoint: "@todo"
             favoriteTarget: "@todo"
           connectionStats: getConnectionStats consideredPoints, players
+          bubbleStats: getBubbleMapStats consideredPoints, players
         results
       getForTeam: ()->
         consideredPoints = getAllPoints filter.included

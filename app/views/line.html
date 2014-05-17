@@ -75,14 +75,13 @@
               </div>
               <div class="row" ng-if="lineView.selectedLine.players.length">
                 <div class="col-md-4">
-                  <table class="table table-bordered" ng-repeat="(players, outcomes) in lineView.selectedLine.stats.connectionStats">
-                    <thead>
+                  <h3>Connections</h3>
+                  <table class="table">
+                    <tbody ng-repeat="(players, outcomes) in lineView.selectedLine.stats.connectionStats">
                       <tr>
                         <th>{{players}}</th>
                         <th></th>
                       </tr>
-                    </thead>
-                    <tbody>
                       <tr ng-repeat="(outcome, quantity) in outcomes">
                         <td>{{outcome | camelCase}}</td>
                         <td>{{quantity}}</td>
@@ -91,7 +90,7 @@
                   </table>
                 </div>
                 <div class="col-md-8">
-                  This will be the diagram!
+                  <bubble-pie data="lineView.selectedLine.stats.bubbleStats"></bubble-pie>
                 </div>
               </div>
 

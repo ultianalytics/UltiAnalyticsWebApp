@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"poi",
+				"pointSpread"
+			],
+			[
+				"team",
+				"teamStats"
+			],
+			[
 				"show",
 				"showPrompt"
 			],
@@ -34,10 +42,6 @@
 			[
 				"o",
 				"oEfficiency"
-			],
-			[
-				"poi",
-				"pointWasWon"
 			],
 			[
 				"sub",
@@ -510,10 +514,6 @@
 			[
 				"da",
 				"data"
-			],
-			[
-				"k",
-				"keypress-for-scrolling"
 			]
 		]
 	},
@@ -784,7 +784,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"*",
@@ -919,9 +919,13 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
+			"teamstats",
+			"icon-question-sign",
+			"ours",
+			"span",
 			"Productivity",
 			"productivity",
 			"box",
@@ -1045,11 +1049,7 @@
 			"FirstUseBeginPrepareModalView",
 			"prepare",
 			"debugger",
-			"customHighlights",
-			"#highlight",
-			"firstUse.highlight",
-			"firstUes.highlight",
-			"$('#send-button')"
+			"customHighlights"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1122,6 +1122,14 @@
 		"selected_items":
 		[
 			[
+				"team",
+				"app/scripts/controllers/team.js"
+			],
+			[
+				"line",
+				"app/scripts/controllers/line.coffee"
+			],
+			[
 				"line.html",
 				"app/views/line.html"
 			],
@@ -1158,10 +1166,6 @@
 				"app/scripts/controllers/explanation.coffee"
 			],
 			[
-				"team",
-				"app/scripts/services/teamStats.js"
-			],
-			[
 				"players",
 				"app/scripts/services/playerStats.js"
 			],
@@ -1176,10 +1180,6 @@
 			[
 				"playersta",
 				"app/includes/partials/playerStatTable.html"
-			],
-			[
-				"line",
-				"app/scripts/services/line-view.coffee"
 			],
 			[
 				"view",
