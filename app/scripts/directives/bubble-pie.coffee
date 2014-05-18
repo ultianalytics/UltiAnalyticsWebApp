@@ -71,5 +71,5 @@ angular.module('newBetaApp')
 
           arcs.append("title")
             .text (d, i)->
-              data.stats[i].label
+              "#{ d.value } #{data.stats[i].label}s"
 

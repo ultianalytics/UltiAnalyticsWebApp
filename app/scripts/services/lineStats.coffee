@@ -53,27 +53,33 @@ angular.module('newBetaApp')
         box.stats[name] = 0
       box
 
+    countEvent = (player, eventType)->
+      player.stats[eventType]++
+      player.value++
+
     getBubbleMapStats = (points, players)->
-      countedEvents = ['Drop', 'Catch', 'Goal', 'D']
+      countedEvents = ['Throwaway', 'Catch', 'Goal', 'D', 'Assist']
       children = _.reduce players, (boxes, player)->
         boxes[player] = makeChild player, countedEvents
         boxes
       , {}
-      children.team = makeChild 'team', countedEvents
+      children.team = makeChild 'Average', countedEvents
       children.team.isPlayer = false
 
-      _.each points, (point)->
+      _.each points, (point)-> #TODO use the playerstats one for this.
         _.each point.events, (event)->
           if _(countedEvents).contains(event.action)
-            hero = event.receiver or event.defender
-            if _(players).contains(hero)
-              children[hero].stats[event.action]++
-              children[hero].value++
-            else
-              children.team.stats[event.action]++
-              children.team.value++
+            if event.action is 'Throwaway'
+              if _(players).contains(event.passer) then countEvent(children[event.passer], 'Throwaway') else  countEvent(children.team, 'Throwaway')
+            else if event.action is 'Goal'
+              if _(players).contains(event.passer) then  countEvent(children[event.passer], 'Assist') else  countEvent(children.team, 'Assist')
+              if _(players).contains(event.receiver) then  countEvent(children[event.receiver], 'Goal') else  countEvent(children.team, 'Goal')
+            else if event.action is 'D'
+              if _(players).contains(event.defender) then  countEvent(children[event.defender], 'D') else  countEvent(children.team, 'D')
+            else if event.action is 'Catch'
+              if _(players).contains(event.receiver) then  children[event.receiver].value++ else  children.team.value++
 
-      numberOfFillers = 7 - _.keys(children).length
+      numberOfFillers = 6 - _.keys(children).length
       children.team.value = children.team.value / 7
 
       _.each children, (child)->
@@ -90,10 +96,10 @@ angular.module('newBetaApp')
       for num in [0..numberOfFillers]
         bubbleStats.children.push _.clone(children.team)
 
-
       _.each bubbleStats.children, (child)->
         child.id = Math.random().toString().slice(2)
-        child.value = Math.pow child.value, 2
+        child.value = Math.pow child.value, 3
+
       bubbleStats
 
     api =
@@ -109,9 +115,8 @@ angular.module('newBetaApp')
           teamStats:
             conversionRate: "#{teamStats.getConversionRate consideredPoints, pointSpread.ours}%"
             pointSpread: "#{pointSpread.ours or 0} - #{pointSpread.theirs or 0}"
-            offensiveProduction: "#{teamStats.getOffensiveProductivity(consideredPoints) or 'NA'}%"
-            breaksPerPoint: "@todo"
-            favoriteTarget: "@todo"
+            offensiveProduction: "#{teamStats.getProductivity(consideredPoints, 'Offense') or 'NA'}%"
+            defensiveProduction: "#{teamStats.getProductivity(consideredPoints, 'Defense') or 'NA'}%"
           connectionStats: getConnectionStats consideredPoints, players
           bubbleStats: getBubbleMapStats consideredPoints, players
         results
@@ -121,9 +126,8 @@ angular.module('newBetaApp')
 
         conversionRate: "#{teamStats.getConversionRate consideredPoints, pointSpread.ours}%"
         pointSpread: "#{pointSpread.ours or 0} - #{pointSpread.theirs or 0}"
-        offensiveProduction: "#{teamStats.getOffensiveProductivity(consideredPoints) or 'NA'}%"
-        breaksPerPoint: "@todo"
-        favoriteTarget: "@todo"
+        offensiveProduction: "#{teamStats.getProductivity(consideredPoints, 'Offense') or 'NA'}%"
+        defensiveProduction: "#{teamStats.getProductivity(consideredPoints, 'Defense') or 'NA'}%"
 
     deferred.promise
 ]
