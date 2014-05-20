@@ -1,71 +1,133 @@
 'use strict'
 
 angular.module('newBetaApp')
-  .factory 'lineStats', ['$q', 'team', 'allGames', 'filter',($q, team, allGames, filter) ->
+  .factory 'lineStats', ['$q', 'filter', 'teamStats','utils',($q, filter, teamStats, utils) ->
 
     deferred = $q.defer()
-    includedGames = null
 
     # wait for player names and games data.
-    $q.all([team, allGames]).then (response)->
-      includedGames = filter.included
-      team = response[0]
+    teamStats.then (response)->
+      teamStats = response
       deferred.resolve api
 
     getConsideredPoints = (games, players)->
       consideredPoints = []
-
       _.each games, (game)->
         _.each game.points, (point)->
           if _.intersection(point.line, players).length is players.length
             #if the line contains all of the passed players
             consideredPoints.push point
-
       consideredPoints
 
-    getScoringPercentage = (points)->
-      ratio = _.countBy points, (point)->
-        if point.events[point.events.length - 1].type is 'Offense' then 'scored' else 'failed'
-      ratio = _.defaults ratio, {scored:0 , failed:0}
-      ratio.scored / ((ratio.scored || 0) + (ratio.failed || 0)) * 100
-
-
     getConnectionStats = (points, players)->
-      connections =
-        total: 0
-        combinations:{}
+      combinations = {}
       _.each points, (point)->
         _.each point.events, (event)->
           if _(players).contains(event.passer) and _(players).contains event.receiver
-            connections.total++
-            connections.combinations[event.passer + ' to ' + event.receiver] ?= 0
-            connections.combinations[event.passer + ' to ' + event.receiver]++
-      connections
+            connectionRef = combinations["Outcomes of #{event.passer} throwing to #{event.receiver}"] ?=
+              total: 0
+            connectionRef[event.action] ?= 0
+            connectionRef[event.action]++
+            connectionRef.total++
+      combinations
 
-    getStats = (players)->
-      consideredPoints = getConsideredPoints includedGames, players
-      oPoints = _.filter consideredPoints, (point)-> point.summary.lineType is 'O'
-      dPoints = _.filter consideredPoints, (point)-> point.summary.lineType is 'D'
+    getPointSpread = (points)->
+      spread = _.countBy points, (point)->
+        if point.events[point.events.length - 1].type is 'Offense' then return 'ours' else return 'theirs'
+      spread.ours ?= 0
+      spread.theirs ?= 0
+      spread
 
-      result =
-        consideredPoints: consideredPoints
-        oPoints: oPoints
-        dPoints: dPoints
-        connections: getConnectionStats consideredPoints, players
-        scoringPercentage: getScoringPercentage consideredPoints
-        onOffense:
-          scoringPercentage: getScoringPercentage oPoints
-        onDefense:
-          scoringPercentage: getScoringPercentage dPoints
+    getAllPoints = (games)->
+      _.reduce games, (total, game)->
+        total.concat game.points
+      , []
 
-      result
+    makeChild = (name, countedEvents)->
+      box =
+        playerName: name
+        isPlayer: true
+        value: 0
+        stats: {}
+      _.each countedEvents, (name)->
+        box.stats[name] = 0
+      box
 
+    countEvent = (player, eventType)->
+      player.stats[eventType]++
+      player.value++
+
+    getBubbleMapStats = (points, players)->
+      countedEvents = ['Throwaway', 'Catch', 'Goal', 'D', 'Assist']
+      children = _.reduce players, (boxes, player)->
+        boxes[player] = makeChild player, countedEvents
+        boxes
+      , {}
+      children.team = makeChild 'Average', countedEvents
+      children.team.isPlayer = false
+
+      _.each points, (point)-> #TODO use the playerstats one for this.
+        _.each point.events, (event)->
+          if _(countedEvents).contains(event.action)
+            if event.action is 'Throwaway'
+              if _(players).contains(event.passer) then countEvent(children[event.passer], 'Throwaway') else  countEvent(children.team, 'Throwaway')
+            else if event.action is 'Goal'
+              if _(players).contains(event.passer) then  countEvent(children[event.passer], 'Assist') else  countEvent(children.team, 'Assist')
+              if _(players).contains(event.receiver) then  countEvent(children[event.receiver], 'Goal') else  countEvent(children.team, 'Goal')
+            else if event.action is 'D'
+              if _(players).contains(event.defender) then  countEvent(children[event.defender], 'D') else  countEvent(children.team, 'D')
+            else if event.action is 'Catch'
+              if _(players).contains(event.receiver) then  children[event.receiver].value++ else  children.team.value++
+
+      numberOfFillers = 6 - _.keys(children).length
+      children.team.value = children.team.value / 7
+
+      _.each children, (child)->
+        child.stats = _.reduce child.stats, (arr, val, name)->
+          arr.push
+            label: name
+            value: val
+          arr
+        , []
+
+      bubbleStats =
+        children: utils.objToArr children
+
+      for num in [0..numberOfFillers]
+        bubbleStats.children.push _.clone(children.team)
+
+      _.each bubbleStats.children, (child)->
+        child.id = Math.random().toString().slice(2)
+        child.value = Math.pow child.value, 3
+
+      bubbleStats
 
     api =
-      getPlayers: ->
-        _.pluck team.players, 'name'
-      getStats: getStats
+      getStats: (players)->
+        consideredPoints = getConsideredPoints filter.included, players
+        oPoints = _.filter consideredPoints, (point)-> point.summary.lineType is 'O'
+        dPoints = _.filter consideredPoints, (point)-> point.summary.lineType is 'D'
+        pointSpread = getPointSpread consideredPoints
 
+        results =
+          numberOfPointsConsidered: consideredPoints.length
+          pointsPossible: getAllPoints(filter.included).length
+          teamStats:
+            conversionRate: "#{teamStats.getConversionRate consideredPoints, pointSpread.ours}%"
+            pointSpread: "#{pointSpread.ours or 0} - #{pointSpread.theirs or 0}"
+            offensiveProduction: "#{teamStats.getProductivity(consideredPoints, 'Offense') or 'NA'}%"
+            defensiveProduction: "#{teamStats.getProductivity(consideredPoints, 'Defense') or 'NA'}%"
+          connectionStats: getConnectionStats consideredPoints, players
+          bubbleStats: getBubbleMapStats consideredPoints, players
+        results
+      getForTeam: ()->
+        consideredPoints = getAllPoints filter.included
+        pointSpread = getPointSpread consideredPoints
+
+        conversionRate: "#{teamStats.getConversionRate consideredPoints, pointSpread.ours}%"
+        pointSpread: "#{pointSpread.ours or 0} - #{pointSpread.theirs or 0}"
+        offensiveProduction: "#{teamStats.getProductivity(consideredPoints, 'Offense') or 'NA'}%"
+        defensiveProduction: "#{teamStats.getProductivity(consideredPoints, 'Defense') or 'NA'}%"
 
     deferred.promise
 ]
