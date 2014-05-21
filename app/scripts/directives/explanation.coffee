@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('newBetaApp')
-  .directive 'explanation', (calculationExplanations) ->
+  .directive 'explanation', (calculationExplanations, $sce) ->
     templateUrl: 'includes/partials/explanation.html'
     restrict: 'E'
     replace: true
@@ -21,7 +21,7 @@ angular.module('newBetaApp')
           clearTimeout timer
           scope.showPrompt = false
           scope.shouldShow = scope.shouldShowToolTip
-      scope.explanation = calculationExplanations[scope.key]
+      scope.explanation = $sce.trustAsHtml( calculationExplanations[scope.key]?.explanations[0].description or 'Please ask us personally about this one.' )
       scope.showTooltip = ->
         scope.shouldShowToolTip = true
         scope.shouldShow = true

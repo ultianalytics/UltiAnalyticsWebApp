@@ -2,7 +2,7 @@
   <div style="display:inline-block;" ng-if="shouldShow">
     <span class="icon icon-eye-open" ng-if="showPrompt" ng-click="showTooltip()"></span>
     <div class="explanation-tooltip" ng-show="shouldShowToolTip">
-      <span>{{explanation}}</span>
+      <span ng-bind-html="explanation"></span>
       <div class="close-button"><span  ng-click="hideTooltip()" class="icon icon-remove"></div>
     </div>
   </div>

@@ -784,7 +784,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"*html",
@@ -1121,6 +1121,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"inde",
+				"app/index.html"
+			],
 			[
 				"stat",
 				"app/scripts/filters/statsort.coffee"
@@ -1628,10 +1632,6 @@
 			[
 				"prepare-layout-main",
 				"templates/send/prepare-layout-main.jade"
-			],
-			[
-				"field.coffee",
-				"client/js/send/fields/placed-field.coffee"
 			]
 		],
 		"width": 0.0
