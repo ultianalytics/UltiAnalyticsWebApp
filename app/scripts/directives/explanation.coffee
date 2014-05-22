@@ -21,10 +21,20 @@ angular.module('newBetaApp')
           clearTimeout timer
           scope.showPrompt = false
           scope.shouldShow = scope.shouldShowToolTip
+
       scope.explanation = $sce.trustAsHtml( calculationExplanations[scope.key]?.explanations[0].description or 'Please ask us personally about this one.' )
+
       scope.showTooltip = ->
-        scope.shouldShowToolTip = true
-        scope.shouldShow = true
-        scope.showPrompt = false
+        setTimeout ->
+          scope.$apply ->
+            scope.shouldShowToolTip = true
+            scope.shouldShow = true
+            scope.showPrompt = false
+
       scope.hideTooltip = ->
         scope.shouldShowToolTip = false
+
+      $(window).on 'click', (event)->
+        unless scope.shouldShowToolTip is false or event.currentTarget is $(element).find('span.explanation-description')[0]
+          scope.$apply ->
+            scope.hideTooltip()
