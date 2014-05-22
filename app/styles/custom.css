@@ -697,14 +697,13 @@ div[ng-view]{
     box-shadow: -2px 2px 0 #FFF;
 }
 .explanation {
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  left: 90%;
-  z-index: 10;
+  display: inline;
 }
 .explanation .explanation-tooltip {
+  display: inline-block;
   width: 200px;
+  position: absolute;
+  z-index: 10;
   border-radius: 5px;
   border: 1px solid gray;
   padding: 5px;

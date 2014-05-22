@@ -9,18 +9,19 @@ angular.module('newBetaApp')
       key: '='
       trigger: '='
     link: (scope, element, attrs) ->
-      timer = null
-      scope.$watch 'trigger', (value) ->
-        if value
-          timer = setTimeout ->
-            scope.$apply ->
-              scope.showPrompt = not scope.shouldShowToolTip
-              scope.shouldShow = true
-          , 1000
-        else
-          clearTimeout timer
+
+      hoverTimeout = null
+
+      element.parent().on 'mouseenter', (event)->
+        hoverTimeout = setTimeout ->
+          scope.$apply ->
+            scope.showPrompt = not scope.shouldShowToolTip
+        , 1000
+
+      element.parent().on 'mouseleave', ->
+        clearTimeout hoverTimeout
+        scope.$apply ->
           scope.showPrompt = false
-          scope.shouldShow = scope.shouldShowToolTip
 
       scope.explanation = $sce.trustAsHtml( calculationExplanations[scope.key]?.explanations[0].description or 'Please ask us personally about this one.' )
 
@@ -28,7 +29,6 @@ angular.module('newBetaApp')
         setTimeout ->
           scope.$apply ->
             scope.shouldShowToolTip = true
-            scope.shouldShow = true
             scope.showPrompt = false
 
       scope.hideTooltip = ->

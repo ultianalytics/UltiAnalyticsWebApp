@@ -14,19 +14,27 @@
             <div class="widget-content">
               <div id="big_stats" class="cf" style="padding: 5px;y">
                 <div class="stat">
-                  <h4>Record</h4></span>
+                  <h4>Record
+                    <explanation key="'record'"></explanation>
+                  </h4>
                   <span class="value">{{teamStats.record.wins}} - {{teamStats.record.losses}}</span>
                 </div> <!-- .stat -->
                 <div class="stat">
-                  <h4>Point Spread</h4>
+                  <h4>Point Spread
+                    <explanation key="'pointSpread'"></explanation>
+                  </h4>
                   <span class="value">{{teamStats.pointSpread.ours}} - {{teamStats.pointSpread.theirs}}</span>
                 </div> <!-- .stat -->
                 <div class="stat">
-                  <h4>Offensive Productivity</h4>
+                  <h4>Offensive Productivity
+                    <explanation key="'oProductivity'"></explanation>
+                  </h4>
                   <span class="value">{{teamStats.offensiveProductivity}}%</span>
                 </div> <!-- .stat -->
                 <div class="stat">
-                  <h4>Conversion Rate</h4>
+                  <h4>Conversion Rate
+                    <explanation key="'conversionRate'"></explanation>
+                  </h4>
                   <span class="value">{{teamStats.conversionRate}}%</span>
                 </div> <!-- .stat -->
               </div>
@@ -39,7 +47,9 @@
           <div class="widget stacked widget-table">
             <div class="widget-header">
               <span class="icon-list-alt"></span>
-              <h3>Passes per Posession</h3>
+              <h3>Passes per Posession
+                <explanation key="'passesPerPosession'"></explanation>
+              </h3>
             </div> <!-- .widget-header -->
             <div class="widget-content points-per-break">
               <div class="pie-chart-container">
@@ -57,7 +67,9 @@
           <div class="widget stacked widget-table">
             <div class="widget-header">
               <span class="icon-list-alt"></span>
-              <h3>Points per Line</h3>
+              <h3>Points per Line
+                <explanation key="'pointsPerLine'"></explanation>
+              </h3>
             </div>
             <div class="widget-content points-per-break">
               <div class="pie-chart-container">
@@ -77,11 +89,13 @@
             <div class="widget stacked widget-table">
               <div class="widget-header">
                 <span class="icon-list-alt"></span>
-                <h3>Assists to Goals</h3>
+                <h3>Assists to Goals
+                  <explanation key="'assistsToGoalsChart'"></explanation>
+                </h3>
               </div> <!-- .widget-header -->
               <div class="widget-content points-per-break">
                 <div class="flow-map-pointers">
-                  <div class="flow-map-pointer"><span>Hockey Assists</span></div>
+                  <div class="flow-map-pointer"><span>Hockey Assists</span><explanation key="'hockeyAssist'"></explanation></div>
                   <div><img src="images/right-arrow.png"></div>
                   <div class="flow-map-pointer"><span>Assists</span></div>
                   <div><img src="images/right-arrow.png"></div>

@@ -1,8 +1,6 @@
 <div class="explanation">
-  <div style="display:inline-block;" ng-if="shouldShow">
-    <span class="icon icon-eye-open" ng-if="showPrompt" ng-click="showTooltip()"></span>
-    <div class="explanation-tooltip" ng-show="shouldShowToolTip">
-      <span class="explanation-description" ng-bind-html="explanation"></span>
-    </div>
+  <span class="icon icon-question-sign" ng-if="showPrompt" ng-click="showTooltip()"></span>
+  <div class="explanation-tooltip" ng-show="shouldShowToolTip">
+    <span class="explanation-description" ng-bind-html="explanation"></span>
   </div>
 </div>

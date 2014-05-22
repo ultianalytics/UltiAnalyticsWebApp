@@ -1,0 +1,20 @@
+toExplain:
+
+record
+pointSpread
+oProductivity
+conversionRate
+passesPerPossessionChart
+pointsPerLineChart
+assistsToGoalsChart
+playerTargetsChart
+lineDiagram
+hockeyAssists
+leaders{
+  Defense
+  Offense
+  PlusMinus
+  PlayingTime
+}
+
+ALL of the playerStats fields.
