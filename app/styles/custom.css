@@ -388,6 +388,9 @@ Assigned to:	You
   background-color: #ebebeb;
   border-color: #adadad;
 }
+.player-token.faded {
+  opacity: .5;
+}
 .drag-line-text {
   position: absolute;
   top: 40%;

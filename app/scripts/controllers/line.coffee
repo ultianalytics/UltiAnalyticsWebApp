@@ -22,7 +22,7 @@ angular.module('newBetaApp')
       $scope.players = _.pluck team.players, 'name'
       $scope.loading = false
       $scope.teamStats = lineStats.getForTeam()
-
+      scope.selectedLineView.selectedLine.updateStats()
     # update the lines on filter change
     scope.$watchCollection 'includedGames', (update, old)->
       if update and lineStats.getStats
@@ -40,7 +40,7 @@ angular.module('newBetaApp')
       scope.selectedLineView is lineView
     scope.selectLineView = (lineView)->
       scope.selectedLineView = lineView
-
+      lineView.selectedLine.updateStats()
 
     scope._contains = _.contains
     scope.isNumber = (item)->

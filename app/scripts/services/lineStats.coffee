@@ -19,6 +19,13 @@ angular.module('newBetaApp')
             consideredPoints.push point
       consideredPoints
 
+    getDatafulPlayers = (points, players)->
+      _.reduce points, (map, point)->
+        _.each point.line, (player)->
+          map[player] = true
+        map
+      , {}
+
     getConnectionStats = (points, players)->
       combinations = {}
       _.each points, (point)->
@@ -119,6 +126,8 @@ angular.module('newBetaApp')
             defensiveProduction: "#{teamStats.getProductivity(consideredPoints, 'Defense') or 'NA'}%"
           connectionStats: getConnectionStats consideredPoints, players
           bubbleStats: getBubbleMapStats consideredPoints, players
+          datafulPlayers: getDatafulPlayers consideredPoints, players
+
         results
       getForTeam: ()->
         consideredPoints = getAllPoints filter.included
