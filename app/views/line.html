@@ -26,7 +26,9 @@
           <div class="widget-content">
             <div ng-repeat="lineView in lineViews" ng-class="'col-md-' + floor(12 / lineViews.length)" ng-click="selectLineView(lineView)">
               <ul class="chrome-style">
-                <li ng-class="{'chrome-style-selected': line === lineView.selectedLine}" ng-repeat="line in lineView.lines track by $index" ng-click="lineView.selectLine(line)"><a>{{ line.players.join(', ') || 'No Data'}}</a></li>
+                <li ng-class="{'chrome-style-selected': line === lineView.selectedLine}" ng-style="{maxWidth: 100 / _keys(lineView.lines).length + '%'}" ng-repeat="line in lineView.lines track by $index" ng-click="lineView.selectLine(line)">
+                  <a class="chrome-tab-content">{{ line.players.join(', ') || 'No Data'}}</a>
+                </li>
                 <li ng-click="lineView.addLine()"><a>+</a></li>
               </ul>
               <div class="row">

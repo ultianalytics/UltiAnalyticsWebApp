@@ -42,6 +42,7 @@ angular.module('newBetaApp')
       scope.selectedLineView = lineView
       lineView.selectedLine.updateStats()
 
+    scope._keys = _.keys
     scope._contains = _.contains
     scope.isNumber = (item)->
       typeof(item) is 'number'

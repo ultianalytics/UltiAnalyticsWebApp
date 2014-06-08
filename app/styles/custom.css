@@ -635,6 +635,9 @@ div[ng-view]{
     position: relative;
 }
 .chrome-style li {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     border: 1px solid #AAA;
     background: #D1D1D1;
     background: -o-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
