@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('newBetaApp')
-  .controller 'PlayerCtrl', ['$scope', '$routeParams', '$q', 'allGames', 'playerExtensionStats', 'filter', ($scope, $routeParams, $q, allGames, playerExtensionStats, filter) ->
+  .controller 'PlayerCtrl', ['$scope', '$routeParams', '$q', 'allGames', 'playerExtensionStats', 'filter','team', ($scope, $routeParams, $q, allGames, playerExtensionStats, filter, team) ->
     scope = $scope
     scope.loading = true
     scope.console = console
