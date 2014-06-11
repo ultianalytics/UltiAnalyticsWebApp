@@ -13,29 +13,25 @@ angular.module('newBetaApp', [
         next.set($location.path());
         return Authorization.ping($location.url().match(/^\/\d+/)[0].slice(1));
       }
-      // function checkPlayerExistence ($q, $location, api) {
-      //   api.retrieveTeam($location.url().match(/^\/\d+/)[0].slice(1), true, function(response){
-      //     if (_(response.players).pluck('name').contains(decodeURI($location.url().match(/\/[^\/]+$/)[0].slice(1)))){
-      //       deferred.resolve();
-      //     } else {
-      //       $location.url('/404');
-      //       deferred.resolve(new Error('bad player name'));
-      //     }
-      //   });
-      //   var deferred = $q.defer();
-      //   return deferred.promise;
-      // }
-
+      function logRoute($location){
+        if (_.contains($location.host().toLowerCase(), 'ultimate-numbers') || _.contains($location.host().toLowerCase(), 'ultianalytics')){
+          var pageRoute = $location.url().replace(/\/\d+\//, '').match(/\w+/)[0]
+          ga('send', 'pageview', {
+            'page': pageRoute,
+            'title': pageRoute.slice(0,1).toUpperCase() + pageRoute.slice(1)
+          });
+        }
+      }
 
       $routeProvider
-        .when('/', {templateUrl: 'views/splash.html'})
-        .when('/:teamId/login', {templateUrl: 'views/login.html', controller: 'LoginCtrl'})
-        .when('/:teamId/players', {templateUrl: 'views/players.html', controller: 'PlayersCtrl', resolve: {authorized: checkAuth}})
-        .when('/:teamId/team', {templateUrl: 'views/team.html', controller: 'TeamCtrl', resolve: {authorized: checkAuth}})
-        .when('/:teamId/download', {templateUrl: 'views/download.html', controller: 'DownloadCtrl', resolve: {authorized: checkAuth}})
-        .when('/:teamId/line', {templateUrl: 'views/line.html', controller: 'LineCtrl', resolve: {authorized: checkAuth}})
-        .when('/:teamId/games', {templateUrl: 'views/games.html', controller: 'GamesCtrl', resolve: {authorized: checkAuth}})
-        .when('/:teamId/player/:playerNameUri', {templateUrl: 'views/player.html', controller: 'PlayerCtrl', resolve: { authorized: checkAuth}})
+        .when('/', {templateUrl: 'views/splash.html', resolve: {ga: logRoute}})
+        .when('/:teamId/login', {templateUrl: 'views/login.html', controller: 'LoginCtrl', resolve: {ga: logRoute}})
+        .when('/:teamId/players', {templateUrl: 'views/players.html', controller: 'PlayersCtrl', resolve: {authorized: checkAuth, ga: logRoute}})
+        .when('/:teamId/team', {templateUrl: 'views/team.html', controller: 'TeamCtrl', resolve: {authorized: checkAuth, ga: logRoute}})
+        .when('/:teamId/download', {templateUrl: 'views/download.html', controller: 'DownloadCtrl', resolve: {authorized: checkAuth, ga: logRoute}})
+        .when('/:teamId/line', {templateUrl: 'views/line.html', controller: 'LineCtrl', resolve: {authorized: checkAuth, ga: logRoute}})
+        .when('/:teamId/games', {templateUrl: 'views/games.html', controller: 'GamesCtrl', resolve: {authorized: checkAuth, ga: logRoute}})
+        .when('/:teamId/player/:playerNameUri', {templateUrl: 'views/player.html', controller: 'PlayerCtrl', resolve: { authorized: checkAuth, ga: logRoute}})
         .when('/404', {templateUrl: 'views/404.html', controller: '404Ctrl'})
         .otherwise({redirectTo: '/404'});
     }
@@ -376,7 +372,7 @@ angular.module('newBetaApp')
     $scope.categories = [
       {
         name: 'Summary',
-        statTypes: ['plusMinus', 'oPlusMinus', 'dPlusMinus', 'pointsPlayed','gamesPlayed']
+        statTypes: ['plusMinus', 'oEfficiency', 'dEfficiency', 'passingPercentage', 'pointsPlayed']
       }, {
         name: 'Passing',
         statTypes: ['assists', 'completions', 'throwaways','stalls', 'passingPercentage']
@@ -396,7 +392,8 @@ angular.module('newBetaApp')
     ];
     $scope.focus = $scope.categories[0];
     $scope.games = filter.included; // updated by the filter controller.
-    $scope.sorter = '-name';
+    $scope.sorter = 'name';
+    $scope.inclineSort = false;
     function init(){
       $scope.stats = playerStats.getAll();
       $scope.players = _.keys($scope.stats);
@@ -414,10 +411,9 @@ angular.module('newBetaApp')
         $scope.averages = playerStats.getAverages();
       });
     }
-    $scope.sort = function(obj, prop){
-      var name;
-      prop ? name = obj + '.' + prop : name = obj;
-      ($scope.sorter === name) ? $scope.sorter = '-' + $scope.sorter : $scope.sorter = name;
+    $scope.sort = function(property){
+      $scope.inclineSort = $scope.sorter === property && !$scope.inclineSort
+      $scope.sorter = property
     };
   }]);
 ;'use strict';
@@ -1861,10 +1857,10 @@ angular.module('newBetaApp')
 
     var includedGames;
     var playerStats;
-    var basicStatTypes = ['catches', 'drops', 'throwaways', 'stalls', 'penalized', 'ds', 'iBPulls', 'oBPulls', 'goals', 'callahans', 'thrownCallahans', 'assists', 'passesDropped', 'completions', 'timePlayed', 'pullHangtime', 'gamesPlayed', 'dPoints', 'oPoints', 'oPlusMinus', 'dPlusMinus', 'plusMinus', 'hungPulls'];
+    var basicStatTypes = ['catches', 'drops', 'throwaways', 'stalls', 'penalized', 'ds', 'iBPulls', 'oBPulls', 'goals', 'callahans', 'thrownCallahans', 'assists', 'passesDropped', 'completions', 'timePlayed', 'pullHangtime', 'gamesPlayed', 'dPoints', 'oPoints', 'oPlusMinus', 'dPlusMinus','hungPulls', 'oEfficiencyPoints', 'dEfficiencyPoints'];
 
 
-    function recordEvent(point, event, players) {
+    function recordEvent(event, players) {
       var receiver = event.receiver;
       var passer = event.passer;
       var defender = event.defender;
@@ -1875,28 +1871,27 @@ angular.module('newBetaApp')
         break;
       case 'Drop':
         players[receiver] && players[receiver].stats.drops++;
-        players[receiver] && players[receiver].stats.plusMinus--;
+        players[receiver] && players[receiver].stats.oPlusMinus--;
         players[passer] && players[passer].stats.passesDropped++;
         break;
       case 'Throwaway':
         players[passer] && players[passer].stats.throwaways++;
-        players[passer] && players[passer].stats.plusMinus--;
+        players[passer] && players[passer].stats.oPlusMinus--;
         break;
       case 'Stall':
         players[passer] && players[passer].stats.stalls++;
-        players[passer] && players[passer].stats.plusMinus--;
+        players[passer] && players[passer].stats.oPlusMinus--;
         break;
       case 'MiscPenalty':
         if (event.type === 'Offense'){
           players[passer] && players[passer].stats.penalized++;
-          players[passer] && players[passer].stats.plusMinus--;
         } else {
           players[defender] && players[defender].stats.penalized++;
         }
         break;
       case 'D':
         players[defender] && players[defender].stats.ds++;
-        players[defender] && players[defender].stats.plusMinus++;
+        players[defender] && players[defender].stats.dPlusMinus++;
         break;
       case 'Pull':
         if (players[defender]){
@@ -1914,65 +1909,30 @@ angular.module('newBetaApp')
         break;
       case 'Goal':
         if (players[passer]){
+          players[passer].stats.oPlusMinus++;
           players[passer].stats.completions++;
           players[passer].stats.assists++;
-          players[passer].stats.plusMinus++;
         }
         if (players[receiver]){
+          players[receiver].stats.oPlusMinus++;
           players[receiver].stats.catches++;
           players[receiver].stats.goals++;
-          players[receiver].stats.plusMinus++;
         }
-        updatePlusMinusLine(players, point, event.type === 'Offense');
         break;
       case 'Callahan':
-        if (event.type === 'Defense') {
-          if (players[defender]){
-            players[defender].stats.catches++;
-            players[defender].stats.goals++;
-            players[defender].stats.ds++;
-            players[defender].stats.callahans++;
-            players[defender].stats.plusMinus++; // + 1 for D
-            players[defender].stats.plusMinus++; // + 1 for Goal
-            updatePlusMinusLine(players, point, true);
-          }
-        } else {
-          if (players[passer]){
-            // TODO...need to add the offense callahan stat (referred to as callaned)
-            players[passer].stats.throwaways++;
-            players[passer].stats.plusMinus--;  // - 1 for throwaway
-            updatePlusMinusLine(players, point, false);
-          }
+        if (players[defender]){
+          players[defender].stats.catches++;
+          players[defender].stats.dPlusMinus++;
+          players[defender].stats.oPlusMinus++;
+          players[defender].stats.goals++;
+          players[defender].stats.ds++;
+          players[defender].stats.callahans++;
         }
         break;
       default:
         if (['EndOfFirstQuarter', 'Halftime', 'EndOfThirdQuarter', 'EndOfFourthQuarter', 'GameOver', 'EndOfOvertime'].indexOf(event.action) < 0){
           console.log('Invalid event: ' + event.action + ' (event skipped)');
         }
-      }
-    }
-
-    function updatePlusMinusLine(players, point, isOurGoal) {
-      if (point.line) {
-        _.each(point.line, function(playerName){
-          if (players[playerName]) {
-            if (isOurGoal) {
-              if (point.summary.lineType === 'O') {
-                players[playerName].stats.oPlusMinus++;
-              } else {
-                players[playerName].stats.dPlusMinus++;
-              }
-            } else {
-              if (point.summary.lineType === 'O') {
-                players[playerName].stats.oPlusMinus--;
-              } else {
-                players[playerName].stats.dPlusMinus--;
-              }
-            }
-          } else {
-            console.log("missing player " + playerName);
-          }
-        });
       }
     }
 
@@ -1990,7 +1950,10 @@ angular.module('newBetaApp')
       });
       return bucket;
     }
-    var boooo = _.once(function(){console.log('Let the world know that I disapprove of the above line of code.')});
+    function pointWasWon(point){
+      return _.last(point.events).type === 'Offense';
+    }
+
     var derive = function() {
       var shittyMode = true; // see ULTIWEB-71. @TODO
       var players = {}
@@ -2000,10 +1963,13 @@ angular.module('newBetaApp')
       _.each(includedGames, function(ref) {
         var playedInGame = {};
         _.each(allGames[ref.gameId].points, function(point) {
-          _.each(point.line, function(name){
+          var subbedPlayers = _.reduce(point.substitutions, function(subbedPlayers, substitution){
+            return subbedPlayers.concat([substitution.fromPlayer, substitution.toPlayer]);
+          }, []);
+          var involvedPlayers = _.union(point.line, subbedPlayers);
+          _.each(involvedPlayers, function(name){
             if (shittyMode && !players[name]){
               players[name] = defaultBucket(basicStatTypes);
-              boooo();
             }
             if (players[name]) {
               if (!playedInGame[name]){
@@ -2011,11 +1977,23 @@ angular.module('newBetaApp')
                 playedInGame[name] = true;
               }
               point.summary.lineType === 'D' ? players[name].stats.dPoints++ : players[name].stats.oPoints++;
-              players[name].stats.timePlayed += point.endSeconds - point.startSeconds;
+              players[name].stats.timePlayed += _.contains(subbedPlayers, name) ? (point.endSeconds - point.startSeconds) / 2 : point.endSeconds - point.startSeconds;
             }
+          //           for (var i = 0; i < point.substitutions.length; i++) {
+          // var fromPlayer = point.substitutions[i].fromPlayer;
+          // var toPlayer = point.substitutions[i].toPlayer;
           });
+          if (pointWasWon(point)){
+            _.each(involvedPlayers, function(name){
+              point.summary.lineType === 'D' ? players[name].stats.dEfficiencyPoints++ : players[name].stats.oEfficiencyPoints++;
+            });
+          } else {
+            _.each(involvedPlayers, function(name){
+              point.summary.lineType === 'D' ? players[name].stats.dEfficiencyPoints-- : players[name].stats.oEfficiencyPoints--;
+            });
+          }
           _.each(point.events, function(event){
-            recordEvent(point, event, players);
+            recordEvent(event, players);
           });
         });
       });
@@ -2041,8 +2019,12 @@ angular.module('newBetaApp')
       stats.pointsPlayed = statSum(stats, ['oPoints', 'dPoints']);
       stats.pulls = statSum(stats, ['oBPulls', 'iBPulls']);
       stats.touches = statSum(stats, ['completions', 'throwaways', 'goals','passesDropped']);
+      stats.plusMinus = statSum(stats, ['oPlusMinus', 'dPlusMinus']);
       stats.timePlayedMinutes = Math.round(stats.timePlayed / 60);
       stats.averagePullHangtime = stats.pullHangtime  / stats.hungPulls;
+      stats.oEfficiency = stats.oEfficiencyPoints / stats.oPoints;
+      stats.dEfficiency = stats.dEfficiencyPoints / stats.dPoints;
+      stats.efficiency = (stats.oEfficiencyPoints + stats.dEfficiencyPoints) / stats.pointsPlayed;
       _.each(['goals', 'assists', 'ds',  'throwaways',  'drops'], function(name){
         stats['pp' + name[0].toUpperCase() + name.slice(1)] = stats.pointsPlayed ? (stats[name] / stats.pointsPlayed) : 0;
       });
@@ -2238,7 +2220,7 @@ angular.module('newBetaApp')
 
         results.record = this.getRecord(games);
         results.pointSpread = this.getPointSpread(games);
-        results.offensiveProductivity = this.getOffensiveProductivity(considerablePoints);
+        results.offensiveProductivity = this.getProductivity(considerablePoints, 'Offense');
         results.conversionRate = this.getConversionRate(considerablePoints, results.pointSpread.ours);
         results.throwsPerPossession = this.getThrowsPerPossession(considerablePoints);
         results.pointSummary = this.getPointSummary(considerablePoints);
@@ -2246,13 +2228,13 @@ angular.module('newBetaApp')
 
         return results;
       },
-      getOffensiveProductivity: function(points){
+      getProductivity: function(points, lineType){
         var offensiveOpps = 0;
         var offensiveConversions = 0;
         _(points).each(function(point) {
-          if (point.summary.lineType === 'O') {
+          if (point.summary.lineType === lineType.slice(0,1)) {
             offensiveOpps++;
-            if (point.events[point.events.length - 1].type === 'Offense') {
+            if (point.events[point.events.length - 1].type === lineType) {
               offensiveConversions++;
             }
           }

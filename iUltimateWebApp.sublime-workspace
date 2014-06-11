@@ -4,6 +4,54 @@
 		"selected_items":
 		[
 			[
+				"selec",
+				"selectedLine"
+			],
+			[
+				"update",
+				"updateStats"
+			],
+			[
+				"data",
+				"getDatafulPlayers"
+			],
+			[
+				"contains",
+				"containsAllPlayers"
+			],
+			[
+				"selected",
+				"selectedLine"
+			],
+			[
+				"old",
+				"oldData"
+			],
+			[
+				"name",
+				"nameMap"
+			],
+			[
+				"na",
+				"nameMap"
+			],
+			[
+				"de",
+				"deferred"
+			],
+			[
+				"action",
+				"actionType"
+			],
+			[
+				"player",
+				"playerName"
+			],
+			[
+				"rest",
+				"restHost"
+			],
+			[
 				"page",
 				"pageRoute"
 			],
@@ -98,10 +146,6 @@
 			[
 				"defaul",
 				"defaultBucket"
-			],
-			[
-				"player",
-				"playerBuckets"
 			],
 			[
 				"mon",
@@ -440,10 +484,6 @@
 				"killPreviousDebuggers"
 			],
 			[
-				"de",
-				"dev"
-			],
-			[
 				"requ",
 				"require_env"
 			],
@@ -474,46 +514,6 @@
 			[
 				"radio",
 				"radioGroupNames"
-			],
-			[
-				"fil",
-				"filteredRadioGroupNames"
-			],
-			[
-				"da",
-				"data"
-			],
-			[
-				"k",
-				"keypress-for-scrolling"
-			],
-			[
-				"key",
-				"keypress-for-scrolling"
-			],
-			[
-				"set",
-				"setTimeout"
-			],
-			[
-				"field",
-				"fieldModel"
-			],
-			[
-				"tab",
-				"tabLabel"
-			],
-			[
-				"new",
-				"newRadioField"
-			],
-			[
-				"ra",
-				"radio"
-			],
-			[
-				"group",
-				"groupName"
 			]
 		]
 	},
@@ -632,7 +632,7 @@
 				"Set Syntax: Jade"
 			]
 		],
-		"width": 512.0
+		"width": 602.0
 	},
 	"console":
 	{
@@ -649,16 +649,22 @@
 	},
 	"file_history":
 	[
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/team.js",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/namemap.coffee",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/directives/navBar.js",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/includes/partials/nav-bar.html",
+		"/Users/kyle.geppert/Code/Personal/ultimateweb/UltimateWeb/war/index.html",
+		"/Users/kyle.geppert/Code/Personal/ultimateweb/UltimateWeb/war/js/team-search.js",
+		"/Users/kyle.geppert/Desktop/foo.html",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/iUltimateWebApp.sublime-workspace",
 		"/Users/kyle.geppert/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/allGames.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/Authorization.js",
-		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/includes/partials/nav-bar.html",
 		"/Users/kyle.geppert/Desktop/tabs.html",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/statTables.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/viewer.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/views/games.html",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/directives/feedback.coffee",
-		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/directives/navBar.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/views/team.html",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/next.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/login.js",
@@ -770,13 +776,7 @@
 		"/Users/kyle.geppert/Code/martini/app/templates/global/modal.jade",
 		"/Users/kyle.geppert/Code/martini/app/templates/send/prepare-layout-main.jade",
 		"/Users/kyle.geppert/Code/martini/app/templates/global/alert.jade",
-		"/Users/kyle.geppert/Code/martini/app/templates/global/modal-save.jade",
-		"/Users/kyle.geppert/Code/martini/app/templates/send/document-advanced-options.jade",
-		"/Users/kyle.geppert/Code/martini/app/client/js/send/document-advanced-options.coffee",
-		"/Users/kyle.geppert/Code/martini/app/templates/send/document-advanced-options-master.jade",
-		"/Users/kyle.geppert/Code/martini/app/client/css/views/recipients.styl",
-		"/Users/kyle.geppert/Code/martini/app/templates/global/alert-loading.jade",
-		"/Users/kyle.geppert/Code/martini/app/templates/global/alert-confirm.jade"
+		"/Users/kyle.geppert/Code/martini/app/templates/global/modal-save.jade"
 	],
 	"find":
 	{
@@ -784,9 +784,10 @@
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
+			"*",
 			"*html",
 			"*coffee, *js",
 			"*",
@@ -913,15 +914,37 @@
 			"*jade",
 			"*coffee",
 			"*styl",
-			"*coffee",
-			"*"
+			"*coffee"
 		]
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
+			"tab-content",
+			"icon-",
+			"close",
+			"icon-close",
+			"player-token",
+			"getName",
+			"nameMap",
+			"team",
+			"growth",
+			"name",
+			"playerNameUri",
+			"name",
+			"ttp://www.ultianalytics.com/app/index.html#/",
+			"http://www.ultianalytics.com/app/index.html#/",
+			"http://www.ultianalytics.com/app/#/",
+			"player.name",
+			"leaders",
+			"<explanation",
+			"hockey",
+			"assists to ",
+			"support@ultianalytics.com",
+			"timer",
+			"explanation",
 			"href",
 			"checkAuth",
 			"track by",
@@ -1026,30 +1049,7 @@
 			"FirstUseBeginPrepareModalView",
 			"prepare",
 			"debugger",
-			"customHighlights",
-			"#highlight",
-			"firstUse.highlight",
-			"firstUes.highlight",
-			"$('#send-button')",
-			"fakeTag",
-			"debug",
-			"debugger",
-			"fakeTag",
-			"deb",
-			"vertical",
-			"Vertical",
-			"vertical",
-			"Vertical",
-			"VerticalBoundaries",
-			"Vertical",
-			"Verticle",
-			"verticle",
-			"Verticle",
-			"verticle",
-			"debugger",
-			".shrouds",
-			"getVerticleBounds",
-			"getLeftBound"
+			"customHighlights"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1122,8 +1122,104 @@
 		"selected_items":
 		[
 			[
+				"linevie",
+				"app/scripts/services/line-view.coffee"
+			],
+			[
+				"cus",
+				"app/styles/custom.css"
+			],
+			[
+				"linev",
+				"app/scripts/services/line-view.coffee"
+			],
+			[
+				"line",
+				"app/scripts/controllers/line.coffee"
+			],
+			[
+				"elli",
+				"app/scripts/filters/ellipse-at.coffee"
+			],
+			[
+				"nav",
+				"app/scripts/directives/navBar.js"
+			],
+			[
+				"pre",
+				"app/scripts/filters/preferred-name.coffee"
+			],
+			[
+				"lead",
+				"app/includes/partials/statLeaders.html"
+			],
+			[
+				"name",
+				"app/scripts/services/namemap.coffee"
+			],
+			[
+				"flow",
+				"app/scripts/directives/flowChart.js"
+			],
+			[
+				"navb",
+				"app/includes/partials/nav-bar.html"
+			],
+			[
+				"target",
+				"app/scripts/directives/targetMap.coffee"
+			],
+			[
+				"playerextensionstats",
+				"app/scripts/services/playerExtensionStats.coffee"
+			],
+			[
+				"playerc",
+				"app/scripts/controllers/player.coffee"
+			],
+			[
+				"player",
+				"app/views/player.html"
+			],
+			[
+				"statt",
+				"app/includes/partials/statTables.html"
+			],
+			[
+				"players",
+				"app/views/players.html"
+			],
+			[
+				"team",
+				"app/scripts/services/team.js"
+			],
+			[
 				"stat",
-				"app/scripts/filters/statsort.coffee"
+				"app/includes/partials/statTables.html"
+			],
+			[
+				"custom",
+				"app/styles/custom.css"
+			],
+			[
+				"expl",
+				"app/includes/partials/explanation.html"
+			],
+			[
+				"ex",
+				"app/scripts/directives/explanation.coffee"
+			],
+			[
+				"calculationexplanations",
+				"app/scripts/services/calculation-explanations.coffee"
+			],
+			[
+				"",
+				"iUltimateWebApp.sublime-workspace"
+			],
+			[
+				"inde",
+				"app/index.html"
 			],
 			[
 				"table",
@@ -1134,28 +1230,12 @@
 				"app/includes/partials/playerStatTable.html"
 			],
 			[
-				"players",
-				"app/scripts/services/playerStats.js"
-			],
-			[
-				"line",
-				"app/scripts/services/line-view.coffee"
-			],
-			[
 				"view",
 				"app/scripts/services/viewer.js"
 			],
 			[
 				"drop",
 				"app/scripts/directives/droppable.coffee"
-			],
-			[
-				"custom",
-				"app/styles/custom.css"
-			],
-			[
-				"nav",
-				"app/includes/partials/nav-bar.html"
 			],
 			[
 				"all",
@@ -1174,10 +1254,6 @@
 				"app/styles/custom.css"
 			],
 			[
-				"team",
-				"app/scripts/services/teamName.js"
-			],
-			[
 				"title",
 				"app/scripts/directives/titleBar.js"
 			],
@@ -1188,10 +1264,6 @@
 			[
 				"viewe",
 				"app/scripts/services/viewer.js"
-			],
-			[
-				"player",
-				"app/scripts/services/playerStats.js"
 			],
 			[
 				"grunt",
@@ -1466,10 +1538,6 @@
 				"Gruntfile.coffee"
 			],
 			[
-				"",
-				"client/js/send/fields/placed-field.coffee"
-			],
-			[
 				"base-field",
 				"client/js/send/fields/base-field.coffee"
 			],
@@ -1564,74 +1632,6 @@
 			[
 				"kyle",
 				"kyle-boot.coffee"
-			],
-			[
-				"grunt-smart",
-				"scripts/grunt/grunt-smart-dev-restart.coffee"
-			],
-			[
-				"start-",
-				"scripts/grunt/grunt-start-app.coffee"
-			],
-			[
-				"jade",
-				"templates/global/alert.jade"
-			],
-			[
-				"stitch",
-				"scripts/grunt/grunt-stitch.coffee"
-			],
-			[
-				"smart",
-				"scripts/grunt/grunt-smart-dev-restart.coffee"
-			],
-			[
-				"start",
-				"scripts/grunt/grunt-start-app.coffee"
-			],
-			[
-				"makefile",
-				"Makefile"
-			],
-			[
-				"template-detail",
-				"templates/templates-page/template-details.jade"
-			],
-			[
-				"router.co",
-				"client/js/global/router.coffee"
-			],
-			[
-				"feedback-layout",
-				"templates/global/feedback-layout.jade"
-			],
-			[
-				"tag-pan",
-				"templates/send/tag-panel.jade"
-			],
-			[
-				"envelope-details-recipient-row",
-				"templates/send/envelope-details-recipient-row.jade"
-			],
-			[
-				"recipient-correct",
-				"templates/send/recipient-correct.jade"
-			],
-			[
-				"tag",
-				"templates/send/tag-panel.jade"
-			],
-			[
-				"baseview",
-				"client/js/global/base/view.coffee"
-			],
-			[
-				"prepare-layout-main",
-				"templates/send/prepare-layout-main.jade"
-			],
-			[
-				"field.coffee",
-				"client/js/send/fields/placed-field.coffee"
 			]
 		],
 		"width": 0.0
