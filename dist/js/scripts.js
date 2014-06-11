@@ -568,7 +568,7 @@ angular.module('newBetaApp').directive('feedback', [
 ]);
 ;/*global d3, angular */
 angular.module('newBetaApp')
-  .directive('flowChart', function() {
+  .directive('flowChart', function($rootScope) {
     return {
       restrict: 'AE',
       template: '<svg></svg>',
@@ -633,7 +633,7 @@ angular.module('newBetaApp')
 
                 link.append('title')
                   .text(function(d) {
-                    return d.source.name.slice(0, d.source.name.length - 1) + ' → ' + d.target.name.slice(0, d.target.name.length - 1) + '\n' + format(d.value);
+                    return $rootScope.getName(d.source.name.slice(0, d.source.name.length - 1), 'shortened') + ' → ' + $rootScope.getName(d.target.name.slice(0, d.target.name.length - 1), 'shortened') + '\n' + format(d.value);
                   });
                 var node = scope.svg.append('g').selectAll('.node')
                   .data(scope.dataset.nodes)
@@ -664,7 +664,7 @@ angular.module('newBetaApp')
                   })
                   .append('title')
                   .text(function(d) {
-                    return d.name + '\n' + format(d.value);
+                    return $rootScope.getName(d.name, 'shortened') + '\n' + format(d.value);
                   });
 
                 node.append('text')
@@ -676,7 +676,7 @@ angular.module('newBetaApp')
                   .attr('text-anchor', 'end')
                   .attr('transform', null)
                   .text(function(d) {
-                    return d.name.substring(0, d.name.length - 1);
+                    return $rootScope.getName(d.name.substring(0, d.name.length - 1), 'shortened');
                   })
                   .filter(function(d) {
                     return d.x < width / 2;
@@ -2119,11 +2119,24 @@ angular.module('newBetaApp').factory('relocate', [
 ;'use strict';
 
 angular.module('newBetaApp')
-  .factory('team', ['$q', '$routeParams', 'api',
-    function($q, params, api) {
+  .factory('team', ['$q', '$routeParams', '$rootScope','api',
+    function($q, params,$rootScope, api) {
+      var players = {};
+      function getName(nickname, type){
+        if (!players[nickname])
+          return nickname;
+        if ((type === 'full' || !type ) && (players[nickname].firstName && players[nickname].lastName))
+          return players[nickname].firstName + ' ' + players[nickname].lastName;
+        if (type === 'shortened' && players[nickname].firstName && players[nickname].lastName)
+          return players[nickname].firstName.slice(0,1).toUpperCase() + '. ' + players[nickname].lastName;
+        return players[nickname][type] || nickname;
+      }
+      $rootScope.getName = getName;
       var deferred = $q.defer();
       api.retrieveTeam(params.teamId, true,
         function success(result) {
+          players = _.indexBy(result.players, 'name')
+          $rootScope.$digest();
           deferred.resolve(result);
         },
         function failure(e) {
@@ -2393,7 +2406,9 @@ angular.module('newBetaApp')
     // make sure we use the host from where we were loaded to prevent CORS from being used unnecessarily
     // (unless the page is loaded locally in which case just use the default host)
     var restHost = window.location.host.indexOf("ultimate-numbers.com") === -1 ? "www.ultianalytics.com" : "www.ultimate-numbers.com";
+    if (_(window.location.host).contains('localhost')) restHost = "330.ultimate-team.appspot.com"; // careful...
     Ultimate.baseRestUrl = "http://" + restHost + '/rest/view';
+
     // make sure we use the host from where we were loaded to prevent CORS from being used unnecessarily
     Ultimate.sessionId = new Date().getTime() + '';
 

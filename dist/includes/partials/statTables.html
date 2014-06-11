@@ -16,7 +16,7 @@
       </thead>
       <tbody>
         <tr ng-repeat="player in statsArray | statSort:sorter:inclineSort" ng-if="true">
-          <td class="stat-element"><a ng-click="relocate.goTo('player', player.name)">{{player.name}}</a></td>
+          <td class="stat-element"><a ng-click="relocate.goTo('player', player.name)">{{getName(player.name)}}</a></td>
           <td class="stat-element" ng-repeat="type in focus.statTypes">
             {{player.stats[type] | hundredths}}
           </td>

@@ -44,7 +44,7 @@
                   <b style="font-size:1.5em;">Game Leaders:</b><br>
                   <p style="margin:0;" ng-repeat="(type, leader) in gameStats.leaders">
                     <span style="display:inline-block; min-width:90px;">{{type | camelCase}} : </span>
-                    <b><a ng-click="relocate.goTo('player', leader.name)">{{leader.name}}</a></b>
+                    <b><a ng-click="relocate.goTo('player', leader.name)">{{getName(leader.name)}}</a></b>
                     <span>({{leader.stats[type]}})</span>
                   </p>
                 </div>
