@@ -10,6 +10,9 @@ assistsToGoalsChart
 playerTargetsChart
 lineDiagram
 hockeyAssists
+connectionsTable
+linesSummary
+playerCombinationsChart
 leaders{
   Defense
   Offense

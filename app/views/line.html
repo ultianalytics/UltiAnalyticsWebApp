@@ -21,7 +21,10 @@
         <div class="widget stacked widget-table col-md-12">
           <div class="widget-header">
             <span class="icon-list-alt"></span>
-            <h3>Lines</h3>
+            <h3>
+              <span>Lines</span>
+              <explanation key="'linesSummary'"></explanation>
+            </h3>
           </div>
           <div class="widget-content">
             <div ng-repeat="lineView in lineViews" ng-class="'col-md-' + floor(12 / lineViews.length)" ng-click="selectLineView(lineView)">
@@ -77,7 +80,10 @@
               </div>
               <div class="row" ng-if="lineView.selectedLine.players.length">
                 <div class="col-md-4" ng-if="_keys(lineView.selectedLine.stats.connectionStats).length">
-                  <h3>Connections</h3>
+                  <h3>
+                    <span>Connections</span>
+                    <explanation key="'connectionsTable'"></explanation>
+                  </h3>
                   <table class="table">
                     <tbody ng-repeat="(players, outcomes) in lineView.selectedLine.stats.connectionStats">
                       <tr>
@@ -92,7 +98,10 @@
                   </table>
                 </div>
                 <div class="col-md-8">
-                  <h3>Power Positions</h3>
+                  <h3>
+                    <span>Power Positions</span>
+                    <explanation key="'playerCombinationsChart'"></explanation>
+                  </h3>
                   <bubble-pie data="lineView.selectedLine.stats.bubbleStats"></bubble-pie>
                 </div>
               </div>

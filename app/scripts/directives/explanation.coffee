@@ -16,7 +16,7 @@ angular.module('newBetaApp')
         hoverTimeout = setTimeout ->
           scope.$apply ->
             scope.showPrompt = not scope.shouldShowToolTip
-        , 1000
+        , 1250
 
       element.parent().on 'mouseleave', ->
         clearTimeout hoverTimeout
