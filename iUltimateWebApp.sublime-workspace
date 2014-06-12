@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"get",
+				"getName"
+			],
+			[
 				"selec",
 				"selectedLine"
 			],
@@ -238,10 +242,6 @@
 			[
 				"ver",
 				"verticleBoundaries"
-			],
-			[
-				"get",
-				"getHorizontalBounds"
 			],
 			[
 				"left",
@@ -649,7 +649,11 @@
 	},
 	"file_history":
 	[
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/includes/partials/playerStatTable.html",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/directives/playerStatTable.coffee",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/ultimateWebRESTapi.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/team.js",
+		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/name-lookups.coffee",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/namemap.coffee",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/directives/navBar.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/includes/partials/nav-bar.html",
@@ -669,7 +673,6 @@
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/next.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/login.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/controllers/games.coffee",
-		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/ultimateWebRESTapi.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/services/gameStats.coffee",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/scripts/app.js",
 		"/Users/kyle.geppert/Code/Personal/iUltimateWebApp/app/styles/animations.css",
@@ -773,10 +776,7 @@
 		"/Users/kyle.geppert/Code/martini/app/client/js/send/documents.coffee",
 		"/Users/kyle.geppert/Code/martini/app/client/js/cloud-providers/cloud-providers.coffee",
 		"/Users/kyle.geppert/Code/martini/app/client/css/pages/prepare.styl",
-		"/Users/kyle.geppert/Code/martini/app/templates/global/modal.jade",
-		"/Users/kyle.geppert/Code/martini/app/templates/send/prepare-layout-main.jade",
-		"/Users/kyle.geppert/Code/martini/app/templates/global/alert.jade",
-		"/Users/kyle.geppert/Code/martini/app/templates/global/modal-save.jade"
+		"/Users/kyle.geppert/Code/martini/app/templates/global/modal.jade"
 	],
 	"find":
 	{
@@ -784,9 +784,11 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
+			"*",
+			"*html",
 			"*",
 			"*html",
 			"*coffee, *js",
@@ -912,8 +914,6 @@
 			"*styl",
 			"*coffee",
 			"*jade",
-			"*coffee",
-			"*styl",
 			"*coffee"
 		]
 	},
@@ -922,6 +922,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"layout middle-area no-bottom active",
+			"player in statsArray",
+			"getText",
+			"name",
+			"rootscope",
+			"root",
+			"lastName",
+			"name",
+			"'last'",
+			"name",
 			"tab-content",
 			"icon-",
 			"close",
@@ -1039,16 +1049,6 @@
 			"403",
 			"tutorial",
 			"#send-button",
-			"customHighlights",
-			"custom",
-			"highlighted",
-			"customHighlights",
-			"shake",
-			"FirstUseBeginPrepareModalView",
-			"custom",
-			"FirstUseBeginPrepareModalView",
-			"prepare",
-			"debugger",
 			"customHighlights"
 		],
 		"highlight": true,
@@ -1122,6 +1122,46 @@
 		"selected_items":
 		[
 			[
+				"tar",
+				"app/scripts/directives/targetMap.coffee"
+			],
+			[
+				"flo",
+				"app/scripts/directives/flowChart.js"
+			],
+			[
+				"nav",
+				"app/scripts/directives/navBar.js"
+			],
+			[
+				"flow",
+				"app/scripts/directives/flowChart.js"
+			],
+			[
+				"player",
+				"app/views/player.html"
+			],
+			[
+				"playerstat",
+				"app/includes/partials/playerStatTable.html"
+			],
+			[
+				"team",
+				"app/scripts/services/team.js"
+			],
+			[
+				"name",
+				"app/scripts/services/name-lookups.coffee"
+			],
+			[
+				"rest",
+				"app/scripts/services/ultimateWebRESTapi.js"
+			],
+			[
+				"app.",
+				"app/scripts/app.js"
+			],
+			[
 				"linevie",
 				"app/scripts/services/line-view.coffee"
 			],
@@ -1142,24 +1182,12 @@
 				"app/scripts/filters/ellipse-at.coffee"
 			],
 			[
-				"nav",
-				"app/scripts/directives/navBar.js"
-			],
-			[
 				"pre",
 				"app/scripts/filters/preferred-name.coffee"
 			],
 			[
 				"lead",
 				"app/includes/partials/statLeaders.html"
-			],
-			[
-				"name",
-				"app/scripts/services/namemap.coffee"
-			],
-			[
-				"flow",
-				"app/scripts/directives/flowChart.js"
 			],
 			[
 				"navb",
@@ -1178,20 +1206,12 @@
 				"app/scripts/controllers/player.coffee"
 			],
 			[
-				"player",
-				"app/views/player.html"
-			],
-			[
 				"statt",
 				"app/includes/partials/statTables.html"
 			],
 			[
 				"players",
 				"app/views/players.html"
-			],
-			[
-				"team",
-				"app/scripts/services/team.js"
 			],
 			[
 				"stat",
@@ -1612,26 +1632,6 @@
 			[
 				"upload",
 				"client/js/vendor/uploadifive.js"
-			],
-			[
-				"basevi",
-				"client/js/global/base/view.coffee"
-			],
-			[
-				"script",
-				"templates/layout/script-end.jade"
-			],
-			[
-				"grun",
-				"Gruntfile.coffee"
-			],
-			[
-				"dev",
-				"dev-boot.coffee"
-			],
-			[
-				"kyle",
-				"kyle-boot.coffee"
 			]
 		],
 		"width": 0.0

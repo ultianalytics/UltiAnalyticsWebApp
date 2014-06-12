@@ -1,6 +1,4 @@
 'use strict';
-// gotta get that footer positioned properly. This seemed like a good spot for some errant code.
-
 
 angular.module('newBetaApp', [
   'ngRoute',

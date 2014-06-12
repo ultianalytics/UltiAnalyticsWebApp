@@ -73,18 +73,23 @@ angular.module('newBetaApp')
       children.team = makeChild 'Average', countedEvents
       children.team.isPlayer = false
 
+      playersLookup = _.reduce players, (obj, player)->
+        obj[player] = true
+        obj
+      , {}
+
       _.each points, (point)-> #TODO use the playerstats one for this.
         _.each point.events, (event)->
           if _(countedEvents).contains(event.action)
             if event.action is 'Throwaway'
-              if _(players).contains(event.passer) then countEvent(children[event.passer], 'Throwaway') else  countEvent(children.team, 'Throwaway')
+              if playersLookup[event.passer] then countEvent(children[event.passer], 'Throwaway') else  countEvent(children.team, 'Throwaway')
             else if event.action is 'Goal'
-              if _(players).contains(event.passer) then  countEvent(children[event.passer], 'Assist') else  countEvent(children.team, 'Assist')
-              if _(players).contains(event.receiver) then  countEvent(children[event.receiver], 'Goal') else  countEvent(children.team, 'Goal')
+              if playersLookup[event.passer] then  countEvent(children[event.passer], 'Assist') else  countEvent(children.team, 'Assist')
+              if playersLookup[event.receiver] then  countEvent(children[event.receiver], 'Goal') else  countEvent(children.team, 'Goal')
             else if event.action is 'D'
-              if _(players).contains(event.defender) then  countEvent(children[event.defender], 'D') else  countEvent(children.team, 'D')
+              if playersLookup[event.defender] then  countEvent(children[event.defender], 'D') else  countEvent(children.team, 'D')
             else if event.action is 'Catch'
-              if _(players).contains(event.receiver) then  children[event.receiver].value++ else  children.team.value++
+              if playersLookup[event.receiver] then  children[event.receiver].value++ else  children.team.value++
 
       numberOfFillers = 6 - _.keys(children).length
       children.team.value = children.team.value / 7

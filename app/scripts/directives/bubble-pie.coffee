@@ -3,7 +3,7 @@
 angular.module('newBetaApp')
   .directive 'bubblePie', () ->
     restrict: 'E'
-    replace: true
+    template: '<chart-key color-scheme="colorMap"></chart-key>'
     scope:
       data: '='
     link: (scope, element, attrs) ->
@@ -17,8 +17,8 @@ angular.module('newBetaApp')
         if newData then render(newData)
 
       render = (data)->
-
-        element.empty()
+        scope.colorMap = {}
+        element.find('svg').remove()
 
         size = $(element).parent().width()
 
@@ -66,7 +66,10 @@ angular.module('newBetaApp')
           arcs = persister["arcs#{ data.id }"]
 
           arcs.append("svg:path")
-            .attr( "fill", (d, i)-> color(i) )
+            .attr "fill", (d, i)->
+              tempColor = color(i)
+              scope.colorMap[d.data.label] = tempColor
+              tempColor
             .attr( "d", arc )
 
           arcs.append("title")

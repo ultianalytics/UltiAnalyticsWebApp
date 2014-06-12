@@ -76,7 +76,7 @@
                 </div>
               </div>
               <div class="row" ng-if="lineView.selectedLine.players.length">
-                <div class="col-md-4">
+                <div class="col-md-4" ng-if="_keys(lineView.selectedLine.stats.connectionStats).length">
                   <h3>Connections</h3>
                   <table class="table">
                     <tbody ng-repeat="(players, outcomes) in lineView.selectedLine.stats.connectionStats">
