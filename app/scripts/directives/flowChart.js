@@ -1,6 +1,6 @@
 /*global d3, angular */
 angular.module('newBetaApp')
-  .directive('flowChart', function() {
+  .directive('flowChart', function($rootScope) {
     return {
       restrict: 'AE',
       template: '<svg></svg>',
@@ -65,7 +65,7 @@ angular.module('newBetaApp')
 
                 link.append('title')
                   .text(function(d) {
-                    return d.source.name.slice(0, d.source.name.length - 1) + ' → ' + d.target.name.slice(0, d.target.name.length - 1) + '\n' + format(d.value);
+                    return $rootScope.getName(d.source.name.slice(0, d.source.name.length - 1), 'shortened') + ' → ' + $rootScope.getName(d.target.name.slice(0, d.target.name.length - 1), 'shortened') + '\n' + format(d.value);
                   });
                 var node = scope.svg.append('g').selectAll('.node')
                   .data(scope.dataset.nodes)
@@ -96,7 +96,7 @@ angular.module('newBetaApp')
                   })
                   .append('title')
                   .text(function(d) {
-                    return d.name + '\n' + format(d.value);
+                    return $rootScope.getName(d.name, 'shortened') + '\n' + format(d.value);
                   });
 
                 node.append('text')
@@ -108,7 +108,7 @@ angular.module('newBetaApp')
                   .attr('text-anchor', 'end')
                   .attr('transform', null)
                   .text(function(d) {
-                    return d.name.substring(0, d.name.length - 1);
+                    return $rootScope.getName(d.name.substring(0, d.name.length - 1), 'shortened');
                   })
                   .filter(function(d) {
                     return d.x < width / 2;

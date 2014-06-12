@@ -16,7 +16,7 @@
               </div>
               <div class="widget-content player-name">
                 <div class="pricing-header">
-                  <h1>{{playerName}}</h1>
+                  <h1>{{getName(playerName)}}</h1>
                 </div>
               </div>
             </div>
@@ -38,7 +38,7 @@
           <div class="widget widget-stacked">
             <div class="widget-header">
               <i class="icon-th-list"></i>
-              <h3>Who {{playerName}} throws to</h3>
+              <h3>Who {{getName(playerName)}} throws to</h3>
             </div>
             <div class="widget-content">
               <target-map data="targetStats"></target-map>

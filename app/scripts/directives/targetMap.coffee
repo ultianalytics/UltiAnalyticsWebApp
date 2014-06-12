@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('newBetaApp')
-  .directive 'targetMap', ['$parse', ($parse) ->
+  .directive 'targetMap', ['$parse', '$rootScope',($parse, $rootScope) ->
     templateUrl: 'includes/partials/targetMap.html'
     restrict: 'E'
     scope:
@@ -18,8 +18,8 @@ angular.module('newBetaApp')
 
       getText = (data)->
         at = data.actionType
-        dv = data.value
-        dr = data.receiver
+        dv = $rootScope.getName(data.value, 'shortened')
+        dr = $rootScope.getName(data.receiver, 'shortened')
         plural = dv > 1
         text = switch
           when at is 'Throwaway' then dv + (if plural then ' throwaways' else ' throwaway')
@@ -85,7 +85,7 @@ angular.module('newBetaApp')
           .style( 'text-anchor', 'middle')
           .text (d)->
             if _.contains d.receiver.toLowerCase(), 'anonymous' then return 'The other team'
-            d.receiver.substring 0, d.r / 3
+            $rootScope.getName(d.receiver, 'shortened').substring 0, d.r / 3
 
           d3.select( self.frameElement)
           .style 'height', diameter + 'px'

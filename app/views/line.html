@@ -14,7 +14,7 @@
               <h3>Players</h3>
             </div>
             <div class="widget-content" style="text-align:center;padding: 2px;">
-              <button ng-repeat="player in players" draggable="true" item="player" on-drag="setDragging" class="btn btn-default player-token" ng-click="addPlayerToSelected(player)" ng-class="{selected: _contains(selectedLineView.selectedLine.players, player)}">{{player}}</button>
+              <button ng-repeat="player in players" draggable="true" item="player" on-drag="setDragging" class="btn btn-default player-token" ng-click="addPlayerToSelected(player)" ng-class="{selected: _contains(selectedLineView.selectedLine.players, player), faded: !selectedLineView.selectedLine.stats.datafulPlayers[player] && selectedLineView.selectedLine.stats.datafulPlayers }">{{player}}</button>
             </div>
           </div>
         </div>
@@ -24,10 +24,11 @@
             <h3>Lines</h3>
           </div>
           <div class="widget-content">
-            <!-- @todo Make all this shit work with bootstrap. I can't believe I forgot to already.-->
             <div ng-repeat="lineView in lineViews" ng-class="'col-md-' + floor(12 / lineViews.length)" ng-click="selectLineView(lineView)">
               <ul class="chrome-style">
-                <li ng-class="{'chrome-style-selected': line === lineView.selectedLine}" ng-repeat="line in lineView.lines track by $index" ng-click="lineView.selectLine(line)"><a>{{ line.players.join(', ') || 'No Data'}}</a></li>
+                <li ng-class="{'chrome-style-selected': line === lineView.selectedLine}" ng-style="{maxWidth: 100 / _keys(lineView.lines).length + '%'}" ng-repeat="line in lineView.lines track by $index" ng-click="lineView.selectLine(line)">
+                  <a class="chrome-tab-content">{{ line.players.join(', ') || 'No Data'}}</a>
+                </li>
                 <li ng-click="lineView.addLine()"><a>+</a></li>
               </ul>
               <div class="row">
@@ -57,58 +58,44 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  We are the team stats of course!
+                <div class="col-md-6" ng-if="lineView.selectedLine.players.length">
+                  <p>{{lineView.selectedLine.players | linePlayers}} <b>{{lineView.selectedLine.stats.numberOfPointsConsidered}} of {{lineView.selectedLine.stats.pointsPossible}}</b> posssible points.</p>
+                  <h3>Performance</h3>
+                  <table class="table">
+                    <tr>
+                      <th></th>
+                      <th>Line</th>
+                      <th>Team</th>
+                    </tr>
+                    <tr ng-repeat="(statType, statValue) in lineView.selectedLine.stats.teamStats">
+                      <td>{{statType | camelCase}}</td>
+                      <td>{{statValue}}</td>
+                      <td>{{teamStats[statType]}}</td>
+                    </tr>
+                  </table>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-4">
-                  connections stats go here!
+              <div class="row" ng-if="lineView.selectedLine.players.length">
+                <div class="col-md-4" ng-if="_keys(lineView.selectedLine.stats.connectionStats).length">
+                  <h3>Connections</h3>
+                  <table class="table">
+                    <tbody ng-repeat="(players, outcomes) in lineView.selectedLine.stats.connectionStats">
+                      <tr>
+                        <th>{{players}}</th>
+                        <th></th>
+                      </tr>
+                      <tr ng-repeat="(outcome, quantity) in outcomes">
+                        <td>{{outcome | camelCase}}</td>
+                        <td>{{quantity}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
                 <div class="col-md-8">
-                  This will be the diagram!
+                  <h3>Power Positions</h3>
+                  <bubble-pie data="lineView.selectedLine.stats.bubbleStats"></bubble-pie>
                 </div>
               </div>
-
-              <!--
-                  <table ng-show="line.players.length" class="table table-striped">
-                    <tr>
-                      <td><b>Points Played Together<b></td><td><b>{{line.stats.consideredPoints.length}}<b></td>
-                    </tr>
-                    <tr>
-                      <td>Scoring Percentage</td><td>{{line.stats.scoringPercentage | hundredths}}</td>
-                    </tr>
-                    <tr>
-                      <th>Connections</th>
-                      <th>{{line.stats.connections.total}}</th>
-                    </tr>
-                    <tr ng-repeat="(connection, value) in line.stats.connections.combinations">
-                      <td>{{connection}}</td>
-                      <td>{{value}}</td>
-                    </tr>
-                    <tr>
-                      <th>On Offense</th>
-                      <th>{{line.stats.oPoints.length}}</th>
-                    </tr>
-                    <tr ng-repeat="(stat,value) in line.stats.onOffense">
-                      <td>{{stat | camelCase}}</td>
-                      <td>{{value | hundredths}}</td>
-                    </tr>
-                    <tr>
-                      <th>On Defense</th>
-                      <th>{{line.stats.dPoints.length}}</th>
-                    </tr>
-                    <tr ng-repeat="(stat,value) in line.stats.onDefense">
-                      <td>{{stat | camelCase}}</td>
-                      <td>{{value | hundredths}}</td>
-                    </tr>
-                    <tr ng-repeat="stat in line.stats.onDefense"></tr>
-                  </table>
-                  <h3 ng-show="!line.players.length" style="text-align:center;"><b>No Data</b></h3>
-                </div>
-              </div>
-            </div>
-               -->
           </div>
         </div>
       </div>

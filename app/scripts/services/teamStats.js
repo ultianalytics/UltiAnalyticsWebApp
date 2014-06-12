@@ -76,7 +76,7 @@ angular.module('newBetaApp')
 
         results.record = this.getRecord(games);
         results.pointSpread = this.getPointSpread(games);
-        results.offensiveProductivity = this.getOffensiveProductivity(considerablePoints);
+        results.offensiveProductivity = this.getProductivity(considerablePoints, 'Offense');
         results.conversionRate = this.getConversionRate(considerablePoints, results.pointSpread.ours);
         results.throwsPerPossession = this.getThrowsPerPossession(considerablePoints);
         results.pointSummary = this.getPointSummary(considerablePoints);
@@ -84,13 +84,13 @@ angular.module('newBetaApp')
 
         return results;
       },
-      getOffensiveProductivity: function(points){
+      getProductivity: function(points, lineType){
         var offensiveOpps = 0;
         var offensiveConversions = 0;
         _(points).each(function(point) {
-          if (point.summary.lineType === 'O') {
+          if (point.summary.lineType === lineType.slice(0,1)) {
             offensiveOpps++;
-            if (point.events[point.events.length - 1].type === 'Offense') {
+            if (point.events[point.events.length - 1].type === lineType) {
               offensiveConversions++;
             }
           }
