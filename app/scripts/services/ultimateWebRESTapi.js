@@ -533,8 +533,7 @@ angular.module('newBetaApp')
 
     function sendAnalyticsEvent(restEndpointName) {
       // NOTE: You can add another property for more detail
-      // commented out for testing
-      //_gaq.push(['_trackEvent', Ultimate.isAdminSite ? 'WebRestRequest-Admin' : 'WebRestRequest', restEndpointName]);
+      _gaq.push(['_trackEvent', Ultimate.isAdminSite ? 'WebRestRequest-Admin' : 'WebRestRequest', restEndpointName]);
     }
 
     function defaultError(e){
