@@ -89,7 +89,7 @@
         return player.value++;
       };
       getBubbleMapStats = function(points, players) {
-        var bubbleStats, children, countedEvents, num, numberOfFillers, _i;
+        var bubbleStats, children, countedEvents, num, numberOfFillers, playersLookup, _i;
         countedEvents = ['Throwaway', 'Catch', 'Goal', 'D', 'Assist'];
         children = _.reduce(players, function(boxes, player) {
           boxes[player] = makeChild(player, countedEvents);
@@ -97,34 +97,38 @@
         }, {});
         children.team = makeChild('Average', countedEvents);
         children.team.isPlayer = false;
+        playersLookup = _.reduce(players, function(obj, player) {
+          obj[player] = true;
+          return obj;
+        }, {});
         _.each(points, function(point) {
           return _.each(point.events, function(event) {
             if (_(countedEvents).contains(event.action)) {
               if (event.action === 'Throwaway') {
-                if (_(players).contains(event.passer)) {
+                if (playersLookup[event.passer]) {
                   return countEvent(children[event.passer], 'Throwaway');
                 } else {
                   return countEvent(children.team, 'Throwaway');
                 }
               } else if (event.action === 'Goal') {
-                if (_(players).contains(event.passer)) {
+                if (playersLookup[event.passer]) {
                   countEvent(children[event.passer], 'Assist');
                 } else {
                   countEvent(children.team, 'Assist');
                 }
-                if (_(players).contains(event.receiver)) {
+                if (playersLookup[event.receiver]) {
                   return countEvent(children[event.receiver], 'Goal');
                 } else {
                   return countEvent(children.team, 'Goal');
                 }
               } else if (event.action === 'D') {
-                if (_(players).contains(event.defender)) {
+                if (playersLookup[event.defender]) {
                   return countEvent(children[event.defender], 'D');
                 } else {
                   return countEvent(children.team, 'D');
                 }
               } else if (event.action === 'Catch') {
-                if (_(players).contains(event.receiver)) {
+                if (playersLookup[event.receiver]) {
                   return children[event.receiver].value++;
                 } else {
                   return children.team.value++;

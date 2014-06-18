@@ -4,7 +4,7 @@
   angular.module('newBetaApp').directive('bubblePie', function() {
     return {
       restrict: 'E',
-      replace: true,
+      template: '<chart-key color-scheme="colorMap"></chart-key>',
       scope: {
         data: '='
       },
@@ -24,7 +24,8 @@
         });
         return render = function(data) {
           var bubble, bubbles, d3Svg, persister, pie, size;
-          element.empty();
+          scope.colorMap = {};
+          element.find('svg').remove();
           size = $(element).parent().width();
           d3Svg = d3.select(element[0]).append('svg').attr('width', size).attr('height', size).attr('class', 'bubble-pie');
           pie = d3.layout.pie().value(function(d) {
@@ -48,7 +49,10 @@
             arc = persister["arc" + data.id];
             arcs = persister["arcs" + data.id];
             arcs.append("svg:path").attr("fill", function(d, i) {
-              return color(i);
+              var tempColor;
+              tempColor = color(i);
+              scope.colorMap[d.data.label] = tempColor;
+              return tempColor;
             }).attr("d", arc);
             return arcs.append("title").text(function(d, i) {
               return "" + d.value + " " + data.stats[i].label + "s";
