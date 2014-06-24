@@ -9,6 +9,7 @@ angular.module('newBetaApp')
         page: '=',
       },
       link: function postLink(scope) {
+        scope.getName = $rootScope.getName
         scope.playerName = decodeURI($routeParams.playerNameUri);
         $rootScope.isMobile = viewer.isMobile();
         scope.isMobileSized = viewer.isMobileSized;
