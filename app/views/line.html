@@ -59,7 +59,7 @@
                   </div>
                 </div>
                 <div class="col-md-6" ng-if="lineView.selectedLine.players.length">
-                  <p>{{lineView.selectedLine.players | linePlayers}} <b>{{lineView.selectedLine.stats.numberOfPointsConsidered}} of {{lineView.selectedLine.stats.pointsPossible}}</b> posssible points.</p>
+                <p class="points-played-message">{{lineView.selectedLine.players | linePlayers}} <b>{{lineView.selectedLine.stats.numberOfPointsConsidered}} of {{lineView.selectedLine.stats.pointsPossible}}</b> posssible points.</p>
                   <h3>Performance</h3>
                   <table class="table">
                     <tr>
@@ -75,7 +75,7 @@
                   </table>
                 </div>
               </div>
-              <div class="row" ng-if="lineView.selectedLine.players.length">
+              <div class="row line-stats" ng-if="lineView.selectedLine.players.length">
                 <div class="col-md-4" ng-if="_keys(lineView.selectedLine.stats.connectionStats).length">
                   <h3>Connections</h3>
                   <table class="table">
@@ -93,7 +93,7 @@
                 </div>
                 <div class="col-md-8">
                   <h3>Power Positions</h3>
-                  <bubble-pie data="lineView.selectedLine.stats.bubbleStats"></bubble-pie>
+                  <bubble-pie class="bubble-pie" data="lineView.selectedLine.stats.bubbleStats"></bubble-pie>
                 </div>
               </div>
           </div>

@@ -564,12 +564,13 @@ Assigned to:	You
   display: inline-block;
   width: 85px;
   vertical-align: top;
-  height: 1.5em;
+  height: 1.3em;
+
 }
 .key-indicator{
   display: inline-block;
-  width: 1.5em;
-  height: 1.5em;
+  width: 1.3em;
+  height: 1.3em;
   border: 1px solid black;
 }
 .pie-chart-container{
@@ -710,4 +711,13 @@ div[ng-view]{
 }
 .chrome-style li.chrome-style-selected:after {
     box-shadow: -2px 2px 0 #FFF;
+}
+.bubble-pie {
+  margin-top: 25px;
+}
+.points-played-message {
+  text-align: center;
+}
+.points-played-message b {
+  color: black;
 }
