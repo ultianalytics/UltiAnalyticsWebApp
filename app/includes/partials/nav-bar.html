@@ -40,7 +40,7 @@
           <li ng-class="isActive('player')" ng-class="{active: pageFocus('specificPlayer')}" ng-if="isActive('player')">
             <a>
               <i class="icon-user"></i>
-              <span>{{playerName}}</span>
+              <span>{{getName(playerName, 'shortened')}}</span>
             </a>
           </li>
           <a class="switch-back" ng-if="!isMobileSized()" href="http://www.ultianalytics.com/team/{{teamId}}/main-classic">Old Website</a>

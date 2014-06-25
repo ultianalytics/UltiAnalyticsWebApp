@@ -131,7 +131,23 @@ Assigned to:	You
   border-bottom-color:rgb(213,213,213);
 }
 .navbar-header{
-  height:50px !important;
+  width: 100%;
+  height:50px;
+}
+.navbar-header .ua-logo {
+  height: 21px;
+  display: inline-block;
+  margin: 14px;
+  width: 120px;
+  float: right;
+}
+.navbar-header .ua-logo.small-screen {
+  height: 15px;
+  margin: -5px 0 10px 25px;
+  float: left;
+}
+.nav-header-container .navbar-header .ua-logo img {
+  height: 100%;
 }
 .filter-close-icon {
   top:5px;
@@ -549,12 +565,13 @@ Assigned to:	You
   display: inline-block;
   width: 85px;
   vertical-align: top;
-  height: 1.5em;
+  height: 1.3em;
+
 }
 .key-indicator{
   display: inline-block;
-  width: 1.5em;
-  height: 1.5em;
+  width: 1.3em;
+  height: 1.3em;
   border: 1px solid black;
 }
 .pie-chart-container{
@@ -570,12 +587,6 @@ Assigned to:	You
 }
 .stats-tables > div > p {
   margin:5px 0 3px 10px !important;
-}
-.logo {
-  top: 14px;
-  width: 150px;
-  position: absolute;
-  right: 0;
 }
 .nav-header-container {
   position: relative;
@@ -723,4 +734,13 @@ div[ng-view]{
   position: absolute;
   top: -2px;
   right: 2px;
+}
+.bubble-pie {
+  margin-top: 25px;
+}
+.points-played-message {
+  text-align: center;
+}
+.points-played-message b {
+  color: black;
 }

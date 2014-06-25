@@ -184,8 +184,8 @@ angular.module('newBetaApp')
           ['catchingPercentage', 'catches', 'drops'],
           ['passingPercentage', 'completions', 'throwaways'],
           ['iBPullingPercentage', 'iBPulls', 'oBPulls']
-        ], function(average){
-          stats[average[0]] = Math.round(stats[average[1]] / (stats[average[1]] + stats[average[2]]) * 100);
+        ], function(averageProperities){
+          stats[averageProperities[0]] = Math.round(stats[averageProperities[1]] / (stats[averageProperities[1]] + stats[averageProperities[2]]) * 100);
         }
       );
     }
@@ -211,7 +211,12 @@ angular.module('newBetaApp')
       var averages = {};
       var statTypes = _.keys(_.sample(playerStats).stats);
       _(statTypes).each(function(type){
-        averages[type] = _.reduce(playerStats, getSumFunction(type),0).valueOf() / _.keys(playerStats).length;
+        var numberOfNans = _.reduce(playerStats, function(count, player){
+          if (_.isNaN(player.stats[type]))
+            count++;
+          return count;
+        },0)
+        averages[type] = _.reduce(playerStats, getSumFunction(type),0).valueOf() / (_.keys(playerStats).length - numberOfNans);
       });
       return averages;
     }

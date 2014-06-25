@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('newBetaApp')
-  .service('api', function Rest() {
+  .service('api', function Rest($location) {
     var exports = {};
     // init the global app object
     var Ultimate = {};
@@ -14,7 +14,6 @@ angular.module('newBetaApp')
     // make sure we use the host from where we were loaded to prevent CORS from being used unnecessarily
     // (unless the page is loaded locally in which case just use the default host)
     var restHost = window.location.host.indexOf("ultimate-numbers.com") === -1 ? "www.ultianalytics.com" : "www.ultimate-numbers.com";
-    if (_(window.location.host).contains('localhost')) restHost = "330.ultimate-team.appspot.com"; // careful...
     Ultimate.baseRestUrl = "http://" + restHost + '/rest/view';
 
     // make sure we use the host from where we were loaded to prevent CORS from being used unnecessarily
@@ -533,8 +532,8 @@ angular.module('newBetaApp')
 
     function sendAnalyticsEvent(restEndpointName) {
       // NOTE: You can add another property for more detail
-      // commented out for testing
-      //_gaq.push(['_trackEvent', Ultimate.isAdminSite ? 'WebRestRequest-Admin' : 'WebRestRequest', restEndpointName]);
+      if (_.contains($location.host().toLowerCase(), 'ultimate-numbers') || _.contains($location.host().toLowerCase(), 'ultianalytics'))
+        _gaq.push(['_trackEvent', Ultimate.isAdminSite ? 'WebRestRequest-Admin' : 'WebRestRequest', restEndpointName]);
     }
 
     function defaultError(e){

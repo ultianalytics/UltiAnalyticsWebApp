@@ -68,7 +68,7 @@ angular.module('newBetaApp')
           arcs.append("svg:path")
             .attr "fill", (d, i)->
               tempColor = color(i)
-              scope.colorMap[d.data.label] = tempColor
+              unless d.data.label is 'Catch' then scope.colorMap[d.data.label] = tempColor
               tempColor
             .attr( "d", arc )
 
