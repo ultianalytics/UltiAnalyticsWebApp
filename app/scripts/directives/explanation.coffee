@@ -16,18 +16,22 @@ angular.module('newBetaApp')
         hoverTimeout = setTimeout ->
           scope.$apply ->
             scope.showPrompt = not scope.shouldShowToolTip
-        , 1250
+        , 1000
 
       element.parent().on 'mouseleave', ->
         clearTimeout hoverTimeout
         scope.$apply ->
           scope.showPrompt = false
 
-      scope.explanation = $sce.trustAsHtml( calculationExplanations[scope.key]?.explanations[0].description or 'Please ask us personally about this one.' )
+      scope.explanation = $sce.trustAsHtml( calculationExplanations[scope.key]?.explanations[0].description or 'Ask us personally about this one if you\'d like.' )
 
       scope.showTooltip = ->
-        setTimeout ->
+        setTimeout -> # avoids the click event.
           scope.$apply ->
+            elementRightOffset = $(element).offset().left + 200
+            documentWidth = $(document).width()
+            $explanationTooltip = $(element).find('.explanation-tooltip')
+            if documentWidth < elementRightOffset then $explanationTooltip.css 'left', -1 * ( elementRightOffset - documentWidth )
             scope.shouldShowToolTip = true
             scope.showPrompt = false
 

@@ -1,23 +1,2 @@
 toExplain:
-
-record
-pointSpread
-oProductivity
-conversionRate
-passesPerPossessionChart
-pointsPerLineChart
-assistsToGoalsChart
-playerTargetsChart
-lineDiagram
-hockeyAssists
-connectionsTable
-linesSummary
-playerCombinationsChart
-leaders{
-  Defense
-  Offense
-  PlusMinus
-  PlayingTime
-}
-
 ALL of the playerStats fields.

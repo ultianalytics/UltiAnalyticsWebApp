@@ -715,6 +715,18 @@ div[ng-view]{
 }
 .explanation {
   display: inline;
+  height: 12px;
+  font-size: 12px;
+  top: 0;
+  line-height: 14px;
+}
+.explanation .icon {
+  margin: 0 !important;
+  font-size: 12px !important;
+  vertical-align: top !important;
+}
+.explanation .icon:before {
+  vertical-align: top;
 }
 .explanation .explanation-tooltip {
   display: inline-block;
@@ -726,7 +738,6 @@ div[ng-view]{
   padding: 5px;
   background-color: white;
   box-shadow: 2px 2px 10px #888888;
-  font-size: .85em;
   font-weight: 100;
 }
 .explanation .explanation-tooltip .close-button {
@@ -736,7 +747,7 @@ div[ng-view]{
   right: 2px;
 }
 .bubble-pie {
-  margin-top: 25px;
+  margin-top: 50px;
 }
 .points-played-message {
   text-align: center;

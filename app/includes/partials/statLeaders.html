@@ -3,7 +3,8 @@
     <div id="leader-widget" class="widget-content">
       <div id="big_stats" class="cf">
         <div class="stat" ng-repeat="(type, info) in leaderMap track by $index">
-          <div class="leader-category">{{info.category}}
+          <div class="leader-category">
+            <span>{{info.category}}</span>
             <explanation key="info.category + 'Leader'"></explanation>
           </div>
           <div class="leader-name"><a ng-click="relocate.goTo('player', leaders[type].name)" style="color:#FF9900">{{getName(leaders[type].name)}}</a></div>

@@ -48,16 +48,16 @@
             <div class="widget-header">
               <span class="icon-list-alt"></span>
               <h3>Passes per Posession
-                <explanation key="'passesPerPosession'"></explanation>
+                <explanation key="'passesPerPosessionChart'"></explanation>
               </h3>
             </div> <!-- .widget-header -->
             <div class="widget-content points-per-break">
               <div class="pie-chart-container">
-                <h3>Scored</h3>
+                <h3>Score</h3>
                 <pie-chart dataset="teamStats.throwsPerPossession.scored" width="200" height="200"></pie-chart>
               </div>
               <div class="pie-chart-container">
-                <h3>Failed</h3>
+                <h3>Turn</h3>
                 <pie-chart dataset="teamStats.throwsPerPossession.failed" width="200" height="200"></pie-chart>
               </div>
             </div>
@@ -67,8 +67,9 @@
           <div class="widget stacked widget-table">
             <div class="widget-header">
               <span class="icon-list-alt"></span>
-              <h3>Points per Line
-                <explanation key="'pointsPerLine'"></explanation>
+              <h3>
+                <span>Points per Line</span>
+                <explanation key="'pointsPerLineChart'"></explanation>
               </h3>
             </div>
             <div class="widget-content points-per-break">
