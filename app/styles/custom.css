@@ -665,11 +665,27 @@ div[ng-view]{
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #FFF;
     text-shadow: 0 1px #FFF;
     margin: 0 -5px;
-    padding: 0 20px;
+    padding: 0 12px;
 }
 .chrome-style a {
     color: #555;
     text-decoration: none;
+}
+.chrome-style a .icon-remove {
+  margin-left: 10px;
+  width: 10px;
+  display: inline-block;
+}
+.chrome-style a .icon-remove:hover {
+  color: gray;
+}
+.chrome-style a .icon-remove:before {
+  position: absolute;
+  top:6px;
+  right: 12px;
+}
+.chrome-style li .icon-plus {
+  margin: 0 5px;
 }
 .chrome-style li.chrome-style-selected {
     background: #FFF;
@@ -739,6 +755,9 @@ div[ng-view]{
   background-color: white;
   box-shadow: 2px 2px 10px #888888;
   font-weight: 100;
+}
+.explanation .explanation-tooltip ul{
+  padding: 5px 0 0px 22px;
 }
 .explanation .explanation-tooltip .close-button {
   display: inline-block;

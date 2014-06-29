@@ -30,9 +30,12 @@
             <div ng-repeat="lineView in lineViews" ng-class="'col-md-' + floor(12 / lineViews.length)" ng-click="selectLineView(lineView)">
               <ul class="chrome-style">
                 <li ng-class="{'chrome-style-selected': line === lineView.selectedLine}" ng-style="{maxWidth: 100 / _keys(lineView.lines).length + '%'}" ng-repeat="line in lineView.lines track by $index" ng-click="lineView.selectLine(line)">
-                  <a class="chrome-tab-content">{{ line.players.join(', ') || 'No Data'}}</a>
+                  <a class="chrome-tab-content">
+                    <span>{{ line.players.join(', ') || 'No Data'}}</span>
+                    <i class="icon-remove" ng-click="lineView.removeLine(line)" ng-if="_keys(lineView.lines).length > 1"></i>
+                   </a>
                 </li>
-                <li ng-click="lineView.addLine()"><a>+</a></li>
+                <li ng-click="lineView.addLine()"><i class="icon-plus"></i></li>
               </ul>
               <div class="row">
                 <div class="col-md-6">
