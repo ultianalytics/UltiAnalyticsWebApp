@@ -743,6 +743,7 @@ div[ng-view]{
   margin: 0 !important;
   font-size: 12px !important;
   vertical-align: top !important;
+  color: rgb(255,153,0) !important;
 }
 .explanation .icon:before {
   vertical-align: top;
