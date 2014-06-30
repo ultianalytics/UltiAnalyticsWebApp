@@ -739,7 +739,11 @@ div[ng-view]{
   top: 0;
   line-height: 14px;
 }
+.explanation .icon.opaque {
+  opacity: 1;
+}
 .explanation .icon {
+  opacity: 0;
   margin: 0 !important;
   font-size: 12px !important;
   vertical-align: top !important;
@@ -777,4 +781,7 @@ div[ng-view]{
 }
 .points-played-message b {
   color: black;
+}
+*:hover > .explanation {
+  opacity: 1;
 }

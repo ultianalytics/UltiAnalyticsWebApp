@@ -10,20 +10,16 @@ angular.module('newBetaApp')
       trigger: '='
     link: (scope, element, attrs) ->
 
-      hoverTimeout = null
-
       element.parent().on 'mouseenter', (event)->
-        hoverTimeout = setTimeout ->
           scope.$apply ->
-            scope.showPrompt = not scope.shouldShowToolTip
-        , 1000
+            scope.showPrompt = not scope.shouldShowToolTip and !!description
 
       element.parent().on 'mouseleave', ->
-        clearTimeout hoverTimeout
         scope.$apply ->
           scope.showPrompt = false
 
-      scope.explanation = $sce.trustAsHtml( calculationExplanations[scope.key]?.explanations[0].description or 'Ask us personally about this one if you\'d like.' )
+      description = calculationExplanations[scope.key]?.explanations[0].description
+      scope.explanation = $sce.trustAsHtml( description or 'Ask us personally about this one if you\'d like.' )
 
       scope.showTooltip = ->
         setTimeout -> # avoids the click event.
