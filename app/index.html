@@ -1,4 +1,6 @@
 <!doctype html>
+
+<!--[if lt IE 10]><p class=chromeframe>Your browser is <b><em>ancient!</em></b> Please <a href="http://browsehappy.com/">upgrade to a more modern browser</a> to view this site, as well make the world a more pleasant place for web developers. I mean really, do you know how much of our time is wasted working on backwards compatibility? The number of hokey little .js libraries we have to integrate just so file upload works in archaic enviornments. Do you know how nice and easy flex-box styling is? Of course you don't. If you did, you wouldn't be trying to visit this site with the internet equivalent of a doctor who still practices blood-letting. Want less ads on youTube? Download <a href="http://browsehappy.com/">Firefox.</a> </p><![endif]-->
     <html class="no-js">
         <head>
         <meta charset="utf-8">
@@ -26,7 +28,7 @@
     </head>
         <body ng-app="newBetaApp">
           <div ng-view=""></div>
-
+        <script src="http://www.ultianalytics.com/js/explanations.js"></script>
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/angular-animate/angular-animate.min.js"></script>
         <script src="bower_components/lodash/dist/lodash.min.js"></script>
@@ -89,6 +91,8 @@
         <script src="scripts/directives/footer.js"></script>
         <script src="scripts/services/line-view.js"></script>
         <script src="scripts/filters/statSort.js"></script>
+        <script src="scripts/services/calculation-explanations.js"></script>
+        <script src="scripts/directives/explanation.js"></script>
         <script src="scripts/filters/line-players.js"></script>
         <script src="scripts/directives/bubble-pie.js"></script>
         <script src="scripts/services/utils.js"></script>

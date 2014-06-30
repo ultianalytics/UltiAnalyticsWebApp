@@ -27,6 +27,7 @@ angular.module('newBetaApp')
       , {}
 
     getConnectionStats = (points, players)->
+      if players.length < 2 then return false
       combinations = {}
       _.each points, (point)->
         _.each point.events, (event)->
@@ -36,6 +37,7 @@ angular.module('newBetaApp')
             connectionRef[event.action] ?= 0
             connectionRef[event.action]++
             connectionRef.total++
+      if _.keys(combinations).length is 0 then return 'none'
       combinations
 
     getPointSpread = (points)->

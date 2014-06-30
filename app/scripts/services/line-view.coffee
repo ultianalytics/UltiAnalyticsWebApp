@@ -15,4 +15,6 @@ angular.module('newBetaApp')
         @selectedLine = line
       selectedAddPlayer: (player)=>
         @selectedLine.addPlayer player
+      numberOfLines: ->
+        _.keys(@lines).length
     LineView
