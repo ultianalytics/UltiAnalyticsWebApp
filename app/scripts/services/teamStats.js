@@ -73,7 +73,6 @@ angular.module('newBetaApp')
         var considerablePoints = _.reduce(games, function(points, game){
           return points.concat(game.points);
         }, []);
-
         results.record = this.getRecord(games);
         results.pointSpread = this.getPointSpread(games);
         results.offensiveProductivity = this.getProductivity(considerablePoints, 'Offense');
@@ -81,10 +80,30 @@ angular.module('newBetaApp')
         results.throwsPerPossession = this.getThrowsPerPossession(considerablePoints);
         results.pointSummary = this.getPointSummary(considerablePoints);
         results.assistMap = this.getAssistMap(considerablePoints);
-
+        results.windEfficiency = this.getWindEfficiency(games, results.pointSpread.ours);
         return results;
       },
-      getProductivity: function(points, lineType){
+      getWindEfficiency: function(games){
+        var pointsIndexedByWind = _.reduce(games, function(memo, game){
+          memo[game.wind.mph] = memo[game.wind.mph] || [];
+          memo[game.wind.mph] = memo[game.wind.mph].concat(game.points);
+          return memo;
+        } , {})
+        var _this = this
+        var results = _.reduce(['us', 'them'], function(result, team){
+          result[team] = _.reduce(pointsIndexedByWind, function(memo, points, windSpeed){
+            var pointSummary = _this.getPointSummary(points)
+            memo.push({
+              x:windSpeed,
+              y:_this.getConversionRate(points, pointSummary[team].defense + pointSummary[team].offense )
+            });
+            return memo;
+          }, [])
+          return result;
+        }, {});
+        return results;
+      },
+      getProductivity: function(points, lineType, isOpponent){
         var offensiveOpps = 0;
         var offensiveConversions = 0;
         _(points).each(function(point) {
