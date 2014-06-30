@@ -2488,6 +2488,10 @@ angular.module('newBetaApp')
           return players[nickname].firstName + ' ' + players[nickname].lastName;
         if (type === 'shortened' && players[nickname].firstName && players[nickname].lastName)
           return players[nickname].firstName.slice(0,1).toUpperCase() + '. ' + players[nickname].lastName;
+        if (type === 'last' && players[nickname].firstName && players[nickname].lastName)
+          return players[nickname].lastName.slice(0,1).toUpperCase()
+        if (type === 'first' && players[nickname].firstName && players[nickname].lastName)
+          return players[nickname].firstName.slice(0,1).toUpperCase()
         return players[nickname][type] || nickname;
       }
       $rootScope.getName = getName;
