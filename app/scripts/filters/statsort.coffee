@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('newBetaApp')
-  .filter 'statSort', () ->
+  .filter 'statSort', ($rootScope) ->
     (input, type, reverse) ->
       unless input then return Math.random()
       copy = _.clone input
@@ -11,6 +11,8 @@ angular.module('newBetaApp')
           diff = playerA.stats[type] - playerB.stats[type]
           diff * factor
         else
-          if playerA.name < playerB.name then return factor
-          else if playerA.name > playerB.name then return factor * -1
+          nameToSortA = $rootScope.getName(playerA.name, 'last') or $rootScope.getName(playerA.name, 'first')
+          nameToSortB = $rootScope.getName(playerB.name, 'last') or $rootScope.getName(playerB.name, 'first')
+          if nameToSortA < nameToSortB then return factor
+          else if nameToSortA > nameToSortB then return factor * -1
 
