@@ -745,7 +745,7 @@ div[ng-view]{
 .explanation .icon {
   opacity: 0;
   margin: 0 0 0 5px !important;
-  font-size: 12px !important;
+  font-size: 14px !important;
   vertical-align: top !important;
   color: rgb(255,153,0) !important;
 }
