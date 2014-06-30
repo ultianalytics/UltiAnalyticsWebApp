@@ -11,7 +11,13 @@
       <thead>
         <tr>
           <th class="stat-header"><a ng-click="sort('name')">Player Name</a></th>
-          <th class="stat-header" ng-repeat="type in focus.statTypes"><a ng-click="sort(type)">{{type | camelCase:type}}</a></th>
+          <th class="stat-header" ng-repeat="type in focus.statTypes">
+            <a ng-click="sort(type)">
+              <span>{{type | camelCase:type}}
+              </span>
+            </a>
+            <explanation key="type"><explanation>
+          </th>
         </tr>
       </thead>
       <tbody>

@@ -2755,7 +2755,7 @@ angular.module('newBetaApp')
 'use strict';
 
 angular.module('newBetaApp')
-  .service('api', function Rest() {
+  .service('api', function Rest($location) {
     var exports = {};
     // init the global app object
     var Ultimate = {};
@@ -3283,7 +3283,8 @@ angular.module('newBetaApp')
 
     function sendAnalyticsEvent(restEndpointName) {
       // NOTE: You can add another property for more detail
-      _gaq.push(['_trackEvent', Ultimate.isAdminSite ? 'WebRestRequest-Admin' : 'WebRestRequest', restEndpointName]);
+      if (_.contains($location.host().toLowerCase(), 'ultimate-numbers') || _.contains($location.host().toLowerCase(), 'ultianalytics'))
+        _gaq.push(['_trackEvent', Ultimate.isAdminSite ? 'WebRestRequest-Admin' : 'WebRestRequest', restEndpointName]);
     }
 
     function defaultError(e){
