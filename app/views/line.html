@@ -29,20 +29,20 @@
           <div class="widget-content">
             <div ng-repeat="lineView in lineViews" ng-class="'col-md-' + floor(12 / lineViews.length)" ng-click="selectLineView(lineView)">
               <ul class="chrome-style">
-                <li ng-class="{'chrome-style-selected': line === lineView.selectedLine}" ng-style="{maxWidth: 100 / _keys(lineView.lines).length + '%'}" ng-repeat="line in lineView.lines track by $index" ng-click="lineView.selectLine(line)">
+                <li ng-class="{'chrome-style-selected': line === lineView.selectedLine}" ng-style="{maxWidth: 100 / lineView.numberOfLines() + '%'}" ng-repeat="line in lineView.lines track by $index" ng-click="lineView.selectLine(line)">
                   <a class="chrome-tab-content">
                     <span>{{ line.players.join(', ') || 'No Data'}}</span>
-                    <i class="icon-remove" ng-click="lineView.removeLine(line)" ng-if="_keys(lineView.lines).length > 1"></i>
+                    <i class="icon-remove" ng-click="lineView.removeLine(line)" ng-if="lineView.numberOfLines() > 1"></i>
                    </a>
                 </li>
-                <li ng-click="lineView.addLine()"><i class="icon-plus"></i></li>
+                <li ng-click="lineView.addLine()" ng-if="lineView.numberOfLines() < 9"><i class="icon-plus"></i></li>
               </ul>
               <div class="row">
                 <div class="col-md-6">
-                  <div class="line-container" droppable on-drop="lineView.selectedAddPlayer" dragging="dragging">
+                  <div class="line-container" droppable on-drop="lineView.selectedAddPlayer" dragging="dragging" ng-class="{'selected':isSelectedLineView(lineView) && lineViews.length > 1}">
                     <div class="line-header">
-                      <h3 ng-show="!isSelectedLineView(lineView)">Players</h3>
-                      <h3 ng-show="isSelectedLineView(lineView)"><b>Selected</b></h3>
+                      <h3 ng-show="!(isSelectedLineView(lineView) && lineViews.length > 1)">Players</h3>
+                      <h3 ng-show="isSelectedLineView(lineView) && lineViews.length > 1"><b>Selected</b></h3>
                     </div>
                     <div class="line-players-list">
                       <div class="line-drop-box">
@@ -66,7 +66,7 @@
                 </div>
                 <div class="col-md-6" ng-if="lineView.selectedLine.players.length">
                 <p class="points-played-message">{{lineView.selectedLine.players | linePlayers}} <b>{{lineView.selectedLine.stats.numberOfPointsConsidered}} of {{lineView.selectedLine.stats.pointsPossible}}</b> posssible points.</p>
-                  <h3>Performance</h3>
+                  <h3 class="centered">Performance</h3>
                   <table class="table">
                     <tr>
                       <th></th>
@@ -82,12 +82,13 @@
                 </div>
               </div>
               <div class="row line-stats" ng-if="lineView.selectedLine.players.length">
-                <div class="col-md-4" ng-if="_keys(lineView.selectedLine.stats.connectionStats).length">
-                  <h3>
+                <div class="col-md-4" ng-if="lineView.selectedLine.stats.connectionStats">
+                  <h3 class="centered">
                     <span>Connections</span>
                     <explanation key="'connectionsTable'"></explanation>
                   </h3>
-                  <table class="table">
+                  <p ng-if="lineView.selectedLine.stats.connectionStats === 'none'">No connections made.</p>
+                  <table class="table" ng-if="lineView.selectedLine.stats.connectionStats !== 'none'">
                     <tbody ng-repeat="(players, outcomes) in lineView.selectedLine.stats.connectionStats">
                       <tr>
                         <th>{{players}}</th>
@@ -101,7 +102,7 @@
                   </table>
                 </div>
                 <div class="col-md-8">
-                  <h3>
+                  <h3 class="centered">
                     <span>Player Performance</span>
                     <explanation key="'playerCombinationsChart'"></explanation>
                   </h3>

@@ -342,6 +342,9 @@ Assigned to:	You
   margin-left: 13px;
   margin-right: 13px;
 }
+.selected .line-drop-box {
+  box-shadow: inset 0 0 6px rgb(255, 153, 0);
+}
 .line-close-button {
   float: right;
   margin: 2px;
@@ -766,7 +769,7 @@ div[ng-view]{
   right: 2px;
 }
 .bubble-pie {
-  margin-top: 50px;
+  margin-top: 85px;
 }
 .points-played-message {
   text-align: center;

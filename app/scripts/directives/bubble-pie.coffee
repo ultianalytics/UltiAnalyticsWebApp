@@ -28,7 +28,8 @@ angular.module('newBetaApp')
           .attr('class', 'bubble-pie')
 
         pie = d3.layout.pie()
-          .value (d)-> d.value
+          .value (d)->
+            d.value
 
         bubble = d3.layout.pack()
           .sort(null)
@@ -68,6 +69,8 @@ angular.module('newBetaApp')
           arcs.append("svg:path")
             .attr "fill", (d, i)->
               tempColor = color(i)
+              if _.isNaN(d.endAngle) then d.endAngle = 0
+              if _.isNaN(d.startAngle) then d.startAngle = 0
               unless d.data.label is 'Catch' then scope.colorMap[d.data.label] = tempColor
               tempColor
             .attr( "d", arc )
