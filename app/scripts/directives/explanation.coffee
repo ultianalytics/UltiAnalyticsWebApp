@@ -12,13 +12,14 @@ angular.module('newBetaApp')
 
       element.parent().on 'mouseenter', (event)->
           scope.$apply ->
-            scope.showPrompt = not scope.shouldShowToolTip and !!description
+            scope.showPrompt = not scope.shouldShowToolTip
 
       element.parent().on 'mouseleave', ->
         scope.$apply ->
           scope.showPrompt = false
 
       description = calculationExplanations[scope.key]?.explanations[0].description
+      scope.hasDescription = !!description
       scope.explanation = $sce.trustAsHtml( description or 'Ask us personally about this one if you\'d like.' )
 
       scope.showTooltip = ->
