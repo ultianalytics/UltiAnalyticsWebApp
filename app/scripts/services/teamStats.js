@@ -85,8 +85,10 @@ angular.module('newBetaApp')
       },
       getWindEfficiency: function(games){
         var pointsIndexedByWind = _.reduce(games, function(memo, game){
-          memo[game.wind.mph] = memo[game.wind.mph] || [];
-          memo[game.wind.mph] = memo[game.wind.mph].concat(game.points);
+          if (game.wind){
+            memo[game.wind.mph] = memo[game.wind.mph] || [];
+            memo[game.wind.mph] = memo[game.wind.mph].concat(game.points);
+          }
           return memo;
         } , {})
         var _this = this
@@ -101,6 +103,7 @@ angular.module('newBetaApp')
           }, [])
           return result;
         }, {});
+        if ( !results.us.length ) return false;
         return results;
       },
       getProductivity: function(points, lineType, isOpponent){
