@@ -281,7 +281,7 @@ angular.module('newBetaApp')
       }
       if (request.isPost) {
         options.type = 'POST';
-        options.contentType = 'application / json';
+        options.contentType = 'application/json';
       }
       if (request.data) {
         options.data = request.data;
