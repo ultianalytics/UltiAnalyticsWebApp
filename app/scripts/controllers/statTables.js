@@ -24,7 +24,7 @@ angular.module('newBetaApp')
         statTypes: ['goals','catches','touches','drops','catchingPercentage']
       }, {
         name: 'Playing Time',
-        statTypes: ['gamesPlayed','pointsPlayed','timePlayedMinutes', 'oPoints', 'dPoints']
+        statTypes: ['gamesPlayed','pointsPlayed','minutesPlayed', 'oPoints', 'dPoints']
       }, {
         name: 'Defense',
         statTypes: ['ds','pulls','callahans','averagePullHangtime','oBPulls',]

@@ -170,7 +170,7 @@ angular.module('newBetaApp')
       stats.pulls = statSum(stats, ['oBPulls', 'iBPulls']);
       stats.touches = statSum(stats, ['completions', 'throwaways', 'goals','passesDropped']);
       stats.plusMinus = statSum(stats, ['oPlusMinus', 'dPlusMinus']);
-      stats.timePlayedMinutes = Math.round(stats.timePlayed / 60);
+      stats.minutesPlayed = Math.round(stats.timePlayed / 60);
       stats.averagePullHangtime = stats.pullHangtime  / stats.hungPulls;
       stats.oEfficiency = stats.oEfficiencyPoints / stats.oPoints;
       stats.dEfficiency = stats.dEfficiencyPoints / stats.dPoints;

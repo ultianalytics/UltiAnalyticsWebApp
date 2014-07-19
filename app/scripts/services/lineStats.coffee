@@ -129,8 +129,8 @@ angular.module('newBetaApp')
           teamStats:
             conversionRate: "#{teamStats.getConversionRate consideredPoints, pointSpread.ours}%"
             pointSpread: "#{pointSpread.ours or 0} - #{pointSpread.theirs or 0}"
-            offensiveProduction: "#{teamStats.getProductivity(consideredPoints, 'Offense') or 'NA'}%"
-            defensiveProduction: "#{teamStats.getProductivity(consideredPoints, 'Defense') or 'NA'}%"
+            oProductivity: "#{teamStats.getProductivity(consideredPoints, 'Offense') or 'NA'}%"
+            dProductivity: "#{teamStats.getProductivity(consideredPoints, 'Defense') or 'NA'}%"
           connectionStats: getConnectionStats consideredPoints, players
           bubbleStats: getBubbleMapStats consideredPoints, players
           datafulPlayers: getDatafulPlayers consideredPoints, players
@@ -142,8 +142,8 @@ angular.module('newBetaApp')
 
         conversionRate: "#{teamStats.getConversionRate consideredPoints, pointSpread.ours}%"
         pointSpread: "#{pointSpread.ours or 0} - #{pointSpread.theirs or 0}"
-        offensiveProduction: "#{teamStats.getProductivity(consideredPoints, 'Offense') or 'NA'}%"
-        defensiveProduction: "#{teamStats.getProductivity(consideredPoints, 'Defense') or 'NA'}%"
+        oProductivity: "#{teamStats.getProductivity(consideredPoints, 'Offense') or 'NA'}%"
+        dProductivity: "#{teamStats.getProductivity(consideredPoints, 'Defense') or 'NA'}%"
 
     deferred.promise
 ]

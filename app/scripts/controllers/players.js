@@ -40,7 +40,7 @@ angular.module('newBetaApp')
       },
       pointsPlayed: {
         category: 'Playing Time',
-        stats: ['oPoints','dPoints','timePlayedMinutes']
+        stats: ['oPoints','dPoints','minutesPlayed']
       }
     };
     function render() {
