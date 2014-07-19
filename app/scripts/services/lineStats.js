@@ -31,6 +31,9 @@
       };
       getConnectionStats = function(points, players) {
         var combinations;
+        if (players.length < 2) {
+          return false;
+        }
         combinations = {};
         _.each(points, function(point) {
           return _.each(point.events, function(event) {
@@ -47,6 +50,9 @@
             }
           });
         });
+        if (_.keys(combinations).length === 0) {
+          return 'none';
+        }
         return combinations;
       };
       getPointSpread = function(points) {
@@ -177,8 +183,8 @@
             teamStats: {
               conversionRate: "" + (teamStats.getConversionRate(consideredPoints, pointSpread.ours)) + "%",
               pointSpread: "" + (pointSpread.ours || 0) + " - " + (pointSpread.theirs || 0),
-              offensiveProduction: "" + (teamStats.getProductivity(consideredPoints, 'Offense') || 'NA') + "%",
-              defensiveProduction: "" + (teamStats.getProductivity(consideredPoints, 'Defense') || 'NA') + "%"
+              oProductivity: "" + (teamStats.getProductivity(consideredPoints, 'Offense') || 'NA') + "%",
+              dProductivity: "" + (teamStats.getProductivity(consideredPoints, 'Defense') || 'NA') + "%"
             },
             connectionStats: getConnectionStats(consideredPoints, players),
             bubbleStats: getBubbleMapStats(consideredPoints, players),
@@ -193,8 +199,8 @@
           return {
             conversionRate: "" + (teamStats.getConversionRate(consideredPoints, pointSpread.ours)) + "%",
             pointSpread: "" + (pointSpread.ours || 0) + " - " + (pointSpread.theirs || 0),
-            offensiveProduction: "" + (teamStats.getProductivity(consideredPoints, 'Offense') || 'NA') + "%",
-            defensiveProduction: "" + (teamStats.getProductivity(consideredPoints, 'Defense') || 'NA') + "%"
+            oProductivity: "" + (teamStats.getProductivity(consideredPoints, 'Offense') || 'NA') + "%",
+            dProductivity: "" + (teamStats.getProductivity(consideredPoints, 'Defense') || 'NA') + "%"
           };
         }
       };

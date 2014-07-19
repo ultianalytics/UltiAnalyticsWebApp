@@ -30,6 +30,10 @@
         return this.selectedLine.addPlayer(player);
       };
 
+      LineView.prototype.numberOfLines = function() {
+        return _.keys(this.lines).length;
+      };
+
       return LineView;
 
     })();

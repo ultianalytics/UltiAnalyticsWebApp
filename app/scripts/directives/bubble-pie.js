@@ -51,7 +51,15 @@
             arcs.append("svg:path").attr("fill", function(d, i) {
               var tempColor;
               tempColor = color(i);
-              scope.colorMap[d.data.label] = tempColor;
+              if (_.isNaN(d.endAngle)) {
+                d.endAngle = 0;
+              }
+              if (_.isNaN(d.startAngle)) {
+                d.startAngle = 0;
+              }
+              if (d.data.label !== 'Catch') {
+                scope.colorMap[d.data.label] = tempColor;
+              }
               return tempColor;
             }).attr("d", arc);
             return arcs.append("title").text(function(d, i) {
