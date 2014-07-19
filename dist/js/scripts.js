@@ -363,7 +363,7 @@ angular.module('newBetaApp')
       },
       pointsPlayed: {
         category: 'Playing Time',
-        stats: ['oPoints','dPoints','timePlayedMinutes']
+        stats: ['oPoints','dPoints','minutesPlayed']
       }
     };
     function render() {
@@ -396,7 +396,7 @@ angular.module('newBetaApp')
         statTypes: ['goals','catches','touches','drops','catchingPercentage']
       }, {
         name: 'Playing Time',
-        statTypes: ['gamesPlayed','pointsPlayed','timePlayedMinutes', 'oPoints', 'dPoints']
+        statTypes: ['gamesPlayed','pointsPlayed','minutesPlayed', 'oPoints', 'dPoints']
       }, {
         name: 'Defense',
         statTypes: ['ds','pulls','callahans','averagePullHangtime','oBPulls',]
@@ -2371,7 +2371,7 @@ angular.module('newBetaApp')
       stats.pulls = statSum(stats, ['oBPulls', 'iBPulls']);
       stats.touches = statSum(stats, ['completions', 'throwaways', 'goals','passesDropped']);
       stats.plusMinus = statSum(stats, ['oPlusMinus', 'dPlusMinus']);
-      stats.timePlayedMinutes = Math.round(stats.timePlayed / 60);
+      stats.minutesPlayed = Math.round(stats.timePlayed / 60);
       stats.averagePullHangtime = stats.pullHangtime  / stats.hungPulls;
       stats.oEfficiency = stats.oEfficiencyPoints / stats.oPoints;
       stats.dEfficiency = stats.dEfficiencyPoints / stats.dPoints;
@@ -2593,7 +2593,6 @@ angular.module('newBetaApp')
         var considerablePoints = _.reduce(games, function(points, game){
           return points.concat(game.points);
         }, []);
-
         results.record = this.getRecord(games);
         results.pointSpread = this.getPointSpread(games);
         results.offensiveProductivity = this.getProductivity(considerablePoints, 'Offense');
@@ -2601,10 +2600,33 @@ angular.module('newBetaApp')
         results.throwsPerPossession = this.getThrowsPerPossession(considerablePoints);
         results.pointSummary = this.getPointSummary(considerablePoints);
         results.assistMap = this.getAssistMap(considerablePoints);
-
+        results.windEfficiency = this.getWindEfficiency(games, results.pointSpread.ours);
         return results;
       },
-      getProductivity: function(points, lineType){
+      getWindEfficiency: function(games){
+        var pointsIndexedByWind = _.reduce(games, function(memo, game){
+          if (game.wind){
+            memo[game.wind.mph] = memo[game.wind.mph] || [];
+            memo[game.wind.mph] = memo[game.wind.mph].concat(game.points);
+          }
+          return memo;
+        } , {})
+        var _this = this
+        var results = _.reduce(['us', 'them'], function(result, team){
+          result[team] = _.reduce(pointsIndexedByWind, function(memo, points, windSpeed){
+            var pointSummary = _this.getPointSummary(points)
+            memo.push({
+              x:windSpeed,
+              y:_this.getConversionRate(points, pointSummary[team].defense + pointSummary[team].offense )
+            });
+            return memo;
+          }, [])
+          return result;
+        }, {});
+        if ( !results.us.length ) return false;
+        return results;
+      },
+      getProductivity: function(points, lineType, isOpponent){
         var offensiveOpps = 0;
         var offensiveConversions = 0;
         _(points).each(function(point) {
@@ -3036,7 +3058,7 @@ angular.module('newBetaApp')
       }
       if (request.isPost) {
         options.type = 'POST';
-        options.contentType = 'application / json';
+        options.contentType = 'application/json';
       }
       if (request.data) {
         options.data = request.data;
