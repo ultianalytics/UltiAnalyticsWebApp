@@ -24,7 +24,7 @@ angular.module('newBetaApp')
                   bottom: 6,
                   left: 1
                 };
-                var width = element[0].offsetWidth * .95;
+                var width = $(element.parent()).width() * .95;
                 var height = width;
 
                 var formatNumber = d3.format(',.0f');
