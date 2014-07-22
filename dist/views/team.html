@@ -5,7 +5,7 @@
   <div nav-bar page="'team'"></div>
   <feedback></feedback>
   <div loading="loading" style="text-align:center;"></div>
-  <div class="main fade-in" ng-if="!loading" >
+  <div class="main fade-in" ng-if="!loading">
     <div class="container">
       <div class="row">
         <stat-filter></stat-filter>
@@ -15,31 +15,36 @@
               <div id="big_stats" class="cf" style="padding: 5px;y">
                 <div class="stat">
                   <h4>Record
-                    <explanation key="'record'"></explanation>
+                  <explanation key="'record'"></explanation>
                   </h4>
                   <span class="value">{{teamStats.record.wins}} - {{teamStats.record.losses}}</span>
-                </div> <!-- .stat -->
+                </div>
+                <!-- .stat -->
                 <div class="stat">
                   <h4>Point Spread
-                    <explanation key="'pointSpread'"></explanation>
+                  <explanation key="'pointSpread'"></explanation>
                   </h4>
                   <span class="value">{{teamStats.pointSpread.ours}} - {{teamStats.pointSpread.theirs}}</span>
-                </div> <!-- .stat -->
+                </div>
+                <!-- .stat -->
                 <div class="stat">
                   <h4>Offensive Productivity
-                    <explanation key="'oProductivity'"></explanation>
+                  <explanation key="'oProductivity'"></explanation>
                   </h4>
                   <span class="value">{{teamStats.offensiveProductivity}}%</span>
-                </div> <!-- .stat -->
+                </div>
+                <!-- .stat -->
                 <div class="stat">
                   <h4>Conversion Rate
-                    <explanation key="'conversionRate'"></explanation>
+                  <explanation key="'conversionRate'"></explanation>
                   </h4>
                   <span class="value">{{teamStats.conversionRate}}%</span>
-                </div> <!-- .stat -->
+                </div>
+                <!-- .stat -->
               </div>
             </div>
-          </div> <!-- /widget-content -->
+          </div>
+          <!-- /widget-content -->
         </div>
       </div>
       <div class="row">
@@ -48,9 +53,10 @@
             <div class="widget-header">
               <span class="icon-list-alt"></span>
               <h3>Passes per Posession
-                <explanation key="'passesPerPosessionChart'"></explanation>
+              <explanation key="'passesPerPosessionChart'"></explanation>
               </h3>
-            </div> <!-- .widget-header -->
+            </div>
+            <!-- .widget-header -->
             <div class="widget-content points-per-break">
               <div class="pie-chart-container">
                 <h3>Score</h3>
@@ -68,8 +74,8 @@
             <div class="widget-header">
               <span class="icon-list-alt"></span>
               <h3>
-                <span>Points per Line</span>
-                <explanation key="'pointsPerLineChart'"></explanation>
+              <span>Points per Line</span>
+              <explanation key="'pointsPerLineChart'"></explanation>
               </h3>
             </div>
             <div class="widget-content points-per-break">
@@ -85,7 +91,7 @@
           </div>
         </div>
       </div>
-      <div class="row"  ng-if="teamStats.windEfficiency">
+      <div class="row" ng-if="teamStats.windEfficiency">
         <div class="col-md-6">
           <div class="widget stacked">
             <div class="widget-header">
@@ -93,35 +99,47 @@
               <h3>Wind Efficiency</h3>
             </div>
             <div class="widget-content">
-              <line-chart lines="teamStats.windEfficiency"></line-chart>
-            </div>
+            <line-chart lines="teamStats.windEfficiency"></line-chart>
           </div>
         </div>
       </div>
-        <div class="row" ng-if="!isMobile">
-          <div class="col-md-12">
-            <div class="widget stacked widget-table">
-              <div class="widget-header">
-                <span class="icon-list-alt"></span>
-                <h3>Assists to Goals
-                  <explanation key="'assistsToGoalsChart'"></explanation>
-                </h3>
-              </div> <!-- .widget-header -->
-              <div class="widget-content points-per-break">
-                <div class="flow-map-pointers">
-                  <div class="flow-map-pointer"><span>Hockey Assists</span><explanation key="'hockeyAssist'"></explanation></div>
-                  <div><img src="images/right-arrow.png"></div>
-                  <div class="flow-map-pointer"><span>Assists</span></div>
-                  <div><img src="images/right-arrow.png"></div>
-                  <div class="flow-map-pointer"><span>Goals!</span></div>
-                </div>
-                <flow-chart dataset="teamStats.assistMap" width="960"></flow-chart>
+    </div>
+    <div class="row" ng-if="!isMobile">
+      <div class="col-md-12">
+        <div class="widget stacked widget-table">
+          <div class="widget-header">
+            <span class="icon-list-alt"></span>
+            <h3>Assists to Goals
+            <explanation key="'assistsToGoalsChart'"></explanation>
+            </h3>
+          </div>
+          <!-- .widget-header -->
+          <div class="widget-content points-per-break">
+            <div class="flow-map-pointers">
+              <div class="flow-map-pointer">
+                <span>Hockey Assists</span>
+                <explanation key="'hockeyAssist'"></explanation>
+              </div>
+              <div>
+                <img src="images/right-arrow.png">
+              </div>
+              <div class="flow-map-pointer">
+                <span>Assists</span>
+              </div>
+              <div>
+                <img src="images/right-arrow.png">
+              </div>
+              <div class="flow-map-pointer">
+                <span>Goals!</span>
               </div>
             </div>
+            <flow-chart dataset="teamStats.assistMap"></flow-chart>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+</div>
 </div>
 <footer></footer>
