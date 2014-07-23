@@ -8,7 +8,9 @@ angular.module('newBetaApp')
       factor = if reverse then 1 else -1
       copy.sort (playerA, playerB)->
         if type isnt 'name'
-          diff = playerA.stats[type] - playerB.stats[type]
+          statA = if _.isNaN(playerA.stats[type]) then -9999999 else playerA.stats[type]
+          statB = if _.isNaN(playerB.stats[type]) then -9999999 else playerB.stats[type]
+          diff = statA - statB
           diff * factor
         else
           nameToSortA = $rootScope.getName(playerA.name, 'last') or $rootScope.getName(playerA.name, 'first')
