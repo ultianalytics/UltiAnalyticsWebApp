@@ -1574,9 +1574,11 @@ angular.module('newBetaApp')
       copy = _.clone(input);
       factor = reverse ? 1 : -1;
       return copy.sort(function(playerA, playerB) {
-        var diff, nameToSortA, nameToSortB;
+        var diff, nameToSortA, nameToSortB, statA, statB;
         if (type !== 'name') {
-          diff = playerA.stats[type] - playerB.stats[type];
+          statA = _.isNaN(playerA.stats[type]) ? -9999999 : playerA.stats[type];
+          statB = _.isNaN(playerB.stats[type]) ? -9999999 : playerB.stats[type];
+          diff = statA - statB;
           return diff * factor;
         } else {
           nameToSortA = $rootScope.getName(playerA.name, 'last') || $rootScope.getName(playerA.name, 'first');
