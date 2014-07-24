@@ -13,11 +13,16 @@ angular.module('newBetaApp')
             scope.svg = d3.select(element.children()[0]);
           },
           post: function (scope, element) {
+            $(window).resize(function(){
+              render();
+            });
+
             scope.$watch('dataset', function(newVal, oldVal) {
+              render();
+            });
+            function render(){
               if (scope.dataset){
-                if (newVal && oldVal){
-                  element.contents().empty();
-                }
+                element.contents().empty();
                 var margin = {
                   top: 1,
                   right: 1,
@@ -26,6 +31,11 @@ angular.module('newBetaApp')
                 };
                 var width = $(element.parent()).width() * .95;
                 var height = width;
+
+                if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement){
+                  width = $(window).width() - 80;
+                  height = $(window).height() - 80;
+                }
 
                 var formatNumber = d3.format(',.0f');
                 var format = function(d) {
@@ -122,7 +132,7 @@ angular.module('newBetaApp')
                   link.attr('d', path);
                 }
               }
-            });
+            }
           }
         };
       }

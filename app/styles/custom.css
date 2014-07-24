@@ -797,3 +797,6 @@ div[ng-view]{
   stroke: steelblue;
   stroke-width: 1.5px;
 }
+.widget .widget-header .header-icon-container > i {
+  margin-right: 10px;
+}
