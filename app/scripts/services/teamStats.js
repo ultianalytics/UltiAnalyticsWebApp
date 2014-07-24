@@ -3,12 +3,14 @@
 'use strict';
 
 angular.module('newBetaApp')
-  .factory('teamStats', ['$q', '$routeParams', '$rootScope', 'filter', 'api', 'allGames',function($q, $routeParams, $rootScope, filter, api, allGames) {
+  .factory('teamStats', ['$q', '$routeParams', '$rootScope', 'filter', 'api', 'allGames','teamName',function($q, $routeParams, $rootScope, filter, api, allGames, teamName) {
     var deferred = $q.defer();
     var statsMap = {};
     var collection = 0;
     var goal;
-    allGames.then(function(games) {
+    $q.all([allGames, teamName]).then(function(response) {
+      var games = response[0]
+      teamName = response[1]
       goal = _.keys(games).length;
       _.each(games, function(game, id) {
         api.retrieveTeamStatsForGames($routeParams.teamId, [id],
@@ -84,6 +86,10 @@ angular.module('newBetaApp')
         return results;
       },
       getWindEfficiency: function(games){
+        var teamLookup = {
+          us: teamName,
+          them: 'Opponents'
+        }
         var pointsIndexedByWind = _.reduce(games, function(memo, game){
           if (game.wind){
             memo[game.wind.mph] = memo[game.wind.mph] || [];
@@ -93,7 +99,7 @@ angular.module('newBetaApp')
         } , {})
         var _this = this
         var results = _.reduce(['us', 'them'], function(result, team){
-          result[team] = _.reduce(pointsIndexedByWind, function(memo, points, windSpeed){
+          result[teamLookup[team]] = _.reduce(pointsIndexedByWind, function(memo, points, windSpeed){
             var pointSummary = _this.getPointSummary(points)
             memo.push({
               x:windSpeed,
@@ -103,7 +109,7 @@ angular.module('newBetaApp')
           }, [])
           return result;
         }, {});
-        if ( !results.us.length ) return false;
+        if ( !results[teamLookup.us].length ) return false;
         return results;
       },
       getProductivity: function(points, lineType, isOpponent){
