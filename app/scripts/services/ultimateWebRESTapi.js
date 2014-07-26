@@ -19,6 +19,30 @@ angular.module('newBetaApp')
     // make sure we use the host from where we were loaded to prevent CORS from being used unnecessarily
     Ultimate.sessionId = new Date().getTime() + '';
 
+    exports.retrieveState = function(teamId, stateId, stateType, successFunction, errorFunction) {
+      sendAnalyticsEvent('retrieveState');
+      var url = Ultimate.baseRestUrl + '/team/' + teamId + '/state/' + stateType + '/' + stateId;
+      sendRequest({
+        url: url,
+        dataType: 'json',
+        success: successFunction,
+        error: errorFunction || defaultError
+      });
+    };
+
+    exports.saveState = function(teamId, stateType, data, successFunction, errorFunction) {
+      sendAnalyticsEvent('saveState');
+      var url = Ultimate.baseRestUrl + '/team/' + teamId + '/state/' + stateType;
+      sendRequest({
+        url: url,
+        dataType: 'json',
+        isPost: true,
+        data: data,
+        success: successFunction,
+        error: errorFunction || defaultError
+      });
+    };
+
     exports.retrieveTeam = function(id, includePlayers, successFunction, errorFunction) {
       sendAnalyticsEvent('retrieveTeam');
       var url = Ultimate.baseRestUrl + '/team/' + id;

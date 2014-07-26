@@ -16,7 +16,6 @@ angular.module('newBetaApp')
     scope.selectedLineView = _.first scope.lineViews
 
     $q.all([lineStats, team]).then (response)->
-      filter.includeAll();
       team = response[1]
       lineStats = response[0]
       $scope.players = _.pluck team.players, 'name'

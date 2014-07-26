@@ -25,12 +25,12 @@ angular.module('newBetaApp')
             'Calculating Game Statistics...',
             'Calculating Player Statistics...',
             'Calculating Other Data...',
-            'Whoa...a long time has passed.  Try refreshing the page.'
+            'Whoa... a long time has passed. Try refreshing the page.'
           ];
           message = messages[0];
         }
         element.prepend('<span class="9827345987"><b id="87654">'+message+'</b><br><img width="30" src="images/ajax-loader.gif"></span>');
-                scope.$watch('loading', function(newVal){
+        scope.$watch('loading', function(newVal){
           _.each(element.children(), function(node){
             node.hidden = (node.classList.contains('9827345987') && !newVal) || (!node.classList.contains('9827345987') && newVal);
           });
