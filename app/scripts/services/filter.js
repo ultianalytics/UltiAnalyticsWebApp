@@ -33,7 +33,7 @@ angular.module('newBetaApp')
         else {exclude(games);}
       },
       contains: function(game){
-        return _.chain(includedGames).pluck('gameId').contains(game.gameId).value();
+        return _(includedGames).contains(game);
       }
     };
   }]);
