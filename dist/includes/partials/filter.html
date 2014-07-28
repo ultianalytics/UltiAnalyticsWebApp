@@ -30,12 +30,12 @@
             <span class="btn btn-primary" ng-click="filter.onlyInclude([])" style="float:right;">Deselect All</span>
           </div>
           <div ng-repeat="games in orderedTournaments track by $index">
-            <input type="checkbox" checkbox watch="allIncluded(games)" ng-click="toggleAll(games, !allIncluded(games))">
+            <input type="checkbox" ng-checked="allIncluded(games)" ng-click="toggleAll(games, !allIncluded(games))">
             <h4 style="display:inline-block; margin: 10px 0 5px 10px">{{games[0].tournamentName}}</h4>
             <div ng-class="{'disable-games': allIncluded(games)}">
               <div class="games-under-tournaments" style="margin-left:20px;">
                 <div ng-repeat="game in games">
-                  <input type="checkbox" checkbox watch="isIncluded(game)" ng-disabled="allIncluded(games)" ng-click="toggleSelect(game)">
+                  <input type="checkbox" ng-checked="isIncluded(game)" ng-disabled="allIncluded(games)" ng-click="toggleSelect(game)">
                   <span style="display:inline-block; margin-left:10px;">{{game.opponentName}}</span>
                   <span style="float:right;">({{game.msSinceEpoch | date}})</span>
                 </div>

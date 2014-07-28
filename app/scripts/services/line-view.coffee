@@ -6,15 +6,19 @@ angular.module('newBetaApp')
       constructor: ->
         @selectedLine = null
         @lines = {}
-      addLine: ->
+      addLine: (silent)->
         line = new Line
-        @lines[line.id] = @selectedLine = line
+        @lines[line.id] = line
+        unless silent then @selectedLine = line
+        line
       removeLine: (line)->
         delete @lines[line.id]
       selectLine: (line)->
         @selectedLine = line
+      isSelectedLine: (line)->
+        @selectedLine is line
       selectedAddPlayer: (player)=>
-        @selectedLine.addPlayer player
+        @selectedLine.addPlayers player
       numberOfLines: ->
         _.keys(@lines).length
     LineView

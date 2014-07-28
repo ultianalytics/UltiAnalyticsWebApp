@@ -12,7 +12,7 @@ angular.module('newBetaApp', [
         return Authorization.ping($location.url().match(/^\/\d+/)[0].slice(1));
       }
       function logRoute($location){
-        if (_.contains($location.host().toLowerCase(), 'ultimate-numbers') || _.contains($location.host().toLowerCase(), 'ultianalytics')){
+        if (typeof _gaq !== 'undefined' && _gaq.push){
           var pageRoute = $location.url().replace(/\/\d+\//, '').match(/\w+/)[0];
           _gaq.push(['_trackPageview', pageRoute.slice(0,1).toUpperCase() + pageRoute.slice(1)]);
         }
@@ -27,6 +27,7 @@ angular.module('newBetaApp', [
         .when('/:teamId/line', {templateUrl: 'views/line.html', controller: 'LineCtrl', resolve: {authorized: checkAuth, ga: logRoute}})
         .when('/:teamId/games', {templateUrl: 'views/games.html', controller: 'GamesCtrl', resolve: {authorized: checkAuth, ga: logRoute}})
         .when('/:teamId/player/:playerNameUri', {templateUrl: 'views/player.html', controller: 'PlayerCtrl', resolve: { authorized: checkAuth, ga: logRoute}})
+        .when('/:teamId/share/:stateType/:stateId', {templateUrl: 'views/state-loading.html', controller: 'ShareCtrl', resolve: { authorized: checkAuth, ga: logRoute}})
         .when('/404', {templateUrl: 'views/404.html', controller: '404Ctrl'})
         .otherwise({redirectTo: '/404'});
     }
