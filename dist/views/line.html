@@ -18,6 +18,8 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="row">
         <div class="widget stacked widget-table col-md-12">
           <div class="widget-header">
             <span class="icon-list-alt"></span>
@@ -33,16 +35,18 @@
                   <a class="chrome-tab-content">
                     <span>{{ line.players.join(', ') || 'No Data'}}</span>
                     <i class="icon-remove" ng-click="lineView.removeLine(line)" ng-if="lineView.numberOfLines() > 1"></i>
-                   </a>
+                  </a>
                 </li>
-                <li ng-click="lineView.addLine()" ng-if="lineView.numberOfLines() < 9"><i class="icon-plus"></i></li>
+                <li ng-click="lineView.addLine()" ng-if="lineView.numberOfLines() < 9"><i class="icon-plus"></i>
+                </li>
               </ul>
               <div class="row">
                 <div class="col-md-6">
                   <div class="line-container" droppable on-drop="lineView.selectedAddPlayer" dragging="dragging" ng-class="{'selected':isSelectedLineView(lineView) && lineViews.length > 1}">
                     <div class="line-header">
                       <h3 ng-show="!(isSelectedLineView(lineView) && lineViews.length > 1)">Players</h3>
-                      <h3 ng-show="isSelectedLineView(lineView) && lineViews.length > 1"><b>Selected</b></h3>
+                      <h3 ng-show="isSelectedLineView(lineView) && lineViews.length > 1"><b>Selected</b>
+                      </h3>
                     </div>
                     <div class="line-players-list">
                       <div class="line-drop-box">
@@ -54,8 +58,8 @@
                           </div>
                           <div ng-if="!lineView.selectedLine.players.length" style="text-align:center;">
                             <span class="drag-line-text">
-                              <span>Drag </span>
-                              <span ng-if="isSelectedLineView(lineView)">or click </span>
+                              <span>Drag</span>
+                              <span ng-if="isSelectedLineView(lineView)">or click</span>
                               <span>a player onto the line!</span>
                             </span>
                           </div>
@@ -65,7 +69,7 @@
                   </div>
                 </div>
                 <div class="col-md-6" ng-if="lineView.selectedLine.players.length">
-                <p class="points-played-message">{{lineView.selectedLine.players | linePlayers}} <b>{{lineView.selectedLine.stats.numberOfPointsConsidered}} of {{lineView.selectedLine.stats.pointsPossible}}</b> posssible points.</p>
+                  <p class="points-played-message">{{lineView.selectedLine.players | linePlayers}} <b>{{lineView.selectedLine.stats.numberOfPointsConsidered}} of {{lineView.selectedLine.stats.pointsPossible}}</b> posssible points.</p>
                   <h3 class="centered">Performance</h3>
                   <table class="table">
                     <tr>
@@ -112,6 +116,7 @@
                   <bubble-pie class="bubble-pie" data="lineView.selectedLine.stats.bubbleStats"></bubble-pie>
                 </div>
               </div>
+            </div>
           </div>
         </div>
       </div>

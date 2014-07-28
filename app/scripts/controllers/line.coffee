@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('newBetaApp')
-  .controller 'LineCtrl', ['$scope', '$q', 'team','lineStats','LineView', 'filter', 'viewer', ($scope, $q, team, lineStats, LineView, filter, viewer) ->
+  .controller 'LineCtrl', ['$scope', '$q', 'team','lineStats','LineView', 'filter', 'viewer','savedState', ($scope, $q, team, lineStats, LineView, filter, viewer, savedState) ->
     scope = $scope
     scope.dragging
     scope.includedGames = filter.included
@@ -11,17 +11,21 @@ angular.module('newBetaApp')
 
     scope.lineViews.push new LineView
     if viewer.isLargeScreen() then scope.lineViews.push new LineView
-    _.each scope.lineViews, (lineView)->
-      lineView.addLine()
     scope.selectedLineView = _.first scope.lineViews
 
     $q.all([lineStats, team]).then (response)->
       team = response[1]
       lineStats = response[0]
+      savedState = savedState.getOnce()
       $scope.players = _.pluck team.players, 'name'
-      $scope.loading = false
       $scope.teamStats = lineStats.getForTeam()
-      scope.selectedLineView.selectedLine.updateStats()
+      if savedState.lines
+        setFromSaved savedState.lines
+      else
+        _.each scope.lineViews, (lineView)->
+          lineView.addLine()
+      $scope.loading = false
+
     # update the lines on filter change
     scope.$watchCollection 'includedGames', (update, old)->
       if update and lineStats.getStats
@@ -33,7 +37,7 @@ angular.module('newBetaApp')
       scope.dragging = player
 
     scope.addPlayerToSelected = (player)->
-      scope.selectedLineView.selectedLine.addPlayer(player)
+      scope.selectedLineView.selectedLine.addPlayers player
 
     scope.isSelectedLineView = (lineView)->
       scope.selectedLineView is lineView
@@ -45,5 +49,27 @@ angular.module('newBetaApp')
     scope._contains = _.contains
     scope.isNumber = (item)->
       typeof(item) is 'number'
+
     scope.floor = Math.floor
+
+    scope.getSharedData = ->
+      data = scope.$parent.getSharedData()
+      data.lines = []
+      _.each scope.lineViews, (view, lvIndex)->
+        _.each view.lines, (line)->
+          console.log line.getPlayers()
+          data.lines.push
+            players: line.getPlayers()
+            index: lvIndex
+            isSelected: view.isSelectedLine (line)
+      data
+
+
+    setFromSaved = (lineObjects)->
+      _.each lineObjects, (lineObj)->
+        appropriateLineView = $scope.lineViews[lineObj.index % $scope.lineViews.length]
+        line = appropriateLineView.addLine true
+        line.addPlayers lineObj.players
+        if lineObj.isSelected then appropriateLineView.selectLine line
+
 ]

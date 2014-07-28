@@ -12,7 +12,7 @@ angular.module('newBetaApp', [
         return Authorization.ping($location.url().match(/^\/\d+/)[0].slice(1));
       }
       function logRoute($location){
-        if (_.contains($location.host().toLowerCase(), 'ultimate-numbers') || _.contains($location.host().toLowerCase(), 'ultianalytics')){
+        if (typeof _gaq !== 'undefined' && _gaq.push){
           var pageRoute = $location.url().replace(/\/\d+\//, '').match(/\w+/)[0];
           _gaq.push(['_trackPageview', pageRoute.slice(0,1).toUpperCase() + pageRoute.slice(1)]);
         }

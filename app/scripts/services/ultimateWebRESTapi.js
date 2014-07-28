@@ -556,7 +556,7 @@ angular.module('newBetaApp')
 
     function sendAnalyticsEvent(restEndpointName) {
       // NOTE: You can add another property for more detail
-      if (_.contains($location.host().toLowerCase(), 'ultimate-numbers') || _.contains($location.host().toLowerCase(), 'ultianalytics'))
+      if (typeof(_gaq) !== 'undefined' && _gaq.push)
         _gaq.push(['_trackEvent', Ultimate.isAdminSite ? 'WebRestRequest-Admin' : 'WebRestRequest', restEndpointName]);
     }
 

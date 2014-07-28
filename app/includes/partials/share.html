@@ -1,5 +1,5 @@
 <div class="pull-right header-icon-container">
-  <b  ng-click="startSharing()"><a>Share</a></b>
+  <b  ng-click="startSharing()" class="hidden-phone"><a>Share</a></b>
   <i class="icon-share"  ng-click="startSharing()"></i>
 </div>
 <div class='modal-backdrop' ng-if="sharingModalIsOpen"></div>
@@ -7,7 +7,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <button type="button" class="close" data-dismiss="modal" ng-click="stopSharing()" aria-hidden="true">×</button>
         <h4 class="modal-title">Sharing is Caring!</h4>
       </div>
       <div class="modal-body">
@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="modal-footer">
-         <button class="btn btn-mini btn-default" ng-click="closeSharingModal()">Done</button>
+         <button class="btn btn-mini btn-default" ng-click="stopSharing()">Done</button>
       </div>
     </div>
   </div>

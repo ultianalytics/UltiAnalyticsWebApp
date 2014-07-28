@@ -1,18 +1,21 @@
 'use strict'
 
 angular.module('newBetaApp')
-  .factory 'Line', ['lineStats',(lineStats) ->
+  .factory 'Line', ['lineStats', (lineStats) ->
     lineStats.then (response)->
       lineStats = response
     lineNum = 0
     class Line
+      getPlayers: ->
+        @players
       constructor: ->
         @stats = {}
         @id = ++lineNum
         @players = []
-      addPlayer: (player)=>
+      addPlayers: (players)=>
         if @players.length < 7
-          @players = _.union @players, [player]
+          unless _(players).isArray() then players = [players]
+          @players = _.union @players, players
           @updateStats()
       removePlayer: (player)->
         @players = _.without @players, player

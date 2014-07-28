@@ -8,14 +8,13 @@ angular.module('newBetaApp')
       scope.escapeUrl = window.escape
       teamName.then (response)->
         scope.teamName = response
+      scope.stopSharing = ->
+        scope.sharingModalIsOpen = false
       scope.startSharing = ->
         scope.sharingModalIsOpen = true
 
         stateType = $location.path().match(/\/[^\/]+\/\w+/)[0].replace(/\/[^\/]+\//, '')
-
-        api.saveState $routeParams.teamId, stateType,
-          gameIds: _.pluck filter.included, 'gameId'
-        , (response)->
+        api.saveState $routeParams.teamId, stateType, JSON.stringify(scope.getSharedData() or {}), (response)->
           scope.$apply ->
             scope.shareUrl = "#{window.location.host}/#/#{$routeParams.teamId}/share/#{response.type}/#{response.stateId}"
 
