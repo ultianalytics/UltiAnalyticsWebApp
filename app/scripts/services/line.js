@@ -11,16 +11,23 @@
       });
       lineNum = 0;
       return Line = (function() {
+        Line.prototype.getPlayers = function() {
+          return this.players;
+        };
+
         function Line() {
-          this.addPlayer = __bind(this.addPlayer, this);
+          this.addPlayers = __bind(this.addPlayers, this);
           this.stats = {};
           this.id = ++lineNum;
           this.players = [];
         }
 
-        Line.prototype.addPlayer = function(player) {
+        Line.prototype.addPlayers = function(players) {
           if (this.players.length < 7) {
-            this.players = _.union(this.players, [player]);
+            if (!_(players).isArray()) {
+              players = [players];
+            }
+            this.players = _.union(this.players, players);
             return this.updateStats();
           }
         };

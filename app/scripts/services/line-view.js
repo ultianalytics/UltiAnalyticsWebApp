@@ -12,10 +12,14 @@
         this.lines = {};
       }
 
-      LineView.prototype.addLine = function() {
+      LineView.prototype.addLine = function(silent) {
         var line;
         line = new Line;
-        return this.lines[line.id] = this.selectedLine = line;
+        this.lines[line.id] = line;
+        if (!silent) {
+          this.selectedLine = line;
+        }
+        return line;
       };
 
       LineView.prototype.removeLine = function(line) {
@@ -26,8 +30,12 @@
         return this.selectedLine = line;
       };
 
+      LineView.prototype.isSelectedLine = function(line) {
+        return this.selectedLine === line;
+      };
+
       LineView.prototype.selectedAddPlayer = function(player) {
-        return this.selectedLine.addPlayer(player);
+        return this.selectedLine.addPlayers(player);
       };
 
       LineView.prototype.numberOfLines = function() {

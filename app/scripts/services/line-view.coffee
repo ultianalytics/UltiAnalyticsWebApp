@@ -21,4 +21,7 @@ angular.module('newBetaApp')
         @selectedLine.addPlayers player
       numberOfLines: ->
         _.keys(@lines).length
+      updateStats: ->
+        _.each @lines, (line)->
+          line.updateStats()
     LineView

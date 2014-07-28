@@ -2,11 +2,17 @@
 (function() {
   'use strict';
   angular.module('newBetaApp').factory('savedState', function() {
-    var meaningOfLife;
-    meaningOfLife = 42;
+    var data;
+    data = {};
     return {
-      someMethod: function() {
-        return meaningOfLife;
+      getOnce: function() {
+        var temp;
+        temp = data;
+        data = {};
+        return temp;
+      },
+      set: function(newData) {
+        return _.extend(data, newData);
       }
     };
   });

@@ -2,8 +2,8 @@
 (function() {
   'use strict';
   angular.module('newBetaApp').controller('LineCtrl', [
-    '$scope', '$q', 'team', 'lineStats', 'LineView', 'filter', 'viewer', function($scope, $q, team, lineStats, LineView, filter, viewer) {
-      var scope;
+    '$scope', '$q', 'team', 'lineStats', 'LineView', 'filter', 'viewer', 'savedState', function($scope, $q, team, lineStats, LineView, filter, viewer, savedState) {
+      var scope, setFromSaved;
       scope = $scope;
       scope.dragging;
       scope.includedGames = filter.included;
@@ -14,18 +14,21 @@
       if (viewer.isLargeScreen()) {
         scope.lineViews.push(new LineView);
       }
-      _.each(scope.lineViews, function(lineView) {
-        return lineView.addLine();
-      });
       scope.selectedLineView = _.first(scope.lineViews);
       $q.all([lineStats, team]).then(function(response) {
-        filter.includeAll();
         team = response[1];
         lineStats = response[0];
+        savedState = savedState.getOnce();
         $scope.players = _.pluck(team.players, 'name');
-        $scope.loading = false;
         $scope.teamStats = lineStats.getForTeam();
-        return scope.selectedLineView.selectedLine.updateStats();
+        if (savedState.lines) {
+          setFromSaved(savedState.lines);
+        } else {
+          _.each(scope.lineViews, function(lineView) {
+            return lineView.addLine();
+          });
+        }
+        return $scope.loading = false;
       });
       scope.$watchCollection('includedGames', function(update, old) {
         if (update && lineStats.getStats) {
@@ -39,7 +42,7 @@
         return scope.dragging = player;
       };
       scope.addPlayerToSelected = function(player) {
-        return scope.selectedLineView.selectedLine.addPlayer(player);
+        return scope.selectedLineView.selectedLine.addPlayers(player);
       };
       scope.isSelectedLineView = function(lineView) {
         return scope.selectedLineView === lineView;
@@ -53,7 +56,34 @@
       scope.isNumber = function(item) {
         return typeof item === 'number';
       };
-      return scope.floor = Math.floor;
+      scope.floor = Math.floor;
+      scope.getSharedData = function() {
+        var data;
+        data = scope.$parent.getSharedData();
+        data.lines = [];
+        _.each(scope.lineViews, function(view, lvIndex) {
+          return _.each(view.lines, function(line) {
+            console.log(line.getPlayers());
+            return data.lines.push({
+              players: line.getPlayers(),
+              index: lvIndex,
+              isSelected: view.isSelectedLine(line)
+            });
+          });
+        });
+        return data;
+      };
+      return setFromSaved = function(lineObjects) {
+        return _.each(lineObjects, function(lineObj) {
+          var appropriateLineView, line;
+          appropriateLineView = $scope.lineViews[lineObj.index % $scope.lineViews.length];
+          line = appropriateLineView.addLine(true);
+          line.addPlayers(lineObj.players);
+          if (lineObj.isSelected) {
+            return appropriateLineView.selectLine(line);
+          }
+        });
+      };
     }
   ]);
 

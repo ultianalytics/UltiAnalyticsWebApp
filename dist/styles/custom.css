@@ -800,3 +800,9 @@ div[ng-view]{
 .widget .widget-header .header-icon-container > i {
   margin-right: 10px;
 }
+.loading-view [loading] {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  margin-left: -10px
+}

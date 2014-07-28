@@ -60,7 +60,7 @@ angular.module('newBetaApp')
         // else Say a tournament name (+n games other than that tournament)
         // else Say the most recent game selected, and (+n games other than selected)
       // if there are any games selected and no tournaments, it means this is the first load, ergo append the number of games to the message so it's All Games (n games), instead of just all games.
-      // Otherwise they don't have any stats recorded, so tell them. 
+      // Otherwise they don't have any stats recorded, so tell them.
       //TODO: unit test this piece of shit...
 
 

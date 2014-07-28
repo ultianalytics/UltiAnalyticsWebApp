@@ -28,9 +28,9 @@ angular.module('newBetaApp')
 
     # update the lines on filter change
     scope.$watchCollection 'includedGames', (update, old)->
-      if update and lineStats.getStats
-        _(scope.lines).each (line)->
-          line.updateStats()
+      if update and lineStats.getStats # promises resolved.
+        _(scope.lineViews).each (lineView)->
+          lineView.updateStats()
         $scope.teamStats = lineStats.getForTeam()
 
     scope.setDragging = (player)->
