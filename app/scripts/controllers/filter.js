@@ -52,8 +52,13 @@ angular.module('newBetaApp')
     };
     var $dedicatedScope = $scope.$new();
     $dedicatedScope.included = filter.included;
-    $dedicatedScope.$watchCollection('included', function(currentGames){
-
+    $dedicatedScope.$watchCollection('included', function(){
+      updateSelectorMessage()
+    });
+    $dedicatedScope.$watch('tournaments', function(){
+      updateSelectorMessage()
+    });
+    function updateSelectorMessage(){
       // this is the logic for the filter button's message. It's a nest, I know, but it's O(n).
       // if tournaments have been established, run the following logic:
         // Say all games (n games) if all are selected.
@@ -71,7 +76,7 @@ angular.module('newBetaApp')
           games: _.clone($scope.allGames, 'gameId')
         };
         delete possibilities.tournaments['-'];
-        var current = _(currentGames).indexBy('gameId').valueOf();
+        var current = _(filter.included).indexBy('gameId').valueOf();
         _.each($scope.allGames, function(game){
           if (!_(current).has(game.gameId)){
             delete possibilities.total;
@@ -80,21 +85,21 @@ angular.module('newBetaApp')
           }
         });
         if (possibilities.total){
-          $scope.buttonMessage = 'All Games ' + '(' + currentGames.length + ' games)';
+          $scope.buttonMessage = 'All Games ' + '(' + filter.included.length + ' games)';
         } else if (_.keys(possibilities.tournaments).length){
           var tourney = _(possibilities.tournaments).sample();
-          var extraGames = currentGames.length - tourney.length ? ' (+' + (currentGames.length - tourney.length) + ' games)' : '';
+          var extraGames = filter.included.length - tourney.length ? ' (+' + (filter.included.length - tourney.length) + ' games)' : '';
           $scope.buttonMessage = tourney[0].tournamentName + extraGames;
-        } else if (currentGames.length){
-          var extraGames = currentGames.length > 1 ? ' (+' + (currentGames.length - 1) + ' games)' : '';
-          $scope.buttonMessage = _.min(currentGames, 'msSinceEpoch').opponentName + extraGames;
+        } else if (filter.included.length){
+          var extraGames = filter.included.length > 1 ? ' (+' + (filter.included.length - 1) + ' games)' : '';
+          $scope.buttonMessage = _.min(filter.included, 'msSinceEpoch').opponentName + extraGames;
         } else {
           $scope.buttonMessage = 'Zero Games Selected!';
         }
-      } else if (currentGames.length) {
-        $scope.buttonMessage += ' (' + currentGames.length + ' games)';
+      } else if (filter.included.length) {
+        $scope.buttonMessage += ' (' + filter.included.length + ' games)';
       } else {
         $scope.buttonMessage = 'You don\'t have any stats!';
       }
-    });
+    }
   }]);

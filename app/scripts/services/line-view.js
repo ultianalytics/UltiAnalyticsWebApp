@@ -42,6 +42,12 @@
         return _.keys(this.lines).length;
       };
 
+      LineView.prototype.updateStats = function() {
+        return _.each(this.lines, function(line) {
+          return line.updateStats();
+        });
+      };
+
       return LineView;
 
     })();

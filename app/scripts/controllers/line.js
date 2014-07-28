@@ -32,8 +32,8 @@
       });
       scope.$watchCollection('includedGames', function(update, old) {
         if (update && lineStats.getStats) {
-          _(scope.lines).each(function(line) {
-            return line.updateStats();
+          _(scope.lineViews).each(function(lineView) {
+            return lineView.updateStats();
           });
           return $scope.teamStats = lineStats.getForTeam();
         }
