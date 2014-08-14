@@ -1,8 +1,7 @@
 {
   "name": "newbeta",
   "version": "0.0.0",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "grunt": "~0.4.1",
     "grunt-autoprefixer": "~0.4.0",
     "grunt-concurrent": "~0.4.1",
