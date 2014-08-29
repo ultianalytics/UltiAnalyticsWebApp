@@ -8,23 +8,23 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 75.0,
 		"selected_items":
 		[
 			[
-				"prett",
-				"Pretty JSON: Format (Pretty Print) JSON"
+				"remo",
+				"Package Control: Remove Package"
 			],
 			[
-				"pack",
-				"Preferences: Browse Packages"
+				"inst",
+				"Package Control: Install Package"
 			]
 		],
-		"width": 530.0
+		"width": 449.0
 	},
 	"console":
 	{
-		"height": 153.0,
+		"height": 139.0,
 		"history":
 		[
 			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
@@ -41,19 +41,16 @@
 	},
 	"file_history":
 	[
-		"/home/kyle/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
-		"/home/kyle/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
-		"/home/kyle/.config/sublime-text-3/Packages/User/Distraction Free.sublime-settings",
 		"/home/kyle/Code/ultianalyticswebapp/iUltimateWebApp.sublime-project",
-		"/home/kyle/Code/ultianalyticswebapp/app/scripts/directives/onenter.js",
-		"/home/kyle/Code/ultianalyticswebapp/app/bower_components/angular-cookies/angular-cookies.js",
-		"/home/kyle/Code/ultianalyticswebapp/app/styles/animate.css",
-		"/home/kyle/Documents/new-website.html",
-		"/home/kyle/Code/ultianalyticswebapp/package.json"
+		"/home/kyle/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/kyle/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/usr/share/doc/nodejs/README.Debian",
+		"/home/kyle/.bash_profile",
+		"/home/kyle/.bashprofile"
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 0.0
 	},
 	"find_in_files":
 	{
@@ -67,9 +64,6 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"auto_complete_triggers",
-			"\"auto_complete_selector",
-			"	\n"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -86,7 +80,7 @@
 	},
 	"incremental_find":
 	{
-		"height": 25.0
+		"height": 0.0
 	},
 	"input":
 	{
@@ -121,7 +115,7 @@
 	},
 	"replace":
 	{
-		"height": 46.0
+		"height": 0.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -129,10 +123,6 @@
 		"height": 0.0,
 		"selected_items":
 		[
-			[
-				"app",
-				"app/scripts/app.js"
-			]
 		],
 		"width": 0.0
 	},

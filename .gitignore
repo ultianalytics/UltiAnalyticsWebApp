@@ -1,4 +1,6 @@
-
+node_modules/*
 .tmp
 ultiAnalyticsApp.sublime-project
 ultiAnalyticsApp.sublime-workspace
+/iUltimateWebApp.sublime-project
+/iUltimateWebApp.sublime-workspace

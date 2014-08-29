@@ -1,9 +1,9 @@
 {
-	"folders":
-	[
-		{
-			"follow_symlinks": true,
-			"path": "."
-		}
-	]
+    "folders":
+    [
+        {
+            "path": "./",
+            "folder_exclude_patterns": ["test", "dist", ".tmp", "app/bower_components"]
+        }
+    ]
 }
