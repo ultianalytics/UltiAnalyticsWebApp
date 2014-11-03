@@ -97,6 +97,9 @@ angular.module('newBetaApp')
           }
           return memo;
         } , {})
+
+        if (_.keys(pointsIndexedByWind).length < 5) return false;
+
         var _this = this
         var results = _.reduce(['us', 'them'], function(result, team){
           result[teamLookup[team]] = _.reduce(pointsIndexedByWind, function(memo, points, windSpeed){
