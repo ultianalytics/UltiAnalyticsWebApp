@@ -1,10 +1,10 @@
 coffee -c .;
 grunt better_build;
-cd /Users/kyle.geppert/Code/Summit\ Hill\ Software/ultimateweb/UltimateWeb;
+cd /Users/krgeppert/Work/Summit_Hill_Software/ultimateweb/UltimateWeb;
 git checkout master;
-cp -avR /Users/kyle.geppert/Code/Summit\ Hill\ Software/iUltimateWebApp/dist /Users/kyle.geppert/Code/Summit\ Hill\ Software/ultimateweb/UltimateWeb/war;
-rm -r /Users/kyle.geppert/Code/Summit\ Hill\ Software/ultimateweb/UltimateWeb/war/app;
-mv /Users/kyle.geppert/Code/Summit\ Hill\ Software/ultimateweb/UltimateWeb/war/dist /Users/kyle.geppert/Code/Summit\ Hill\ Software/ultimateweb/UltimateWeb/war/app;
+cp -avR /Users/krgeppert/Work/Summit_Hill_Software/iUltimateWebApp/dist /Users/krgeppert/Work/Summit_Hill_Software/ultimateweb/UltimateWeb/war;
+rm -r /Users/krgeppert/Work/Summit_Hill_Software/ultimateweb/UltimateWeb/war/app;
+mv /Users/krgeppert/Work/Summit_Hill_Software/ultimateweb/UltimateWeb/war/dist /Users/krgeppert/Work/Summit_Hill_Software/ultimateweb/UltimateWeb/war/app;
 git add .;
 git commit -m "Built.";
 git pull -r;
