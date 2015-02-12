@@ -2,7 +2,7 @@ coffee -c .;
 grunt better_build;
 cd /Users/krgeppert/Work/Summit_Hill_Software/ultimateweb/UltimateWeb;
 git checkout master;
-cp -avR /Users/krgeppert/Work/Summit_Hill_Software/iUltimateWebApp/dist /Users/krgeppert/Work/Summit_Hill_Software/ultimateweb/UltimateWeb/war;
+cp -avR /Users/krgeppert/Work/Summit_Hill_Software/ultianalyticswebapp/dist /Users/krgeppert/Work/Summit_Hill_Software/ultimateweb/UltimateWeb/war;
 rm -r /Users/krgeppert/Work/Summit_Hill_Software/ultimateweb/UltimateWeb/war/app;
 mv /Users/krgeppert/Work/Summit_Hill_Software/ultimateweb/UltimateWeb/war/dist /Users/krgeppert/Work/Summit_Hill_Software/ultimateweb/UltimateWeb/war/app;
 git add .;
