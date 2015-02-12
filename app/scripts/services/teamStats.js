@@ -75,6 +75,7 @@ angular.module('newBetaApp')
         var considerablePoints = _.reduce(games, function(points, game){
           return points.concat(game.points);
         }, []);
+        considerablePoints = _.filter(considerablePoints)
         results.record = this.getRecord(games);
         results.pointSpread = this.getPointSpread(games);
         results.offensiveProductivity = this.getProductivity(considerablePoints, 'Offense');
@@ -103,10 +104,10 @@ angular.module('newBetaApp')
         var _this = this
         var results = _.reduce(['us', 'them'], function(result, team){
           result[teamLookup[team]] = _.reduce(pointsIndexedByWind, function(memo, points, windSpeed){
-            var pointSummary = _this.getPointSummary(points)
+            var pointSummary = _this.getPointSummary(_.filter(points))
             memo.push({
               x:windSpeed,
-              y:_this.getConversionRate(points, pointSummary[team].defense + pointSummary[team].offense )
+              y:_this.getConversionRate(_.filter(points), pointSummary[team].defense + pointSummary[team].offense )
             });
             return memo;
           }, [])
@@ -130,7 +131,7 @@ angular.module('newBetaApp')
       },
       getConversionRate: function(points, ourPointSpread){
         var scoringOpps = 0;
-        _(points).each(function(point) {
+        _(points).filter().each(function(point) {
           if (point.summary.lineType === 'O') {
             scoringOpps++;
           }
@@ -153,7 +154,7 @@ angular.module('newBetaApp')
             defense: 0
           }
         };
-        _(points).each(function(point) {
+        _(points).filter().each(function(point) {
           if (point.events[point.events.length - 1].type === 'Offense') {
             point.summary.lineType === 'D' ? pointSummary.us.defense++ : pointSummary.us.offense++;
           } else {

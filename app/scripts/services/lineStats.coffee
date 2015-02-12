@@ -13,7 +13,7 @@ angular.module('newBetaApp')
     getConsideredPoints = (games, players)->
       consideredPoints = []
       _.each games, (game)->
-        _.each game.points, (point)->
+        _(game.points).filter().each (point)->
           if _.intersection(point.line, players).length is players.length
             #if the line contains all of the passed players
             consideredPoints.push point
@@ -41,8 +41,9 @@ angular.module('newBetaApp')
       combinations
 
     getPointSpread = (points)->
-      spread = _.countBy points, (point)->
+      spread = _(points).filter().countBy (point)->
         if point.events[point.events.length - 1].type is 'Offense' then return 'ours' else return 'theirs'
+      .valueOf()
       spread.ours ?= 0
       spread.theirs ?= 0
       spread
@@ -119,6 +120,7 @@ angular.module('newBetaApp')
     api =
       getStats: (players)->
         consideredPoints = getConsideredPoints filter.included, players
+        consideredPoints = _.filter(consideredPoints)
         oPoints = _.filter consideredPoints, (point)-> point.summary.lineType is 'O'
         dPoints = _.filter consideredPoints, (point)-> point.summary.lineType is 'D'
         pointSpread = getPointSpread consideredPoints
@@ -138,6 +140,7 @@ angular.module('newBetaApp')
         results
       getForTeam: ()->
         consideredPoints = getAllPoints filter.included
+        consideredPoints = _.filter(consideredPoints)
         pointSpread = getPointSpread consideredPoints
 
         conversionRate: "#{teamStats.getConversionRate consideredPoints, pointSpread.ours}%"
