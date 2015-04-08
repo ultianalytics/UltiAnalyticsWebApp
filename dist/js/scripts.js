@@ -445,6 +445,7 @@ angular.module('newBetaApp')
 angular.module('newBetaApp')
   .controller('StattablesCtrl', ['$scope', '$location','$routeParams', 'playerStats', 'filter', 'relocate', function($scope, $location,$routeParams, playerStats, filter, relocate) {
     $scope.relocate = relocate;
+    $scope.statsArray = []
     $scope.changeFocus = function(type) {
       $scope.focus = type;
     };
@@ -479,6 +480,7 @@ angular.module('newBetaApp')
     $scope.inclineSort = false;
     function init(){
       $scope.stats = playerStats.getAll();
+      if (_.isEmpty($scope.stats)) return;
       $scope.players = _.keys($scope.stats);
       $scope.statTypes = _.keys($scope.stats[$scope.players[0]].stats);
       startWatching();
