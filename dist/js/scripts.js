@@ -3070,17 +3070,18 @@ angular.module('newBetaApp')
         return results;
       },
       getProductivity: function(points, lineType, isOpponent){
-        var offensiveOpps = 0;
-        var offensiveConversions = 0;
+        var opportunities = 0;
+        var goals = 0;
         _(points).each(function(point) {
           if (point.summary.lineType === lineType.slice(0,1)) {
-            offensiveOpps++;
-            if (point.events[point.events.length - 1].type === lineType) {
-              offensiveConversions++;
+            opportunities++;
+            var lastEvent = _.last(point.events);
+            if (lastEvent.type === 'Offense' && lastEvent.action === 'Goal') {
+              goals++;
             }
           }
         });
-        return offensiveOpps ? Math.round(offensiveConversions / offensiveOpps * 100) : 0;
+        return opportunities ? Math.round(goals / opportunities * 100) : 0;
       },
       getConversionRate: function(points, ourPointSpread){
         var scoringOpps = 0;
@@ -3531,8 +3532,7 @@ angular.module('newBetaApp')
         options.data = request.data;
       }
       busyDialogStart();
-      Ultimate.sessionId = 'foo ';
-      var url = addQueryStringParameter(request.url, 'cachebuster ', Ultimate.sessionId);
+      var url = addQueryStringParameter(request.url, 'cachebuster', Ultimate.sessionId);
       options.xhrFields = {
         withCredentials: true
       };
