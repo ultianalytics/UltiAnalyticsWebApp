@@ -11,10 +11,17 @@ angular.module('newBetaApp')
 
     Ultimate.busyDialogStack = 0;
 
-    // make sure we use the host from where we were loaded to prevent CORS from being used unnecessarily
-    // (unless the page is loaded locally in which case just use the default host)
-    var restHost = window.location.host.indexOf("ultimate-numbers.com") === -1 ? "www.ultianalytics.com" : "www.ultimate-numbers.com";
-    Ultimate.baseRestUrl = "http://" + restHost + '/rest/view';
+
+    var restHost = window.location.host;
+    // If you are running locally the rest requests will normally be directred to ultianalytics.com.  However, if you would like the requests to directed to 
+    // a local instance of GAE (http://local.appspot.com:8888) then use local.appspot.com in your page URL, e.g., http://local.appspot.com:9000
+    // (NOTE: you must add local.appspot.com to your hosts file: local.appspot.com 127.0.0.1)
+    if (window.location.hostname == 'local.appspot.com') {  
+      restHost = 'local.appspot.com:8888';
+    } else if (window.location.hostname.indexOf('.com') == -1) {
+      restHost = 'www.ultianalytics.com';
+    }
+    Ultimate.baseRestUrl = window.location.protocol + '//' + restHost + '/rest/view';
 
     // make sure we use the host from where we were loaded to prevent CORS from being used unnecessarily
     Ultimate.sessionId = new Date().getTime() + '';
