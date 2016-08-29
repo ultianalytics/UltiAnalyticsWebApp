@@ -15,7 +15,8 @@ angular.module('newBetaApp')
         when 'PullOb' then return 'Pull (Out of Bounds) by ' + event.defender
         when 'Goal' 
           return if event.type == 'Offense' then 'Our Goal (' + event.passer + ' to ' + event.receiver + ')' else 'Their Goal'
-        when 'Callahan' then return 'Our Callahan (' + event.defender + ')'
+        when 'Callahan'
+            return if event.type == 'Offense' then 'Their Callahan (' + event.passer + ')' else 'Our Callahan (' + event.defender + ')'
         when 'EndOfFirstQuarter' then return 'End of 1st Quarter'
         when 'EndOfThirdQuarter' then return 'End of 3rd Quarter'
         when 'EndOfFourthQuarter' then return 'End of 4th Quarter'
