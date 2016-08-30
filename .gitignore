@@ -1,4 +1,5 @@
 node_modules/*
+dist
 .tmp
 ultiAnalyticsApp.sublime-project
 ultiAnalyticsApp.sublime-workspace
